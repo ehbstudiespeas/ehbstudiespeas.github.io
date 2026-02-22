@@ -1,44 +1,22 @@
 # peas.phd (GitHub Pages)
 
-This is a lightweight static site for **peas.phd** (PEAS: Policy · Ecology · Agriculture · Social science).
+This repository is a minimalist personal website for **peas.phd**, hosted on **GitHub Pages**.
 
-## Deploy on GitHub Pages (user/organization site)
+## Update the animated landing video
+Place your PowerPoint-exported MP4 here:
 
-**Recommended:** create a repo named **`<your-github-username>.github.io`** and push these files to the repo root.
+- `assets/PEASLogoAnimated.mp4`
 
-Then in GitHub:
-- Settings → Pages
-- Source: Deploy from branch
-- Branch: `main` / root
+Commit + push, and GitHub Pages will update.
 
-Your site will publish at:
-`https://<your-github-username>.github.io/`
+## Custom domain
+In GitHub: **Settings → Pages → Custom domain** set to `peas.phd`.
 
-## Deploy on GitHub Pages (project site)
+In GoDaddy DNS (apex domain), ensure you have A records:
 
-If you use a normal repo name (e.g., `peas-phd`), the site publishes at:
-`https://<your-github-username>.github.io/peas-phd/`
+- 185.199.108.153
+- 185.199.109.153
+- 185.199.110.153
+- 185.199.111.153
 
-## Connect your custom domain (peas.phd)
-
-In GitHub repo:
-- Settings → Pages → Custom domain: `peas.phd`
-- Enable "Enforce HTTPS" after it verifies.
-
-In GoDaddy DNS add:
-- **A records** to GitHub Pages IPs
-- **CNAME** `www` → `<your-github-username>.github.io`
-
-GitHub shows the exact records to add.
-
-## Editing content
-
-- Home: `index.html`
-- Research: `research.html`
-- Teaching: `teaching.html`
-- CV: `cv.html`
-- Contact: `contact.html`
-
-Downloads live in `/downloads/` (DOCX copies).
-
-Last generated: 2026-02-22
+(Keep your Microsoft 365 MX/TXT/CNAME email records intact.)

@@ -1,50 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="PEAS – the personal website of Elias H. Bloom (Policy, Ecology, Agriculture, Social science)." />
-  <title>PEAS · Elias H. Bloom</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PEAS — Elias H. Bloom</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="splash">
-  <main class="splash-wrap" aria-label="PEAS splash page">
-    <div class="splash-card">
-      <div class="logo-stage" aria-label="PEAS logo animation">
-        <img class="peas-logo" src="assets/peas_logo.png" alt="PEAS logo" />
-
-        <!-- Labels that fade in over time (positioned roughly over each pea) -->
-        <div class="pea-label l1" aria-hidden="true">Policy</div>
-        <div class="pea-label l2" aria-hidden="true">Ecology</div>
-        <div class="pea-label l3" aria-hidden="true">Agriculture</div>
-        <div class="pea-label l4" aria-hidden="true">Social science</div>
-
-        <!-- A tiny “wink” overlay that appears after the final label fades -->
-        <div class="wink" aria-hidden="true">
-          <span class="eye left"></span>
-          <span class="eye right"></span>
-          <span class="smile"></span>
-        </div>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="mark">
+        <img src="assets/peas_logo.png" alt="PEAS logo">
       </div>
-
-      <h1 class="title">Welcome to <span class="peas">PEAS</span>.</h1>
-      <p class="subtitle">
-        The personal website of <strong>Elias H. Bloom</strong>.
-        <span class="muted">PEAS stands for Policy, Ecology, Agriculture, and Social science — the disciplines I integrate across for the study of entomology.</span>
-      </p>
-
-      <nav class="splash-nav" aria-label="Site">
-        <a href="research.html">Research</a>
-        <a href="cv.html">CV</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-
-      <p class="tiny muted">
-        Tip: If the animation is distracting, it plays only on this landing page.
-      </p>
+      <div class="txt">
+        <div class="name">PEAS<br><span class="muted" style="font-weight:600">Elias H. Bloom</span></div>
+        <div class="tag">Policy · Ecology · Agriculture · Social science</div>
+      </div>
     </div>
-  </main>
-
-  <script src="assets/js/splash.js"></script>
+    <nav class="navlinks" aria-label="Primary">
+      <a class="active" href="index.html">Home</a>
+      <a class="" href="cv.html">CV</a>
+      <a class="" href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <div class="hero">
+      <div>
+        <div class="kicker">Welcome to PEAS</div>
+        <h1>The personal website of Elias H. Bloom</h1>
+        <p><strong>PEAS</strong> stands for <strong>Policy</strong>, <strong>Ecology</strong>, <strong>Agriculture</strong>, and <strong>Social science</strong> — the disciplines I integrate across for the study of entomology.</p>
+        <div class="btnrow">
+          <a class="btn" href="cv.html">View CV</a>
+          <a class="btn" href="contact.html">Contact</a>
+        </div>
+        <p class="muted" style="margin-top:14px">This site is intentionally minimal for now; more pages will be added soon.</p>
+      </div>
+      <div class="video-wrap" aria-label="Animated PEAS logo">
+        <!-- Place your exported MP4 here: assets/PEASLogoAnimated.mp4 -->
+        <video autoplay muted playsinline preload="auto">
+          <source src="assets/PEASLogoAnimated.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>© 2026 Elias H. Bloom · peas.phd</footer>
 </body>
 </html>

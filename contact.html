@@ -1,64 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Contact Elias H. Bloom" />
-  <title>Contact · PEAS</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contact — Elias H. Bloom</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header>
-  <nav class="nav">
+  <div class="nav">
     <div class="brand">
-      <span class="logo">PEAS</span>
-      <div>
-        <div>Elias H. Bloom</div>
-        <small class="muted">Policy · Ecology · Agriculture · Social science</small>
+      <div class="mark">
+        <img src="assets/peas_logo.png" alt="PEAS logo">
+      </div>
+      <div class="txt">
+        <div class="name">PEAS<br><span class="muted" style="font-weight:600">Elias H. Bloom</span></div>
+        <div class="tag">Policy · Ecology · Agriculture · Social science</div>
       </div>
     </div>
-    <div class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-      <a href="teaching.html">Teaching</a>
-      <a href="cv.html">CV</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
-</header>
-
-<main>
-
-<section class="hero">
-  <div class="kicker">Contact</div>
-  <h1>Let’s connect</h1>
-  <p>If you’d like to discuss collaborations, speaking opportunities, or consulting work, email is best.</p>
-  <div class="grid" style="margin-top:18px">
-    <div class="card">
-      <h2>Email</h2>
-      <p><a href="mailto:ehb@peas.phd">ehb@peas.phd</a></p>
-      <p class="muted">You can also use this quick link: <a href="mailto:ehb@peas.phd?subject=Hello%20from%20peas.phd">start an email</a>.</p>
-    </div>
-    <div class="card">
-      <h2>Links</h2>
-      <ul>
-        <li><a href="#" onclick="alert('Add your Google Scholar URL here.'); return false;">Google Scholar</a> <span class="muted">(add URL)</span></li>
-        <li><a href="#" onclick="alert('Add your ORCID URL here.'); return false;">ORCID</a> <span class="muted">(add URL)</span></li>
-        <li><a href="#" onclick="alert('Add your GitHub URL here.'); return false;">GitHub</a> <span class="muted">(add URL)</span></li>
-        <li><a href="#" onclick="alert('Add your LinkedIn URL here.'); return false;">LinkedIn</a> <span class="muted">(optional)</span></li>
-      </ul>
-      <p class="muted">Tip: replace the “#” links with your real URLs in <span style="font-family:var(--mono)">contact.html</span>.</p>
-    </div>
+    <nav class="navlinks" aria-label="Primary">
+      <a class="" href="index.html">Home</a>
+      <a class="" href="cv.html">CV</a>
+      <a class="active" href="contact.html">Contact</a>
+    </nav>
   </div>
-</section>
-
+</header>
+<main>
+  <section class="card">
+    <div class="kicker">Contact</div>
+    <h1>Get in touch</h1>
+    <p>Email is best: <a href="mailto:ehb@peas.phd">ehb@peas.phd</a></p>
+    <p class="muted">More contact links will be added soon.</p>
+  </section>
 </main>
-
-<footer>
-  <div>© 2026 Elias H. Bloom · peas.phd</div>
-  <div class="muted">Built as a static site for GitHub Pages.</div>
-</footer>
-
-<script src="assets/js/main.js"></script>
+<footer>© 2026 Elias H. Bloom · peas.phd</footer>
 </body>
 </html>
