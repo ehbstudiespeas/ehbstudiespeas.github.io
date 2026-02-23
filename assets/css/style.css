@@ -18,7 +18,7 @@ a:hover{text-decoration:underline}
 img,video{max-width:100%;height:auto;display:block}
 
 .muted{color:var(--muted)}
-.kicker{letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;color:var(--muted)}
+.kicker{text-align:center;letter-spacing:.08em;text-transform:uppercase;font-size:1.4rem;color:var(--text);margin-bottom:1rem;font-weight:600}
 
 header{
   border-bottom:1px solid var(--border);
@@ -62,20 +62,19 @@ main{max-width:var(--max);margin:0 auto;padding:22px 18px 56px}
   border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:18px
+  padding:40px 32px;
+  margin-top:40px;
 }
 .card h1{margin:0 0 8px;font-size:1.8rem;letter-spacing:-0.02em}
 .card h2{margin:0 0 10px;font-size:1.2rem}
-.card p{margin:10px 0;max-width:78ch}
+.card p{margin:10px auto;max-width:78ch;text-align:center;}
 
 .hero{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
-  align-items:start;
-}
-@media (min-width: 860px){
-  .hero{grid-template-columns: 1.2fr .8fr;}
+  display:flex;
+  flex-direction:column;
+  text-align: center;
+  gap:24px;
+  align-items:center;
 }
 
 .video-wrap{
@@ -84,9 +83,9 @@ main{max-width:var(--max);margin:0 auto;padding:22px 18px 56px}
   overflow:hidden;
   background:#fff;
 }
-.video-wrap video{width:100%;height:auto}
+.video-wrap video{width:100%;height:auto;margin-top:0.5rem;}
 
-.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btnrow{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:1.5rem;margin-bottom:1rem;}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;
   border:1px solid var(--border);
@@ -103,4 +102,23 @@ footer{max-width:var(--max);margin:0 auto;padding:0 18px 36px;color:var(--muted)
   height:min(78vh, 900px);
   border:1px solid var(--border);
   border-radius:14px;
+}
+
+/* Centering contact card page */
+.contact-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;   /* centers the whole content block */
+  justify-content:center;
+  text-align:center;    /* centers text within */
+  padding: 64px 32px;   /* optional: makes it feel intentional */
+}
+
+.contact-card .kicker{
+  margin-bottom: 18px;
+}
+
+.contact-card p{
+  margin: 0;            /* removes default <p> margins that can look off */
+  font-size: 1.25rem;   /* optional */
 }
