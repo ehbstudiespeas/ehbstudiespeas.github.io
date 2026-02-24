@@ -50,10 +50,84 @@ header{
 .brand .txt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .brand .name{font-weight:700;line-height:1.1}
 .brand .tag{color:var(--muted);font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.navlinks{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.navlinks a{padding:8px 10px;border-radius:10px}
-.navlinks a:hover{background:#f3f4f6;text-decoration:none}
-.navlinks a.active{background:#111827;color:#fff}
+
+
+/* Hamburger nav (replaces old .navlinks link styling) */
+.navlinks{
+  position:relative;
+  display:flex;
+  justify-content:flex-end; /* right aligned */
+  align-items:center;
+}
+
+/* Hide checkbox */
+#menu-toggle{
+  display:none;
+}
+
+/* Hamburger icon */
+.menu-icon{
+  width:28px;
+  height:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+}
+
+.menu-icon span{
+  height:3px;
+  background:var(--text);
+  border-radius:2px;
+  transition:.3s ease;
+}
+
+/* Dropdown menu */
+.dropdown{
+  position:absolute;
+  top:44px;
+  right:0;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  min-width:140px;
+  padding:8px 0;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-10px);
+  transition:.25s ease;
+  z-index: 999;
+}
+
+.dropdown a{
+  padding:10px 16px;
+}
+
+.dropdown a:hover{
+  background:#f3f4f6;
+  text-decoration:none;
+}
+
+/* Toggle open */
+#menu-toggle:checked + .menu-icon + .dropdown{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+/* Optional: animate to X when open */
+#menu-toggle:checked + .menu-icon span:nth-child(1){
+  transform:rotate(45deg) translate(5px,5px);
+}
+#menu-toggle:checked + .menu-icon span:nth-child(2){
+  opacity:0;
+}
+#menu-toggle:checked + .menu-icon span:nth-child(3){
+  transform:rotate(-45deg) translate(6px,-6px);
+}
 
 main{max-width:var(--max);margin:0 auto;padding:22px 18px 56px}
 
@@ -78,10 +152,10 @@ main{max-width:var(--max);margin:0 auto;padding:22px 18px 56px}
 }
 
 .video-wrap{
-  border:1px solid var(--border);
+  border:none;
   border-radius:18px;
   overflow:hidden;
-  background:#fff;
+  background:transparent;
 }
 .video-wrap video{width:100%;height:auto;margin-top:0.5rem;}
 
