@@ -39,7 +39,7 @@
   border-radius: 18px;
   background: #ffffff;
   box-shadow: none;
-  overflow: hidden;
+  overflow: visible;
   padding: 16px;
 }
 
@@ -177,6 +177,8 @@
   width: 100%;
   transform-origin: center top;
   padding-top: 10px;
+  overflow: hidden;
+  border-radius: 14px;
   transition: transform 0.78s cubic-bezier(0.22, 0.7, 0.22, 1), opacity 0.78s cubic-bezier(0.22, 0.7, 0.22, 1), filter 0.78s cubic-bezier(0.22, 0.7, 0.22, 1);
 }
 
@@ -297,7 +299,7 @@
   }
 
   .v2-title {
-    font-size: clamp(2.6rem, 24vw, 5rem);
+    font-size: clamp(2.6rem, 14vw, 3.4rem);
     letter-spacing: 0.04em;
   }
 
