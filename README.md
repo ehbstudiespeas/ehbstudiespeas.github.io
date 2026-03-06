@@ -1,6 +1,6 @@
 # peas.phd (GitHub Pages)
 
-This repository is a minimalist personal website for **peas.phd**, hosted on **GitHub Pages**.
+This repository is my personal website for **peas.phd**, hosted on **GitHub Pages**.
 
 ## Update the animated landing video
 Place your PowerPoint-exported MP4 here:
