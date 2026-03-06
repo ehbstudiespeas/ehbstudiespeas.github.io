@@ -20,6 +20,17 @@
   max-width: 78ch;
 }
 
+.v2-title {
+  font-size: clamp(3rem, 17vw, 10rem);
+  line-height: 0.95;
+  margin-bottom: clamp(0.75rem, 2.5vw, 1.6rem);
+}
+
+.interactive-copy p {
+  font-size: clamp(1rem, 2.1vw, 2rem);
+  line-height: 1.35;
+}
+
 .interactive-stage {
   position: relative;
   width: min(100%, 920px);
@@ -276,23 +287,56 @@
 }
 
 @media (max-width: 700px) {
+  .hero.interactive-hero {
+    gap: 14px;
+  }
+
+  .card {
+    padding: 22px 14px;
+    margin-top: 18px;
+  }
+
+  .v2-title {
+    font-size: clamp(2.6rem, 24vw, 5rem);
+    letter-spacing: 0.04em;
+  }
+
+  .interactive-copy p {
+    font-size: 1.1rem;
+    line-height: 1.42;
+  }
+
   .interactive-stage {
-    padding: 10px;
+    padding: 8px;
     border-radius: 14px;
   }
 
   .interaction-prompt {
-    font-size: 0.84rem;
-    top: 10px;
+    font-size: 0.8rem;
+    top: 8px;
+    padding: 4px 10px;
   }
 
   .thought-bubble {
     width: calc(100% - 18px);
-    top: 48px;
+    top: 44px;
+    border-radius: 18px;
+    padding: 10px 10px 12px;
   }
 
   .bubble-content {
-    max-height: min(38vh, 270px);
+    max-height: min(40vh, 260px);
+    font-size: 0.96rem;
+    line-height: 1.4;
+  }
+
+  .bubble-head {
+    margin-bottom: 4px;
+  }
+
+  .bubble-close {
+    padding: 3px 8px;
+    font-size: 0.9rem;
   }
 }
 
