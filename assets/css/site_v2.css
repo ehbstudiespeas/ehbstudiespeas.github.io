@@ -309,7 +309,7 @@
   }
 
   .interactive-stage {
-    padding: 8px;
+    padding: 0 8px 8px;
     border-radius: 14px;
   }
 
@@ -321,7 +321,7 @@
 
   .thought-bubble {
     width: calc(100% - 18px);
-    top: 44px;
+    top: 0;
     border-radius: 18px;
     padding: 10px 10px 12px;
   }
