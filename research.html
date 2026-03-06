@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Research — Elias H. Bloom</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="research">
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="mark">
+        <img src="assets/peas_logo.png" alt="PEAS logo">
+      </div>
+      <div class="txt">
+        <div class="name">Elias H. Bloom<br><span class="muted" style="font-weight:600">PEAS</span></div>
+      </div>
+    </div>
+
+    <!-- Keep menu as-is for now (no Research link yet) -->
+    <nav class="navlinks">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </label>
+
+      <div class="dropdown">
+        <a href="index.html">Home</a>
+        <a href="cv.html">CV</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Page intro -->
+  <section class="card snap" id="intro">
+    <div class="kicker">PEAS</div>
+    <p>
+      The PEAS framework:
+      <strong>Policy</strong>, <strong>Ecology</strong>, <strong>Agriculture</strong>, and <strong>Social science</strong>.
+    </p>
+  </section>
+
+ <!-- POLICY -->
+<section class="card snap" id="policy">
+  <div class="kicker">Policy</div>
+
+  <!-- Horizontal carousel (2 stops) -->
+  <div class="carousel" aria-label="Policy carousel">
+    <div class="carousel-track">
+
+      <!-- Slide 1: Current -->
+      <article class="slide" id="policy-current" aria-label="Policy: Current research">
+        <div class="slide-grid">
+          <div class="slide-text">
+            <h2>National goals revolutionize ecology on farms</h2>
+            <p><em>
+             The Obama administration set ambitious national goals for honey bees, pollinator habitat, and monarch butterflies. These policies altered the direction of pollinator research in the United States, and increased funding for farmers to conserve pollinators.</a>         
+             </em></p>
+		<h3>Check out my policy synthesis with Michigan State University researchers</h3>
+		<ul>
+		  <li>
+			Responding to the US national pollinator plan: a case study in Michigan.
+			<a href="https://doi.org/10.1002/fee.2430" target="_blank" rel="noopener noreferrer">
+			  Link to paper
+			</a>
+		  </li>
+		</ul>
+
+              </div>
+          <div class="slide-media">
+            <img src="assets/Bloom_PRAP.jpg" alt="Policy research figure" class="research-figure">
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 2: Future -->
+      <!-- Per-slide column tuning: set --text-col and --media-col on any .slide -->
+      <article class="slide" id="policy-future" aria-label="Policy: Future directions" style="--text-col: 1.0fr; --media-col: 1.0fr;">
+        <div class="slide-grid">
+          <div class="slide-text">
+            <h2>Setting goals for organic agriculture in the US</h2>
+            <p><em>
+            My prior research showed goal setting creates targets for researchers and farmers. PolicyNow seeks to determine the ecological, economic, and societal benefits of national goals for organic agriculture. These goals are based on the EU Farm to Farm Strategy, which set the goal of having 30% of land in agricultural production by 2030. 
+            </em></p>
+
+            <h3>PolicyNow</h3>
+            <ul>
+              <li>National analysis of organic agriculture benefits</li>
+              <li>Determine farmer policy preferences</li>
+              <li>Ground truthing of analysis predictions</li>
+            </ul>
+          </div>
+
+          <div class="slide-media">
+            <!-- Swap this image later if you want a different "future" figure -->
+            <img src="assets/RoadmapConceptualDiagram.png" alt="Future policy research figure" class="research-figure">
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- “Stops” navigation -->
+<div class="carousel-dots" aria-label="Policy carousel indicators">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+</div>
+</section>
+
+  <!-- ECOLOGY -->
+  <section class="card snap" id="ecology">
+    <div class="kicker">Ecology</div>
+    <div class="carousel" aria-label="Ecology carousel">
+      <div class="carousel-track">
+        <article class="slide" id="ecology-current" aria-label="Ecology: Current research">
+          <div class="slide-grid">
+            <div class="slide-text">
+              <h2>Biodiversity ecosystem function relationships</h2>
+              <p><em>Theory predicts insect biodiversity increases ecosystem services, making insect conservation key for ecologically functional farms. Biodiversity theory has mechanistic underpinnings giving farmers new targets to promote ecosystem services. </em></p>
+
+              <h3>Check out my research with Washington State University researchers on biodiversity theory</h3>
+              <ul>
+                <li>
+                  A novel application of the Price equation reveals that landscape diversity promotes the response of bees to regionally rare plant species.
+                  <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13406" target="_blank" rel="noopener noreferrer">
+                    Link to paper
+                  </a>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  Long-term organic farming and floral diversity promotes stability of bee communities in agroecosystems.
+                  <a href="https://doi.org/10.1111/1365-2435.14428" target="_blank" rel="noopener noreferrer">
+                    Link to paper
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="slide-media">
+              <img src="assets/Bloom_Bee.png" alt="Ecology current research figure" class="research-figure">
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" id="ecology-future" aria-label="Ecology: Future directions">
+          <div class="slide-grid">
+            <div class="slide-text">
+              <h2>Connecting beta diversity with community assembly</h2>
+              <p><em>Approaches that track changes in the mechanisms of community assembly across farming systems are underdeveloped; niche and stochastic processes assess community asssembly, while beta diversity examines changes in species composition. Contecting these processes will create a mechanistic form of beta diversity that is linked with biodiversity ecosystem function theory.</em></p>
+              <h3>Project BetaFun</h3>
+              <ul>
+                <li>Use simulations to recover community assembly mechanisms in beta diversity</li>
+                <li>Apply to existing datasets to uncover hidden mechanisms</li>
+                <li>Integrate into decision support tools for mechanistic decision support</li>
+              </ul>
+            </div>
+            <div class="slide-media">
+              <img src="assets/Bloom_Posterior.png" alt="Ecology future research figure" class="research-figure">
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="carousel-dots" aria-label="Ecology carousel indicators">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+
+  <!-- AGRICULTURE -->
+  <section class="card snap" id="agriculture">
+    <div class="kicker">Agriculture</div>
+    <div class="carousel" aria-label="Agriculture carousel">
+      <div class="carousel-track">
+        <article class="slide" id="agriculture-current" aria-label="Agriculture: Current research">
+          <div class="slide-grid">
+            <div class="slide-text">
+              <h2>Decision aid systems for farmers</h2>
+              <p><em>Spatio-temporal variation in local farming practices and landscape level features shape biodiversity ecosystem function relationships. Decision support systems give land managers new tools to promote the economic, ecological, and social sustainability of their farms.</em></p>
+
+              <h3>Check out my papers on text message based decision support and spatio-temporal variation</h3>
+              <ul>
+                <li>
+                  A novel plant pathogen management tool for vector management.
+                  <a href="https://doi.org/10.1002/ps.5922" target="_blank" rel="noopener noreferrer">
+                    Link to paper
+                  </a>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  A newly invasive species may promote dissimilarity of pest populations between organic and conventional farming systems.
+                  <a href="https://doi.org/10.1002/eap.2615" target="_blank" rel="noopener noreferrer">
+                    Link to paper
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="slide-media">
+              <img src="assets/Stillson_DecisionAid.png" alt="Agriculture current research figure" class="research-figure">
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" id="agriculture-future" aria-label="Agriculture: Future directions">
+          <div class="slide-grid">
+            <div class="slide-text">
+              <h2>Ecosystem service decision support tools</h2>
+              <p><em>My research indicates that farmers need context dependent, local, rapid decision support that integrates with their farming system. At present, no system exists that allows farmers to select from management options that promote or improve their ecosystem services over time.</em></p>
+              <h3>EcoHero</h3>
+              <ul>
+                <li>Develop heuristical synthetic decision support system for ecosystem services</li>
+                <li>Establish a high throughput ecosystem service monitoring facility</li>
+                <li>Enhance model performance with ground truthing along orthogonal gradients</li>
+              </ul>
+            </div>
+            <div class="slide-media">
+              <img src="assets/Bloom_MachineLearning.png" alt="Agriculture future research figure" class="research-figure">
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="carousel-dots" aria-label="Agriculture carousel indicators">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+
+  <!-- SOCIAL SCIENCE -->
+  <section class="card snap" id="social">
+    <div class="kicker">Social science</div>
+    <div class="carousel" aria-label="Social science carousel">
+      <div class="carousel-track">
+        <article class="slide" id="social-current" aria-label="Social science: Current research">
+          <div class="slide-grid">
+            <div class="slide-text">
+              <h2>Farmers are the agents of change</h2>
+              <p><em>Farmers hold beliefs that shape the ecology of their farming systems through management. Social science tools center farmers as agents of change.</em></p>
+
+              <h3>Motivating farmers to support soil microbiomes</h3>
+              <p>
+                Motivating organic farmers to adopt practices that support the pest-suppressive microbiome relies on understanding their beliefs.
+                <a href="https://doi.org/10.1017/S174217052400005X" target="_blank" rel="noopener noreferrer">
+                  Link
+                </a>
+              </p>
+
+              <h3>Farmer perceptions of pollinator decline</h3>
+              <p>
+                Socioecological Factors and Farmer Perceptions Impacting Pesticide Use and Pollinator Conservation on Cucurbit Farms
+                <a href="https://doi.org/10.3389/fsufs.2021.672981" target="_blank" rel="noopener noreferrer">
+                  Link
+                </a>
+              </p>
+            </div>
+            <div class="slide-media">
+              <img src="assets/Bloom_PRAP.jpg" alt="Social science current research figure" class="research-figure">
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" id="social-future" aria-label="Social science: Future directions">
+          <div class="slide-grid">
+            <div class="slide-text">
+              <h2>Future social science directions</h2>
+              <p><em>Mock summary: this slide outlines future adoption studies, engagement methods, and synthesis outputs.</em></p>
+              <h3>Action items</h3>
+              <ul>
+                <li>[Future social science bullet point]</li>
+                <li>[Future social science bullet point]</li>
+                <li>[Future social science bullet point]</li>
+              </ul>
+            </div>
+            <div class="slide-media">
+              <img src="assets/RoadmapConceptualDiagram.png" alt="Social science future research figure" class="research-figure">
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="carousel-dots" aria-label="Social science carousel indicators">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Elias H. Bloom · peas.phd</footer>
+<script>
+(function(){
+  // config
+  const AUTO_MS = 30000;        // auto-advance every 30s
+  const RESUME_AFTER_MS = 12000; // resume auto after 12s of no user interaction
+
+  // helper: wait for next paint + images to layout
+  function whenReady(el){
+    return new Promise(resolve=>{
+      // if images may change layout, wait a little after load
+      requestAnimationFrame(()=>{
+        setTimeout(()=>resolve(), 50);
+      });
+    });
+  }
+
+  document.querySelectorAll('.carousel').forEach(async carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.slide'));
+    const dots = Array.from(carousel.querySelectorAll('.dot'));
+
+    if(!track || slides.length === 0 || dots.length === 0) return;
+
+    await whenReady(track); // allow layout to settle
+
+    // sync helper
+    let currentIndex = 0;
+    function setActive(i){
+      currentIndex = i;
+      dots.forEach((d, idx)=> d.classList.toggle('active', idx === i));
+    }
+
+    // scroll to slide i (smooth)
+    function goTo(i){
+      const s = Math.max(0, Math.min(i, slides.length - 1));
+      const left = slides[s].offsetLeft;
+      track.scrollTo({ left, behavior: 'smooth' });
+      setActive(s);
+    }
+
+    // dot click => goTo
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', e => {
+        stopAuto();
+        goTo(i);
+        scheduleResume();
+      });
+    });
+
+    // IntersectionObserver to detect visible slide reliably
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          const idx = slides.indexOf(en.target);
+          if(idx >= 0 && idx !== currentIndex){
+            setActive(idx);
+          }
+        }
+      });
+    }, {
+      root: track,
+      threshold: 0.55 // consider "visible" when >55% of slide is visible
+    });
+
+    slides.forEach(s => io.observe(s));
+
+    // Auto advance
+    let autoId = null;
+    function startAuto(){
+      stopAuto(); // clear if any
+      autoId = setInterval(()=>{
+        const next = (currentIndex + 1) % slides.length;
+        goTo(next);
+      }, AUTO_MS);
+    }
+    function stopAuto(){
+      if(autoId !== null){ clearInterval(autoId); autoId = null; }
+    }
+
+    // Pause auto on user interactions
+    let resumeTimer = null;
+    function scheduleResume(){
+      if(resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(()=> {
+        startAuto();
+        resumeTimer = null;
+      }, RESUME_AFTER_MS);
+    }
+
+    // stop auto immediately when user scrolls or uses pointer; resume after delay
+    let isPointerDown = false;
+    track.addEventListener('pointerdown', e => { isPointerDown = true; stopAuto(); if(resumeTimer) clearTimeout(resumeTimer); });
+    track.addEventListener('pointerup', e => { isPointerDown = false; scheduleResume(); });
+    track.addEventListener('wheel', e => { stopAuto(); scheduleResume(); }, { passive: true });
+
+    // Also detect manual scroll (touch / swipe) and set active slide after user stops scrolling
+    let scrollTimeout = null;
+    track.addEventListener('scroll', () => {
+      stopAuto();
+      if(scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(()=> {
+        // find nearest slide based on scrollLeft
+        const pos = track.scrollLeft;
+        let nearest = 0;
+        let minDist = Infinity;
+        slides.forEach((s, i) => {
+          const d = Math.abs(s.offsetLeft - pos);
+          if(d < minDist){ minDist = d; nearest = i; }
+        });
+        goTo(nearest);
+        scheduleResume();
+      }, 120); // 120ms after user stops scrolling
+    }, { passive: true });
+
+    // Initialize: snap to first slide (ensure no jump)
+    track.scrollLeft = slides[0].offsetLeft || 0;
+    setActive(0);
+    // Start auto after a short delay so page load doesn't immediately jump
+    setTimeout(()=> startAuto(), 600);
+  });
+})();
+</script>
+
+
+</body>
+</html>

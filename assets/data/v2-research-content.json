@@ -1,0 +1,28 @@
+{
+  "topics": [
+    {
+      "id": "policy",
+      "label": "Policy",
+      "primaryPeaId": "pea-policy",
+      "bubbleHtml": "<h2>Policy</h2><h3>National goals revolutionize ecology on farms</h3><p><em>The Obama administration set ambitious national goals for honey bees, pollinator habitat, and monarch butterflies. These policies altered the direction of pollinator research in the United States, and increased funding for farmers to conserve pollinators.</em></p><h4>Policy synthesis</h4><ul><li>Responding to the US national pollinator plan: a case study in Michigan. <a href='https://doi.org/10.1002/fee.2430' target='_blank' rel='noopener noreferrer'>Link to paper</a></li></ul><h3>Setting goals for organic agriculture in the US</h3><p><em>My prior research showed goal setting creates targets for researchers and farmers. PolicyNow seeks to determine the ecological, economic, and societal benefits of national goals for organic agriculture. These goals are based on the EU Farm to Farm Strategy, which set the goal of having 30% of land in agricultural production by 2030.</em></p><h4>PolicyNow</h4><ul><li>National analysis of organic agriculture benefits</li><li>Determine farmer policy preferences</li><li>Ground truthing of analysis predictions</li></ul>"
+    },
+    {
+      "id": "ecology",
+      "label": "Ecology",
+      "primaryPeaId": "pea-ecology",
+      "bubbleHtml": "<h2>Ecology</h2><h3>Biodiversity ecosystem function relationships</h3><p><em>Theory predicts insect biodiversity increases ecosystem services, making insect conservation key for ecologically functional farms. Biodiversity theory has mechanistic underpinnings giving farmers new targets to promote ecosystem services.</em></p><h4>Biodiversity theory papers</h4><ul><li>A novel application of the Price equation reveals that landscape diversity promotes the response of bees to regionally rare plant species. <a href='https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13406' target='_blank' rel='noopener noreferrer'>Link to paper</a></li><li>Long-term organic farming and floral diversity promotes stability of bee communities in agroecosystems. <a href='https://doi.org/10.1111/1365-2435.14428' target='_blank' rel='noopener noreferrer'>Link to paper</a></li></ul><h3>Connecting beta diversity with community assembly</h3><p><em>Approaches that track changes in the mechanisms of community assembly across farming systems are underdeveloped; niche and stochastic processes assess community asssembly, while beta diversity examines changes in species composition. Contecting these processes will create a mechanistic form of beta diversity that is linked with biodiversity ecosystem function theory.</em></p><h4>Project BetaFun</h4><ul><li>Use simulations to recover community assembly mechanisms in beta diversity</li><li>Apply to existing datasets to uncover hidden mechanisms</li><li>Integrate into decision support tools for mechanistic decision support</li></ul>"
+    },
+    {
+      "id": "agriculture",
+      "label": "Agriculture",
+      "primaryPeaId": "pea-agriculture",
+      "bubbleHtml": "<h2>Agriculture</h2><h3>Decision aid systems for farmers</h3><p><em>Spatio-temporal variation in local farming practices and landscape level features shape biodiversity ecosystem function relationships. Decision support systems give land managers new tools to promote the economic, ecological, and social sustainability of their farms.</em></p><h4>Decision support papers</h4><ul><li>A novel plant pathogen management tool for vector management. <a href='https://doi.org/10.1002/ps.5922' target='_blank' rel='noopener noreferrer'>Link to paper</a></li><li>A newly invasive species may promote dissimilarity of pest populations between organic and conventional farming systems. <a href='https://doi.org/10.1002/eap.2615' target='_blank' rel='noopener noreferrer'>Link to paper</a></li></ul><h3>Ecosystem service decision support tools</h3><p><em>My research indicates that farmers need context dependent, local, rapid decision support that integrates with their farming system. At present, no system exists that allows farmers to select from management options that promote or improve their ecosystem services over time.</em></p><h4>EcoHero</h4><ul><li>Develop heuristical synthetic decision support system for ecosystem services</li><li>Establish a high throughput ecosystem service monitoring facility</li><li>Enhance model performance with ground truthing along orthogonal gradients</li></ul>"
+    },
+    {
+      "id": "social",
+      "label": "Social science",
+      "primaryPeaId": "pea-social",
+      "bubbleHtml": "<h2>Social science</h2><h3>Farmers are the agents of change</h3><p><em>Farmers hold beliefs that shape the ecology of their farming systems through management. Social science tools center farmers as agents of change.</em></p><h4>Current social science research</h4><p>Motivating organic farmers to adopt practices that support the pest-suppressive microbiome relies on understanding their beliefs. <a href='https://doi.org/10.1017/S174217052400005X' target='_blank' rel='noopener noreferrer'>Link</a></p><p>Socioecological Factors and Farmer Perceptions Impacting Pesticide Use and Pollinator Conservation on Cucurbit Farms <a href='https://doi.org/10.3389/fsufs.2021.672981' target='_blank' rel='noopener noreferrer'>Link</a></p><h3>Future social science directions</h3><p><em>Mock summary: this slide outlines future adoption studies, engagement methods, and synthesis outputs.</em></p><h4>Action items</h4><ul><li>[Future social science bullet point]</li><li>[Future social science bullet point]</li><li>[Future social science bullet point]</li></ul>"
+    }
+  ]
+}
