@@ -11,9 +11,11 @@
 <header>
   <div class="nav">
     <div class="brand">
-      <div class="mark">
-        <img src="assets/peas_logo_3626.png" alt="PEAS logo">
-      </div>
+      <a href="index_v2.html" aria-label="Go to home page">
+        <div class="mark">
+          <img src="assets/peas_logo_3626.png" alt="PEAS logo">
+        </div>
+      </a>
       <div class="txt">
         <div class="name">Elias H. Bloom<br><span class="muted" style="font-weight:600">PEAS</span></div>
       </div>
@@ -30,6 +32,7 @@
     <a href="index_v2.html">Home</a>
     <a href="research.html">Research</a>
     <a href="cv.html">CV</a>
+    <a href="repos.html">Repos</a>
     <a href="contact.html">Contact</a>
   </div>
 </nav>
@@ -37,10 +40,188 @@
 </header>
 <main>
   <section class="card contact-card">
+    <img class="contact-headshot" src="assets/Bloom_Headshot.jpg" alt="Portrait of Elias H. Bloom">
     <div class="kicker">Contact</div>
     <p>Email: <a href="mailto:ehb@peas.phd">ehb[at]peas.phd</a></p>
+
+    <div class="social-links" aria-label="Social links">
+      <a class="btn social-btn" href="https://bsky.app/profile/susta1nabeelity.bsky.social" target="_blank" rel="noopener noreferrer">
+        <img class="social-link-icon" src="https://cdn.simpleicons.org/bluesky/0285FF" alt="" aria-hidden="true">
+        <span>Bluesky</span>
+      </a>
+      <a class="btn social-btn" href="https://x.com/susta1nabeelity" target="_blank" rel="noopener noreferrer">
+        <img class="social-link-icon" src="https://cdn.simpleicons.org/x/111111" alt="" aria-hidden="true">
+        <span>X</span>
+      </a>
+      <a class="btn social-btn" href="https://www.linkedin.com/in/elias-bloom-0782813b6/" target="_blank" rel="noopener noreferrer">
+        <img class="social-link-icon" src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Linked-in-alt.svg" alt="" aria-hidden="true">
+        <span>LinkedIn</span>
+      </a>
+    </div>
+
+    <section class="bsky-preview" aria-labelledby="bsky-preview-title">
+      <h2 id="bsky-preview-title">Latest on Bluesky</h2>
+      <div id="bsky-feed" class="bsky-feed" aria-live="polite">
+        <p class="muted">Loading latest posts…</p>
+      </div>
+    </section>
   </section>
 </main>
 <footer>© 2026 Elias H. Bloom · peas.phd</footer>
+<script>
+  (function () {
+    var feedRoot = document.getElementById('bsky-feed');
+    if (!feedRoot) return;
+
+    var handle = 'susta1nabeelity.bsky.social';
+    var endpoint = 'https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=' + encodeURIComponent(handle) + '&limit=3';
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function postLink(handleValue, postView) {
+      var uri = postView && postView.uri ? postView.uri : '';
+      var rkey = uri.split('/').pop();
+      if (!rkey) return '#';
+      return 'https://bsky.app/profile/' + encodeURIComponent(handleValue) + '/post/' + encodeURIComponent(rkey);
+    }
+
+    function linkifyText(text) {
+      var escaped = escapeHtml(text || '');
+      escaped = escaped.replace(/(https?:\/\/[^\s<]+)/g, function (url) {
+        return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
+      });
+      escaped = escaped.replace(/(^|\s)@([a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/g, function (_, lead, mention) {
+        return lead + '<a href="https://bsky.app/profile/' + encodeURIComponent(mention) + '" target="_blank" rel="noopener noreferrer">@' + mention + '</a>';
+      });
+      escaped = escaped.replace(/(^|\s)#([a-zA-Z0-9_]+)/g, function (_, lead, tag) {
+        return lead + '<a href="https://bsky.app/hashtag/' + encodeURIComponent(tag) + '" target="_blank" rel="noopener noreferrer">#' + tag + '</a>';
+      });
+      return escaped.replace(/\n/g, '<br>');
+    }
+
+    function renderImages(images) {
+      if (!Array.isArray(images) || !images.length) return '';
+      var items = images.slice(0, 4).map(function (img) {
+        var src = img.fullsize || img.thumb || '';
+        if (!src) return '';
+        var alt = escapeHtml(img.alt || 'Attached image');
+        return (
+          '<a class="bsky-media-link" href="' + src + '" target="_blank" rel="noopener noreferrer">' +
+            '<img class="bsky-media-image" src="' + src + '" alt="' + alt + '" loading="lazy">' +
+          '</a>'
+        );
+      }).join('');
+      return '<div class="bsky-media-grid">' + items + '</div>';
+    }
+
+    function renderExternalCard(external) {
+      if (!external || !external.uri) return '';
+      var title = escapeHtml(external.title || external.uri);
+      var desc = escapeHtml(external.description || '');
+      var thumb = external.thumb
+        ? '<img class="bsky-card-thumb" src="' + external.thumb + '" alt="' + title + '" loading="lazy">'
+        : '';
+      return (
+        '<a class="bsky-link-card" href="' + external.uri + '" target="_blank" rel="noopener noreferrer">' +
+          thumb +
+          '<div class="bsky-link-card-body">' +
+            '<div class="bsky-link-card-title">' + title + '</div>' +
+            (desc ? '<div class="bsky-link-card-desc">' + desc + '</div>' : '') +
+          '</div>' +
+        '</a>'
+      );
+    }
+
+    function renderEmbed(embed) {
+      if (!embed || !embed.$type) return '';
+
+      if (embed.$type === 'app.bsky.embed.images#view') {
+        return renderImages(embed.images);
+      }
+
+      if (embed.$type === 'app.bsky.embed.external#view') {
+        return renderExternalCard(embed.external);
+      }
+
+      if (embed.$type === 'app.bsky.embed.video#view') {
+        if (embed.thumbnail) {
+          return (
+            '<a class="bsky-media-link" href="#" aria-label="Video preview">' +
+              '<img class="bsky-media-image" src="' + embed.thumbnail + '" alt="Video preview" loading="lazy">' +
+            '</a>'
+          );
+        }
+        return '';
+      }
+
+      if (embed.$type === 'app.bsky.embed.recordWithMedia#view') {
+        var media = embed.media || {};
+        if (media.$type === 'app.bsky.embed.images#view') return renderImages(media.images);
+        if (media.$type === 'app.bsky.embed.external#view') return renderExternalCard(media.external);
+      }
+
+      return '';
+    }
+
+    fetch(endpoint)
+      .then(function (response) {
+        if (!response.ok) throw new Error('Failed feed request');
+        return response.json();
+      })
+      .then(function (data) {
+        var items = (data && data.feed ? data.feed : []).slice(0, 3);
+        if (!items.length) {
+          feedRoot.innerHTML = '<p class="muted">No recent posts found.</p>';
+          return;
+        }
+
+        var html = items.map(function (item) {
+          var post = item && item.post ? item.post : {};
+          var record = post.record || {};
+          var text = record.text || '';
+          var createdAt = record.createdAt ? new Date(record.createdAt) : null;
+          var displayDate = createdAt && !isNaN(createdAt) ? createdAt.toLocaleDateString() : '';
+          var href = postLink(handle, post);
+          var author = post.author || {};
+          var authorName = escapeHtml(author.displayName || 'Elias H. Bloom');
+          var authorHandle = escapeHtml(author.handle || handle);
+          var authorAvatar = author.avatar || 'assets/Bloom_Headshot.jpg';
+          var embedHtml = renderEmbed(post.embed);
+
+          return (
+            '<article class="bsky-post">' +
+              '<div class="bsky-post-head">' +
+                '<img class="bsky-avatar" src="' + authorAvatar + '" alt="">' +
+                '<div class="bsky-author">' +
+                  '<div class="bsky-author-name">' + authorName + '</div>' +
+                  '<div class="bsky-author-handle">@' + authorHandle + '</div>' +
+                '</div>' +
+              '</div>' +
+              '<p class="bsky-post-text">' + linkifyText(text) + '</p>' +
+              embedHtml +
+              '<div class="bsky-post-meta">' +
+                (displayDate ? '<span>' + escapeHtml(displayDate) + '</span>' : '<span></span>') +
+                '<a href="' + href + '" target="_blank" rel="noopener noreferrer">View post</a>' +
+              '</div>' +
+            '</article>'
+          );
+        }).join('');
+
+        feedRoot.innerHTML = html;
+      })
+      .catch(function () {
+        feedRoot.innerHTML =
+          '<p class="muted">Could not load live Bluesky preview right now. ' +
+          '<a href="https://bsky.app/profile/' + handle + '" target="_blank" rel="noopener noreferrer">View profile</a>.</p>';
+      });
+  })();
+</script>
 </body>
 </html>
