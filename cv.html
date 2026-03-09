@@ -38,10 +38,25 @@
 <main>
   <section class="card">
     <div class="kicker">Curriculum Vitae</div>
-    <iframe class="cv-embed" src="assets/Elias_H_Bloom_CV.pdf" title="Elias H. Bloom CV (PDF)"></iframe>
+    <p><a id="cv-download" href="assets/Elias_H_Bloom_CV.pdf" target="_blank" rel="noopener">Download latest CV (PDF)</a></p>
+    <iframe id="cv-embed" class="cv-embed" src="assets/Elias_H_Bloom_CV.pdf" title="Elias H. Bloom CV (PDF)"></iframe>
     <p class="muted">If the PDF preview doesn’t load in your browser, use the download link above.</p>
   </section>
 </main>
 <footer>© 2026 Elias H. Bloom · peas.phd</footer>
+<script>
+  // Avoid stale PDF caching after replacing the file in-place.
+  (function () {
+    var cvPath = 'assets/Elias_H_Bloom_CV.pdf';
+    var cacheBust = Date.now();
+    var cvUrl = cvPath + '?v=' + cacheBust;
+
+    var frame = document.getElementById('cv-embed');
+    var link = document.getElementById('cv-download');
+
+    if (frame) frame.src = cvUrl;
+    if (link) link.href = cvUrl;
+  })();
+</script>
 </body>
 </html>
