@@ -42,6 +42,10 @@
   <section class="card">
     <div class="kicker">Curriculum Vitae</div>
     <iframe id="cv-embed" class="cv-embed" src="assets/Elias_H_Bloom_CV.pdf" title="Elias H. Bloom CV (PDF)"></iframe>
+    <p id="cv-mobile-note" class="cv-mobile-note" hidden>
+      Mobile browsers may limit embedded PDF scrolling.
+      <a id="cv-open-mobile" href="assets/Elias_H_Bloom_CV.pdf" target="_self" rel="noopener">Open CV in full-screen viewer</a>.
+    </p>
     <p><a id="cv-download" href="assets/Elias_H_Bloom_CV.pdf" target="_blank" rel="noopener">Download Latest CV</a></p>
   </section>
 </main>
@@ -55,9 +59,28 @@
 
     var frame = document.getElementById('cv-embed');
     var link = document.getElementById('cv-download');
+    var mobileNote = document.getElementById('cv-mobile-note');
+    var mobileOpenLink = document.getElementById('cv-open-mobile');
 
     if (frame) frame.src = cvUrl;
     if (link) link.href = cvUrl;
+    if (mobileOpenLink) mobileOpenLink.href = cvUrl;
+
+    // iOS/Android browsers often cannot scroll embedded PDFs reliably.
+    // On touch/mobile screens, show a direct-open link instead of the iframe.
+    var prefersMobileViewer =
+      (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) ||
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+    if (prefersMobileViewer) {
+      if (frame) {
+        frame.hidden = true;
+        frame.setAttribute('aria-hidden', 'true');
+      }
+      if (mobileNote) {
+        mobileNote.hidden = false;
+      }
+    }
   })();
 </script>
 </body>

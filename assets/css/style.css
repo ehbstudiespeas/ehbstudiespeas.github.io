@@ -178,6 +178,12 @@ footer{max-width:var(--max);margin:0 auto;padding:0 18px 36px;color:var(--muted)
   border-radius:14px;
 }
 
+.cv-mobile-note{
+  max-width: 70ch;
+  margin: 10px auto 14px;
+  text-align: center;
+}
+
 /* Centering contact card page */
 .contact-card{
   display:flex;
