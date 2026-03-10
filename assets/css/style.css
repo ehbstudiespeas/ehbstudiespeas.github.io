@@ -178,10 +178,47 @@ footer{max-width:var(--max);margin:0 auto;padding:0 18px 36px;color:var(--muted)
   border-radius:14px;
 }
 
-.cv-mobile-note{
-  max-width: 70ch;
-  margin: 10px auto 14px;
-  text-align: center;
+.cv-viewer{
+  width:100%;
+  height:min(78vh, 900px);
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+  padding:12px;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.cv-status{
+  margin:4px auto;
+  text-align:center;
+  color:var(--muted);
+  font-size:.96rem;
+}
+
+.cv-page-frame{
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  background:#fff;
+  margin:0 auto 10px;
+  width:max-content;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.cv-page-frame:last-child{
+  margin-bottom:0;
+}
+
+.cv-page-canvas{
+  display:block;
+  width:auto;
+  max-width:none;
+  height:auto;
+}
+
+.cv-viewer-error{
+  padding:16px 12px;
 }
 
 /* Centering contact card page */

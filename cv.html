@@ -41,46 +41,138 @@
 <main>
   <section class="card">
     <div class="kicker">Curriculum Vitae</div>
-    <iframe id="cv-embed" class="cv-embed" src="assets/Elias_H_Bloom_CV.pdf" title="Elias H. Bloom CV (PDF)"></iframe>
-    <p id="cv-mobile-note" class="cv-mobile-note" hidden>
-      Mobile browsers may limit embedded PDF scrolling.
-      <a id="cv-open-mobile" href="assets/Elias_H_Bloom_CV.pdf" target="_self" rel="noopener">Open CV in full-screen viewer</a>.
-    </p>
+    <div id="cv-viewer" class="cv-viewer" aria-label="Elias H. Bloom CV">
+      <p id="cv-status" class="cv-status">Loading CV…</p>
+    </div>
     <p><a id="cv-download" href="assets/Elias_H_Bloom_CV.pdf" target="_blank" rel="noopener">Download Latest CV</a></p>
   </section>
 </main>
 <footer>© 2026 Elias H. Bloom · peas.phd</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-  // Avoid stale PDF caching after replacing the file in-place.
+  // Render the PDF inline with pdf.js so mobile users can scroll all pages.
   (function () {
     var cvPath = 'assets/Elias_H_Bloom_CV.pdf';
     var cacheBust = Date.now();
     var cvUrl = cvPath + '?v=' + cacheBust;
 
-    var frame = document.getElementById('cv-embed');
+    var viewer = document.getElementById('cv-viewer');
+    var status = document.getElementById('cv-status');
     var link = document.getElementById('cv-download');
-    var mobileNote = document.getElementById('cv-mobile-note');
-    var mobileOpenLink = document.getElementById('cv-open-mobile');
 
-    if (frame) frame.src = cvUrl;
     if (link) link.href = cvUrl;
-    if (mobileOpenLink) mobileOpenLink.href = cvUrl;
+    if (!viewer) return;
 
-    // iOS/Android browsers often cannot scroll embedded PDFs reliably.
-    // On touch/mobile screens, show a direct-open link instead of the iframe.
-    var prefersMobileViewer =
-      (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) ||
-      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
-
-    if (prefersMobileViewer) {
-      if (frame) {
-        frame.hidden = true;
-        frame.setAttribute('aria-hidden', 'true');
-      }
-      if (mobileNote) {
-        mobileNote.hidden = false;
+    function showStatus(message) {
+      if (status) {
+        status.textContent = message;
       }
     }
+
+    function clearStatus() {
+      if (status && status.parentNode) {
+        status.parentNode.removeChild(status);
+      }
+      status = null;
+    }
+
+    function showError(message) {
+      showStatus(message);
+      viewer.classList.add('cv-viewer-error');
+    }
+
+    if (!window.pdfjsLib) {
+      showError('Could not load CV viewer. Please use the download link below.');
+      return;
+    }
+
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    function renderDocument(pdfDoc) {
+      var pageNumber = 1;
+
+      function renderNextPage() {
+        if (pageNumber > pdfDoc.numPages) {
+          clearStatus();
+          return;
+        }
+
+        pdfDoc.getPage(pageNumber).then(function (page) {
+          showStatus('Rendering page ' + pageNumber + ' of ' + pdfDoc.numPages + '…');
+          var baseViewport = page.getViewport({ scale: 1 });
+          // Keep text legible on narrow screens by rendering to a minimum width.
+          // The viewer pane can scroll horizontally when needed.
+          var availableWidth = Math.max(viewer.clientWidth - 24, 240);
+          var targetWidth = Math.max(availableWidth, 760);
+          var scale = targetWidth / baseViewport.width;
+          var viewport = page.getViewport({ scale: scale });
+          var outputScale = window.devicePixelRatio || 1;
+
+          var pageFrame = document.createElement('div');
+          pageFrame.className = 'cv-page-frame';
+
+          var canvas = document.createElement('canvas');
+          canvas.className = 'cv-page-canvas';
+          canvas.width = Math.floor(viewport.width * outputScale);
+          canvas.height = Math.floor(viewport.height * outputScale);
+          canvas.style.width = Math.floor(viewport.width) + 'px';
+          canvas.style.height = Math.floor(viewport.height) + 'px';
+
+          var context = canvas.getContext('2d', { alpha: false });
+          pageFrame.appendChild(canvas);
+          viewer.appendChild(pageFrame);
+
+          var renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+            transform: outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null
+          };
+
+          page.render(renderContext).promise
+            .then(function () {
+              pageNumber += 1;
+              renderNextPage();
+            })
+            .catch(function () {
+              showError('Could not render the full CV. Please use the download link below.');
+            });
+        }).catch(function () {
+          showError('Could not render the full CV. Please use the download link below.');
+        });
+      }
+
+      renderNextPage();
+    }
+
+    function loadPdfFromBytes(disableWorker) {
+      return fetch(cvUrl, { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('Failed to fetch PDF');
+          }
+          return response.arrayBuffer();
+        })
+        .then(function (bytes) {
+          return window.pdfjsLib.getDocument({
+            data: bytes,
+            disableWorker: !!disableWorker
+          }).promise;
+        });
+    }
+
+    loadPdfFromBytes(false)
+      .catch(function () {
+        // Some local/dev environments block worker startup; retry without worker.
+        return loadPdfFromBytes(true);
+      })
+      .then(function (pdfDoc) {
+        showStatus('Rendering CV…');
+        renderDocument(pdfDoc);
+      })
+      .catch(function () {
+        showError('Could not load CV preview. Please use the download link below.');
+      });
   })();
 </script>
 </body>
