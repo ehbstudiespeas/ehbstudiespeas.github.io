@@ -67,5 +67,5 @@ JavaScript attaches click and keyboard handlers to these SVG paths, when a pea i
 
 The **vision, content, and overall direction** of this site originate with Elias H. Bloom.
 
-- Early versions of the site structure and layout were **“vibe‑coded”** collaboratively with OpenAI Codex.
-- Subsequent refinements and new pages were implemented in **Cursor**, using its script editor and **agentic assistants** to help with HTML/CSS edits, accessibility tweaks, and layout polish.
+- Early versions of the site structure and layout were **”vibe‑coded”** collaboratively with OpenAI Codex. Ongoing development and maintenance also uses **Claude** (Anthropic) for vibe coding, edits, and iterative improvements.
+- Subsequent refinements after vibe coding were implemented in **Cursor**, using its script editor and **agentic assistants** to help with HTML/CSS edits, accessibility tweaks, and layout polish.
