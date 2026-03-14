@@ -104,7 +104,7 @@
           // Keep text legible on narrow screens by rendering to a minimum width.
           // The viewer pane can scroll horizontally when needed.
           var availableWidth = Math.max(viewer.clientWidth - 24, 240);
-          var targetWidth = Math.max(availableWidth, 760);
+          var targetWidth = availableWidth;
           var scale = targetWidth / baseViewport.width;
           var viewport = page.getViewport({ scale: scale });
           var outputScale = window.devicePixelRatio || 1;

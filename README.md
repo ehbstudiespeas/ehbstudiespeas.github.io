@@ -63,7 +63,7 @@ JavaScript attaches click and keyboard handlers to these SVG paths, when a pea i
 - the script reads its `data-topic-id` and constructs a URL to the matching anchor on `research.html`
 - The browser then navigates to that anchored section
 
-## AI and tooling statement
+## AI statement
 
 The **vision, content, and overall direction** of this site originate with Elias H. Bloom.
 
