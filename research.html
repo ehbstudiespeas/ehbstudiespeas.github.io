@@ -295,23 +295,37 @@
 
 <footer>© 2026 Elias H. Bloom · peas.phd</footer>
 <script>
-// Handle hash navigation: scroll main to the target section on page load.
-// Needed because body.research has overflow:hidden, so the browser's native
-// hash scroll targets the window (which can't scroll) instead of main.
+// Handle hash navigation to research sections.
+// body.research has overflow:hidden so the browser's native fragment scroll
+// targets the window (which can't scroll) instead of main. We also strip the
+// hash immediately via history.replaceState so the browser never fires its own
+// scroll, then do our own controlled scroll on window load.
 (function(){
   var hash = window.location.hash;
   if (!hash) return;
-  var target = document.getElementById(hash.slice(1));
-  var main = document.querySelector('main');
-  if (!target || !main) return;
+  var id = hash.slice(1);
+
+  // Strip hash before browser native fragment-scroll fires.
+  history.replaceState(null, '', window.location.pathname + window.location.search);
 
   window.addEventListener('load', function(){
+    var target = document.getElementById(id);
+    var main   = document.querySelector('main');
+    if (!target || !main) return;
+
     requestAnimationFrame(function(){
-      // Compute scroll offset relative to main
+      // Disable snap so it can't pull the scroll to a different position.
+      main.style.scrollSnapType = 'none';
+
       var top = target.getBoundingClientRect().top
               - main.getBoundingClientRect().top
               + main.scrollTop;
-      main.scrollTo({ top: top, behavior: 'instant' });
+      main.scrollTop = top;  // direct assignment = truly instant, no CSS override
+
+      // Re-enable snap on the next frame (after the scroll has committed).
+      requestAnimationFrame(function(){
+        main.style.scrollSnapType = '';
+      });
     });
   });
 })();
