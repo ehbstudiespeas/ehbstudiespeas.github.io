@@ -295,6 +295,29 @@
 
 <footer>© 2026 Elias H. Bloom · peas.phd</footer>
 <script>
+// Handle hash navigation: scroll main to the target section on page load.
+// Needed because body.research has overflow:hidden, so the browser's native
+// hash scroll targets the window (which can't scroll) instead of main.
+(function(){
+  var hash = window.location.hash;
+  if (!hash) return;
+  var target = document.getElementById(hash.slice(1));
+  var main = document.querySelector('main');
+  if (!target || !main) return;
+
+  window.addEventListener('load', function(){
+    requestAnimationFrame(function(){
+      // Compute scroll offset relative to main
+      var top = target.getBoundingClientRect().top
+              - main.getBoundingClientRect().top
+              + main.scrollTop;
+      main.scrollTo({ top: top, behavior: 'instant' });
+    });
+  });
+})();
+</script>
+
+<script>
 (function(){
   // config
   const AUTO_MS = 30000;        // auto-advance every 30s
