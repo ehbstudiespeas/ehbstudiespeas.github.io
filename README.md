@@ -32,9 +32,10 @@ The **Research** page uses a horizontal “card carousel” layout to walk throu
 
 ## Repositories
 
-The **Repositories** minimal at present but I intend to build it over time.
+The **Repositories** are minimal at present but I intend to build it over time.
 
 - Repository links are buttons and icons use free/stock images.
+- v3 will  link specific repositories with projects.
 
 ## Contacts
 
@@ -67,5 +68,6 @@ JavaScript attaches click and keyboard handlers to these SVG paths, when a pea i
 
 The **vision, content, and overall direction** of this site originate with Elias H. Bloom.
 
-- Early versions of the site structure and layout were **”vibe‑coded”** collaboratively with OpenAI Codex. Ongoing development and maintenance also uses **Claude** (Anthropic) for vibe coding, edits, and iterative improvements.
-- Subsequent refinements after vibe coding were implemented in **Cursor**, using its script editor and **agentic assistants** to help with HTML/CSS edits, accessibility tweaks, and layout polish.
+- Early versions of the site structure and layout were vibe‑coded collaboratively with OpenAI Codex. Ongoing development and maintenance also uses **Claude** (Anthropic) for vibe coding, edits, and iterative improvements.
+- Subsequent refinements after vibe coding were implemented in **Cursor**, where I use the script editor mainly and **agentic assistants** occasionally to help with HTML/CSS edits, accessibility tweaks, and layout polish.
+    - I prefer using **Cursor** as simply a script editing tool and assistant, rather than for any true agentic activities.
