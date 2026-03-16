@@ -1,0 +1,5 @@
+.DS_Store
+
+# Raw video source files — keep out of git history (large, unedited OBS recordings)
+assets/*.mov
+assets/*.MOV

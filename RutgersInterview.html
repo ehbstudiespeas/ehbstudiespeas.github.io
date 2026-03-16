@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Rutgers Interview — Elias H. Bloom</title>
+  <link rel="icon" href="assets/peas_logo_31526_sq.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/peas_logo_31526_sq.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/peas_logo_31526_sq.png" />
+  <!-- Hidden from search engines and crawlers -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/site_v2.css">
+  <style>
+    /* ── Video player container ── */
+    .interview-player {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16 / 9;
+    }
+    .interview-player video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      margin: 0;
+    }
+
+    /* ── YouTube-style info card (mid-video, top-left) ── */
+    .yt-card {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 8px 10px 8px 8px;
+      max-width: 280px;
+      z-index: 20;
+      animation: slide-in .3s ease;
+    }
+    .yt-card[hidden] { display: none; }
+
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .yt-thumb {
+      width: 80px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .yt-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .yt-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .yt-card-body a {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .yt-card-body a:hover { text-decoration: underline; }
+
+    .yt-close {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 2px 4px;
+    }
+    .yt-close:hover { color: var(--text); }
+
+    /* ── End-screen overlay (4-quadrant grid) ── */
+    .end-screen {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px;
+      padding: 6px;
+      z-index: 30;
+      animation: fade-in .4s ease;
+    }
+    .end-screen[hidden] { display: none; }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .end-tile {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+    .end-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .end-tile:hover img {
+      transform: scale(1.04);
+      filter: brightness(1.1);
+    }
+
+    /* play arrow badge */
+    .end-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.25);
+      transition: background .2s ease;
+    }
+    .end-tile:hover::after {
+      background: rgba(0,0,0,.1);
+    }
+    .end-tile-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .end-tile-play svg {
+      width: clamp(24px, 12%, 44px);
+      height: clamp(24px, 12%, 44px);
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.7));
+    }
+
+    /* replay button — sits centered at bottom of overlay */
+    .end-replay {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.4);
+      color: #fff;
+      font-size: .82rem;
+      font-family: var(--sans);
+      padding: 5px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
+      transition: background .2s;
+    }
+    .end-replay:hover { background: rgba(255,255,255,.28); }
+
+    /* ── Card layout tweaks ── */
+    .interview-card { margin-top: 40px; }
+    .interview-card h1 { margin: 0 0 4px; font-size: 1.5rem; }
+    .interview-card .q-meta {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 20px;
+    }
+    .interview-card .q-context {
+      margin-top: 16px;
+      font-size: .95rem;
+      color: var(--muted);
+      text-align: left;
+    }
+  </style>
+</head>
+<body class="interview-page">
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <a href="index_v2.html" aria-label="Go to home page">
+        <div class="mark">
+          <img src="assets/peas_logo_3626.png" alt="PEAS logo">
+        </div>
+      </a>
+      <div class="txt">
+        <div class="name">Elias H. Bloom<br><span class="muted" style="font-weight:600">PEAS</span></div>
+      </div>
+    </div>
+    <!-- No nav links — this page is intentionally unlisted -->
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Question 1 ── -->
+  <section class="card interview-card" id="q1">
+    <h1>Question 1 — Rutgers Interview</h1>
+    <p class="q-meta">Recorded March 16, 2026 · Test question</p>
+
+    <div class="interview-player" id="player-wrap-q1">
+      <video id="video-q1" controls preload="metadata">
+        <source src="assets/video/Bloom_TestQ1_31626.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+
+      <!-- Mid-video card — appears at 2:08, auto-dismisses at 2:16 -->
+      <div id="yt-card-q1" class="yt-card" hidden>
+        <img class="yt-thumb"
+             src="https://img.youtube.com/vi/8NBORwECKIA/mqdefault.jpg"
+             alt="Related YouTube video thumbnail">
+        <div class="yt-card-body">
+          <div class="yt-label">Featured on YouTube</div>
+          <a href="https://youtu.be/8NBORwECKIA?si=z55jhuyllJP7hejq"
+             target="_blank" rel="noopener">Watch Video ↗</a>
+        </div>
+        <button class="yt-close" aria-label="Dismiss card">×</button>
+      </div>
+
+      <!-- End-screen overlay — 4-quadrant grid, appears when video ends -->
+      <div id="end-screen-q1" class="end-screen" hidden>
+
+        <a class="end-tile"
+           href="https://youtu.be/lUQLgWBQA3M?si=PV3s3ukWJOCsfPJb"
+           target="_blank" rel="noopener" aria-label="Watch related video 1 on YouTube">
+          <img src="https://img.youtube.com/vi/lUQLgWBQA3M/mqdefault.jpg" alt="">
+          <div class="end-tile-play">
+            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
+              <polygon points="10,8 17,12 10,16" fill="white"/>
+            </svg>
+          </div>
+        </a>
+
+        <a class="end-tile"
+           href="https://youtu.be/Zk18D9BX_pI?si=JMzBwOUwhVyXq3tO"
+           target="_blank" rel="noopener" aria-label="Watch related video 2 on YouTube">
+          <img src="https://img.youtube.com/vi/Zk18D9BX_pI/mqdefault.jpg" alt="">
+          <div class="end-tile-play">
+            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
+              <polygon points="10,8 17,12 10,16" fill="white"/>
+            </svg>
+          </div>
+        </a>
+
+        <a class="end-tile"
+           href="https://youtu.be/XJ1jbX6ecbw?si=fvjCS9UT5QD1WN5n"
+           target="_blank" rel="noopener" aria-label="Watch related video 3 on YouTube">
+          <img src="https://img.youtube.com/vi/XJ1jbX6ecbw/mqdefault.jpg" alt="">
+          <div class="end-tile-play">
+            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
+              <polygon points="10,8 17,12 10,16" fill="white"/>
+            </svg>
+          </div>
+        </a>
+
+        <a class="end-tile"
+           href="https://youtu.be/ZQ6_y8vPBrk?si=klzN-OsSOPpBp_4t"
+           target="_blank" rel="noopener" aria-label="Watch related video 4 on YouTube">
+          <img src="https://img.youtube.com/vi/ZQ6_y8vPBrk/mqdefault.jpg" alt="">
+          <div class="end-tile-play">
+            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
+              <polygon points="10,8 17,12 10,16" fill="white"/>
+            </svg>
+          </div>
+        </a>
+
+        <button class="end-replay" id="replay-q1" aria-label="Replay video">&#9654; Replay</button>
+      </div>
+    </div>
+
+    <p class="q-context">
+      Response to interview question 1. For questions or follow-up, contact
+      <a href="mailto:ehb@peas.phd">ehb@peas.phd</a>.
+    </p>
+  </section>
+
+  <!--
+    Future questions go here — copy the section above and update:
+      - id="q2", id="video-q2", id="yt-card-q2", id="end-screen-q2", id="replay-q2"
+      - <source src="assets/video/Bloom_Q2_MDDYY.mp4">
+      - The cueTime, autoDismiss, and end-screen hrefs/srcs in the JS config below
+  -->
+
+</main>
+
+<footer>© 2026 Elias H. Bloom · peas.phd</footer>
+
+<script>
+  (function () {
+    // ── Config: one entry per video ──────────────────────────────────────────
+    var videos = [
+      {
+        videoId:     'video-q1',
+        cardId:      'yt-card-q1',
+        cueTime:     128,       // seconds — card appears at 2:08
+        autoDismiss: 8000,      // ms — card hides at 2:16 (8 s window)
+        endScreenId: 'end-screen-q1',
+        replayId:    'replay-q1'
+      }
+      // Add more objects here for Q2–Q5
+    ];
+    // ─────────────────────────────────────────────────────────────────────────
+
+    videos.forEach(function (cfg) {
+      var video     = document.getElementById(cfg.videoId);
+      var card      = document.getElementById(cfg.cardId);
+      var endScreen = document.getElementById(cfg.endScreenId);
+      var replayBtn = document.getElementById(cfg.replayId);
+      if (!video) return;
+
+      // ── Mid-video info card ──
+      if (card) {
+        var cardShown = false;
+        var cardTimer = null;
+
+        video.addEventListener('timeupdate', function () {
+          if (!cardShown && video.currentTime >= cfg.cueTime) {
+            card.hidden = false;
+            cardShown = true;
+            if (cfg.autoDismiss > 0) {
+              cardTimer = setTimeout(function () { card.hidden = true; }, cfg.autoDismiss);
+            }
+          }
+        });
+
+        card.querySelector('.yt-close').addEventListener('click', function () {
+          card.hidden = true;
+          if (cardTimer) clearTimeout(cardTimer);
+        });
+      }
+
+      // ── End-screen overlay ──
+      if (endScreen) {
+        video.addEventListener('ended', function () {
+          endScreen.hidden = false;
+        });
+
+        if (replayBtn) {
+          replayBtn.addEventListener('click', function () {
+            endScreen.hidden = true;
+            video.currentTime = 0;
+            video.play();
+          });
+        }
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
