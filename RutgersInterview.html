@@ -137,20 +137,19 @@
       filter: brightness(1.1);
     }
 
-    /* play arrow badge */
+    /* dim overlay on tile */
     .end-tile::after {
       content: '';
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background: rgba(0,0,0,.25);
       transition: background .2s ease;
     }
     .end-tile:hover::after {
-      background: rgba(0,0,0,.1);
+      background: rgba(0,0,0,.08);
     }
+
+    /* centered play button */
     .end-tile-play {
       position: absolute;
       inset: 0;
@@ -164,6 +163,34 @@
       width: clamp(24px, 12%, 44px);
       height: clamp(24px, 12%, 44px);
       filter: drop-shadow(0 2px 6px rgba(0,0,0,.7));
+    }
+
+    /* bottom info bar — label + title */
+    .end-tile-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 9px 8px;
+      background: linear-gradient(transparent, rgba(0,0,0,.78));
+      z-index: 3;
+      pointer-events: none;
+    }
+    .end-tile-label {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 2px;
+    }
+    .end-tile-title {
+      font-size: .78rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* replay button — sits centered at bottom of overlay */
@@ -230,7 +257,7 @@
 
     <div class="interview-player" id="player-wrap-q1">
       <video id="video-q1" controls preload="metadata">
-        <source src="assets/video/Bloom_TestQ1_31626.mp4" type="video/mp4">
+        <source src="assets/video/Bloom_TestQ1_31626_v2.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
       </video>
 
@@ -250,51 +277,67 @@
       <!-- End-screen overlay — 4-quadrant grid, appears when video ends -->
       <div id="end-screen-q1" class="end-screen" hidden>
 
-        <a class="end-tile"
+        <a class="end-tile" data-yt-id="lUQLgWBQA3M"
            href="https://youtu.be/lUQLgWBQA3M?si=PV3s3ukWJOCsfPJb"
            target="_blank" rel="noopener" aria-label="Watch related video 1 on YouTube">
           <img src="https://img.youtube.com/vi/lUQLgWBQA3M/mqdefault.jpg" alt="">
           <div class="end-tile-play">
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
               <polygon points="10,8 17,12 10,16" fill="white"/>
             </svg>
           </div>
+          <div class="end-tile-info">
+            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-title">Loading…</div>
+          </div>
         </a>
 
-        <a class="end-tile"
+        <a class="end-tile" data-yt-id="Zk18D9BX_pI"
            href="https://youtu.be/Zk18D9BX_pI?si=JMzBwOUwhVyXq3tO"
            target="_blank" rel="noopener" aria-label="Watch related video 2 on YouTube">
           <img src="https://img.youtube.com/vi/Zk18D9BX_pI/mqdefault.jpg" alt="">
           <div class="end-tile-play">
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
               <polygon points="10,8 17,12 10,16" fill="white"/>
             </svg>
           </div>
+          <div class="end-tile-info">
+            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-title">Loading…</div>
+          </div>
         </a>
 
-        <a class="end-tile"
+        <a class="end-tile" data-yt-id="XJ1jbX6ecbw"
            href="https://youtu.be/XJ1jbX6ecbw?si=fvjCS9UT5QD1WN5n"
            target="_blank" rel="noopener" aria-label="Watch related video 3 on YouTube">
           <img src="https://img.youtube.com/vi/XJ1jbX6ecbw/mqdefault.jpg" alt="">
           <div class="end-tile-play">
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
               <polygon points="10,8 17,12 10,16" fill="white"/>
             </svg>
           </div>
+          <div class="end-tile-info">
+            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-title">Loading…</div>
+          </div>
         </a>
 
-        <a class="end-tile"
+        <a class="end-tile" data-yt-id="ZQ6_y8vPBrk"
            href="https://youtu.be/ZQ6_y8vPBrk?si=klzN-OsSOPpBp_4t"
            target="_blank" rel="noopener" aria-label="Watch related video 4 on YouTube">
           <img src="https://img.youtube.com/vi/ZQ6_y8vPBrk/mqdefault.jpg" alt="">
           <div class="end-tile-play">
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
               <polygon points="10,8 17,12 10,16" fill="white"/>
             </svg>
+          </div>
+          <div class="end-tile-info">
+            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-title">Loading…</div>
           </div>
         </a>
 
@@ -324,17 +367,30 @@
     // ── Config: one entry per video ──────────────────────────────────────────
     var videos = [
       {
-        videoId:     'video-q1',
-        cardId:      'yt-card-q1',
-        cueTime:     128,       // seconds — card appears at 2:08
-        autoDismiss: 8000,      // ms — card hides at 2:16 (8 s window)
-        endScreenId: 'end-screen-q1',
-        replayId:    'replay-q1'
+        videoId:      'video-q1',
+        cardId:       'yt-card-q1',
+        cardShowTime: 128,   // seconds — card appears  (2:08)
+        cardHideTime: 136,   // seconds — card disappears (2:16); pause-safe
+        endScreenId:  'end-screen-q1',
+        endShowTime:  176,   // seconds — end screen appears (2:56)
+        replayId:     'replay-q1'
       }
       // Add more objects here for Q2–Q5
     ];
     // ─────────────────────────────────────────────────────────────────────────
 
+    // ── Fetch YouTube titles via oEmbed and populate end-tile labels ──────
+    document.querySelectorAll('.end-tile[data-yt-id]').forEach(function (tile) {
+      var ytId    = tile.getAttribute('data-yt-id');
+      var titleEl = tile.querySelector('.end-tile-title');
+      if (!ytId || !titleEl) return;
+      fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch%3Fv%3D' + ytId + '&format=json')
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(function (d) { titleEl.textContent = d.title || 'Watch on YouTube'; })
+        .catch(function ()  { titleEl.textContent = 'Watch on YouTube ↗'; });
+    });
+
+    // ── Per-video overlay logic ───────────────────────────────────────────
     videos.forEach(function (cfg) {
       var video     = document.getElementById(cfg.videoId);
       var card      = document.getElementById(cfg.cardId);
@@ -342,40 +398,72 @@
       var replayBtn = document.getElementById(cfg.replayId);
       if (!video) return;
 
-      // ── Mid-video info card ──
-      if (card) {
-        var cardShown = false;
-        var cardTimer = null;
+      var cardShown      = false;
+      var cardDismissed  = false; // true if user manually closed it
+      var endShown       = false;
 
-        video.addEventListener('timeupdate', function () {
-          if (!cardShown && video.currentTime >= cfg.cueTime) {
-            card.hidden = false;
-            cardShown = true;
-            if (cfg.autoDismiss > 0) {
-              cardTimer = setTimeout(function () { card.hidden = true; }, cfg.autoDismiss);
-            }
-          }
-        });
+      // ── timeupdate: drives all time-based triggers ──
+      video.addEventListener('timeupdate', function () {
+        var t = video.currentTime;
 
-        card.querySelector('.yt-close').addEventListener('click', function () {
+        // Show card
+        if (card && !cardShown && t >= cfg.cardShowTime) {
+          card.hidden = false;
+          cardShown = true;
+        }
+
+        // Hide card when playback reaches hide-time (pause-safe)
+        if (card && cardShown && !cardDismissed && t >= cfg.cardHideTime) {
           card.hidden = true;
-          if (cardTimer) clearTimeout(cardTimer);
+        }
+
+        // Show end screen
+        if (endScreen && !endShown && t >= cfg.endShowTime) {
+          endScreen.hidden = false;
+          endShown = true;
+        }
+      });
+
+      // ── seeked: reset state when user scrubs back before a cue ──
+      video.addEventListener('seeked', function () {
+        var t = video.currentTime;
+
+        if (card && t < cfg.cardShowTime) {
+          cardShown     = false;
+          cardDismissed = false;
+          card.hidden   = true;
+        } else if (card && t >= cfg.cardShowTime && t < cfg.cardHideTime && !cardDismissed) {
+          // seeked into the show-window: make sure it's visible
+          card.hidden = false;
+          cardShown   = true;
+        } else if (card && t >= cfg.cardHideTime) {
+          card.hidden = true;
+        }
+
+        if (endScreen && t < cfg.endShowTime) {
+          endShown          = false;
+          endScreen.hidden  = true;
+        }
+      });
+
+      // ── Manual card dismiss ──
+      if (card) {
+        card.querySelector('.yt-close').addEventListener('click', function () {
+          card.hidden   = true;
+          cardDismissed = true;
         });
       }
 
-      // ── End-screen overlay ──
-      if (endScreen) {
-        video.addEventListener('ended', function () {
-          endScreen.hidden = false;
+      // ── Replay button: hide end screen and restart from beginning ──
+      if (replayBtn) {
+        replayBtn.addEventListener('click', function () {
+          endScreen.hidden  = true;
+          endShown          = false;
+          cardShown         = false;
+          cardDismissed     = false;
+          video.currentTime = 0;
+          video.play();
         });
-
-        if (replayBtn) {
-          replayBtn.addEventListener('click', function () {
-            endScreen.hidden = true;
-            video.currentTime = 0;
-            video.play();
-          });
-        }
       }
     });
   })();
