@@ -27,31 +27,32 @@
       margin: 0;
     }
 
-    /* ── YouTube-style info card (mid-video, top-left) ── */
-    .yt-card {
-      position: absolute;
-      top: 12px;
-      left: 12px;
+    /* ── Cue strip — mid-video banner below player ── */
+    .cue-strip {
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.96);
+      gap: 12px;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height .35s ease, opacity .3s ease, margin .35s ease, padding .35s ease;
+      background: var(--surface, #fff);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 8px 10px 8px 8px;
-      max-width: min(260px, 62%);
-      z-index: 20;
-      animation: slide-in .3s ease;
+      padding: 0 10px;
+      position: relative;
+      margin-top: 0;
     }
-    .yt-card[hidden] { display: none; }
-
-    @keyframes slide-in {
-      from { opacity: 0; transform: translateY(-6px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .cue-strip.visible {
+      max-height: 72px;
+      opacity: 1;
+      margin-top: 10px;
+      padding: 8px 10px;
     }
+    .cue-strip[hidden] { display: none; }
 
-    .yt-thumb {
+    .cue-thumb {
       width: 80px;
       height: 56px;
       object-fit: cover;
@@ -59,20 +60,20 @@
       flex-shrink: 0;
     }
 
-    .yt-card-body {
+    .cue-body {
       display: flex;
       flex-direction: column;
       gap: 4px;
       min-width: 0;
     }
-    .yt-label {
+    .cue-label {
       font-size: .72rem;
       font-weight: 700;
       letter-spacing: .06em;
       text-transform: uppercase;
       color: var(--muted);
     }
-    .yt-card-body a {
+    .cue-body a {
       font-size: .88rem;
       font-weight: 600;
       color: var(--text);
@@ -81,9 +82,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .yt-card-body a:hover { text-decoration: underline; }
+    .cue-body a:hover { text-decoration: underline; }
 
-    .yt-close {
+    .cue-close {
       position: absolute;
       top: 4px;
       right: 6px;
@@ -95,33 +96,27 @@
       color: var(--muted);
       padding: 2px 4px;
     }
-    .yt-close:hover { color: var(--text); }
+    .cue-close:hover { color: var(--text); }
 
-    @media (max-width: 480px) {
-      .yt-card { padding: 6px 8px 6px 6px; gap: 7px; }
-      .yt-thumb { width: 60px; height: 42px; }
-      .yt-label { font-size: .65rem; }
-      .yt-card-body a { font-size: .82rem; }
+    /* ── End panel — below-player grid of related videos ── */
+    .end-panel {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height .45s ease, opacity .4s ease, margin .45s ease;
+      margin-top: 0;
     }
+    .end-panel.visible {
+      max-height: 600px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+    .end-panel[hidden] { display: none; }
 
-    /* ── End-screen overlay (4-quadrant grid) ── */
-    .end-screen {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.82);
+    .end-panel-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 6px;
-      padding: 6px;
-      z-index: 30;
-      animation: fade-in .4s ease;
-    }
-    .end-screen[hidden] { display: none; }
-
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      gap: 8px;
     }
 
     .end-tile {
@@ -131,6 +126,7 @@
       cursor: pointer;
       display: block;
       text-decoration: none;
+      aspect-ratio: 16 / 9;
     }
     .end-tile img {
       width: 100%;
@@ -200,26 +196,21 @@
       text-overflow: ellipsis;
     }
 
-    /* replay button — sits centered at bottom of overlay */
-    .end-replay {
-      position: absolute;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 40;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.4);
-      color: #fff;
+    /* replay button */
+    .end-panel-replay {
+      display: block;
+      margin: 10px auto 0;
+      background: var(--surface, #fff);
+      border: 1px solid var(--border);
+      color: var(--text);
       font-size: .82rem;
       font-family: var(--sans);
-      padding: 5px 14px;
+      padding: 6px 18px;
       border-radius: 999px;
       cursor: pointer;
-      backdrop-filter: blur(4px);
-      white-space: nowrap;
       transition: background .2s;
     }
-    .end-replay:hover { background: rgba(255,255,255,.28); }
+    .end-panel-replay:hover { background: var(--hover, #f0f0f0); }
 
     /* ── Card layout tweaks ── */
     .interview-card { margin-top: 40px; }
@@ -269,22 +260,24 @@
         <source src="assets/video/Bloom_TestQ1_31626_v2.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
       </video>
+    </div>
 
-      <!-- Mid-video card — appears at 2:08, auto-dismisses at 2:16 -->
-      <div id="yt-card-q1" class="yt-card" hidden>
-        <img class="yt-thumb"
-             src="https://img.youtube.com/vi/8NBORwECKIA/mqdefault.jpg"
-             alt="Related YouTube video thumbnail">
-        <div class="yt-card-body">
-          <div class="yt-label">Featured on YouTube</div>
-          <a href="https://youtu.be/8NBORwECKIA?si=z55jhuyllJP7hejq"
-             target="_blank" rel="noopener">Watch Video ↗</a>
-        </div>
-        <button class="yt-close" aria-label="Dismiss card">×</button>
+    <!-- Mid-video cue strip — slides in below player at 2:08 -->
+    <div id="cue-strip-q1" class="cue-strip" hidden>
+      <img class="cue-thumb"
+           src="https://img.youtube.com/vi/8NBORwECKIA/mqdefault.jpg"
+           alt="">
+      <div class="cue-body">
+        <div class="cue-label">Featured on YouTube</div>
+        <a href="https://youtu.be/8NBORwECKIA?si=z55jhuyllJP7hejq"
+           target="_blank" rel="noopener">Watch Video ↗</a>
       </div>
+      <button class="cue-close" aria-label="Dismiss">×</button>
+    </div>
 
-      <!-- End-screen overlay — 4-quadrant grid, appears when video ends -->
-      <div id="end-screen-q1" class="end-screen" hidden>
+    <!-- End-of-video panel — expands below player when video ends -->
+    <div id="end-panel-q1" class="end-panel" hidden>
+      <div class="end-panel-grid">
 
         <a class="end-tile" data-yt-id="lUQLgWBQA3M"
            href="https://youtu.be/lUQLgWBQA3M?si=PV3s3ukWJOCsfPJb"
@@ -350,8 +343,8 @@
           </div>
         </a>
 
-        <button class="end-replay" id="replay-q1" aria-label="Replay video">&#9654; Replay</button>
       </div>
+      <button class="end-panel-replay" id="replay-q1" aria-label="Replay video">&#8635; Replay</button>
     </div>
 
     <p class="q-context">
@@ -362,9 +355,9 @@
 
   <!--
     Future questions go here — copy the section above and update:
-      - id="q2", id="video-q2", id="yt-card-q2", id="end-screen-q2", id="replay-q2"
+      - id="q2", id="video-q2", id="cue-strip-q2", id="end-panel-q2", id="replay-q2"
       - <source src="assets/video/Bloom_Q2_MDDYY.mp4">
-      - The cueTime, autoDismiss, and end-screen hrefs/srcs in the JS config below
+      - The cueTime, autoDismiss, and end-panel hrefs/srcs in the JS config below
   -->
 
 </main>
@@ -377,16 +370,32 @@
     var videos = [
       {
         videoId:      'video-q1',
-        cardId:       'yt-card-q1',
-        cardShowTime: 128,   // seconds — card appears  (2:08)
-        cardHideTime: 136,   // seconds — card disappears (2:16); pause-safe
-        endScreenId:  'end-screen-q1',
-        endShowTime:  176,   // seconds — end screen appears (2:56)
+        cueStripId:   'cue-strip-q1',
+        cueShowTime:  128,   // seconds — cue strip slides in  (2:08)
+        cueHideTime:  136,   // seconds — cue strip slides out (2:16); pause-safe
+        endPanelId:   'end-panel-q1',
+        endShowTime:  176,   // seconds — end panel expands (2:56)
         replayId:     'replay-q1'
       }
       // Add more objects here for Q2–Q5
     ];
     // ─────────────────────────────────────────────────────────────────────────
+
+    // helper: show element with animated transition
+    function showEl(el) {
+      el.hidden = false;
+      // next frame so display:none is cleared before transition fires
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          el.classList.add('visible');
+        });
+      });
+    }
+
+    // helper: hide element (collapse transition, then set hidden)
+    function hideEl(el) {
+      el.classList.remove('visible');
+    }
 
     // ── Fetch YouTube titles via oEmbed and populate end-tile labels ──────
     document.querySelectorAll('.end-tile[data-yt-id]').forEach(function (tile) {
@@ -399,36 +408,36 @@
         .catch(function ()  { titleEl.textContent = 'Watch on YouTube ↗'; });
     });
 
-    // ── Per-video overlay logic ───────────────────────────────────────────
+    // ── Per-video logic ───────────────────────────────────────────────────
     videos.forEach(function (cfg) {
-      var video     = document.getElementById(cfg.videoId);
-      var card      = document.getElementById(cfg.cardId);
-      var endScreen = document.getElementById(cfg.endScreenId);
+      var video    = document.getElementById(cfg.videoId);
+      var cueStrip = document.getElementById(cfg.cueStripId);
+      var endPanel = document.getElementById(cfg.endPanelId);
       var replayBtn = document.getElementById(cfg.replayId);
       if (!video) return;
 
-      var cardShown      = false;
-      var cardDismissed  = false; // true if user manually closed it
-      var endShown       = false;
+      var cueShown      = false;
+      var cueDismissed  = false; // true if user manually closed it
+      var endShown      = false;
 
       // ── timeupdate: drives all time-based triggers ──
       video.addEventListener('timeupdate', function () {
         var t = video.currentTime;
 
-        // Show card
-        if (card && !cardShown && t >= cfg.cardShowTime) {
-          card.hidden = false;
-          cardShown = true;
+        // Show cue strip
+        if (cueStrip && !cueShown && t >= cfg.cueShowTime) {
+          showEl(cueStrip);
+          cueShown = true;
         }
 
-        // Hide card when playback reaches hide-time (pause-safe)
-        if (card && cardShown && !cardDismissed && t >= cfg.cardHideTime) {
-          card.hidden = true;
+        // Hide cue strip when playback reaches hide-time (pause-safe)
+        if (cueStrip && cueShown && !cueDismissed && t >= cfg.cueHideTime) {
+          hideEl(cueStrip);
         }
 
-        // Show end screen
-        if (endScreen && !endShown && t >= cfg.endShowTime) {
-          endScreen.hidden = false;
+        // Show end panel
+        if (endPanel && !endShown && t >= cfg.endShowTime) {
+          showEl(endPanel);
           endShown = true;
         }
       });
@@ -437,39 +446,58 @@
       video.addEventListener('seeked', function () {
         var t = video.currentTime;
 
-        if (card && t < cfg.cardShowTime) {
-          cardShown     = false;
-          cardDismissed = false;
-          card.hidden   = true;
-        } else if (card && t >= cfg.cardShowTime && t < cfg.cardHideTime && !cardDismissed) {
-          // seeked into the show-window: make sure it's visible
-          card.hidden = false;
-          cardShown   = true;
-        } else if (card && t >= cfg.cardHideTime) {
-          card.hidden = true;
+        if (cueStrip) {
+          if (t < cfg.cueShowTime) {
+            cueShown    = false;
+            cueDismissed = false;
+            hideEl(cueStrip);
+            // wait for transition then apply hidden
+            cueStrip.addEventListener('transitionend', function onEnd() {
+              cueStrip.removeEventListener('transitionend', onEnd);
+              if (!cueStrip.classList.contains('visible')) cueStrip.hidden = true;
+            });
+          } else if (t >= cfg.cueShowTime && t < cfg.cueHideTime && !cueDismissed) {
+            // seeked into the show-window: make sure it's visible
+            showEl(cueStrip);
+            cueShown = true;
+          } else if (t >= cfg.cueHideTime) {
+            hideEl(cueStrip);
+          }
         }
 
-        if (endScreen && t < cfg.endShowTime) {
-          endShown          = false;
-          endScreen.hidden  = true;
+        if (endPanel && t < cfg.endShowTime) {
+          endShown = false;
+          hideEl(endPanel);
+          endPanel.addEventListener('transitionend', function onEnd() {
+            endPanel.removeEventListener('transitionend', onEnd);
+            if (!endPanel.classList.contains('visible')) endPanel.hidden = true;
+          });
         }
       });
 
-      // ── Manual card dismiss ──
-      if (card) {
-        card.querySelector('.yt-close').addEventListener('click', function () {
-          card.hidden   = true;
-          cardDismissed = true;
+      // ── Manual cue strip dismiss ──
+      if (cueStrip) {
+        cueStrip.querySelector('.cue-close').addEventListener('click', function () {
+          cueDismissed = true;
+          hideEl(cueStrip);
+          cueStrip.addEventListener('transitionend', function onEnd() {
+            cueStrip.removeEventListener('transitionend', onEnd);
+            if (!cueStrip.classList.contains('visible')) cueStrip.hidden = true;
+          });
         });
       }
 
-      // ── Replay button: hide end screen and restart from beginning ──
+      // ── Replay button: collapse end panel and restart ──
       if (replayBtn) {
         replayBtn.addEventListener('click', function () {
-          endScreen.hidden  = true;
-          endShown          = false;
-          cardShown         = false;
-          cardDismissed     = false;
+          hideEl(endPanel);
+          endPanel.addEventListener('transitionend', function onEnd() {
+            endPanel.removeEventListener('transitionend', onEnd);
+            if (!endPanel.classList.contains('visible')) endPanel.hidden = true;
+          });
+          endShown      = false;
+          cueShown      = false;
+          cueDismissed  = false;
           video.currentTime = 0;
           video.play();
         });
