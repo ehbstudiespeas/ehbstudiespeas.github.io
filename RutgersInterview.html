@@ -169,6 +169,59 @@
     }
     .end-panel-replay:hover { background: var(--hover, #f0f0f0); }
 
+    /* ── Publication cards (Q2 panel) ── */
+    .pub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding-top: 2px;
+    }
+    .pub-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      transition: box-shadow .2s, transform .15s;
+    }
+    .pub-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .pub-card-cover {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      flex-shrink: 0;
+      transition: transform .2s ease;
+    }
+    .pub-card:hover .pub-card-cover {
+      transform: scale(1.03);
+    }
+    .pub-card-body {
+      padding: 8px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .pub-card-label {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pub-card-title {
+      font-size: .78rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
     /* ── Card layout tweaks ── */
     .interview-card { margin-top: 40px; }
     .interview-card h1 { margin: 0 0 4px; font-size: 1.5rem; }
@@ -322,12 +375,73 @@
 
   </section>
 
-  <!--
-    Future questions go here — copy the section above and update:
-      - id="q2", id="video-q2", id="panel-toggle-q2", id="end-panel-q2", id="replay-q2"
-      - <source src="assets/video/Bloom_Q2_MDDYY.mp4">
-      - The endShowTime and end-panel hrefs/srcs in the JS config below
-  -->
+  <!-- ── Question 2 ── -->
+  <section class="card interview-card" id="q2">
+    <h1>Question 2 - The Land Grant Mission</h1>
+
+    <div class="interview-player" id="player-wrap-q2">
+      <video id="video-q2" controls preload="metadata"
+             playsinline webkit-playsinline
+             poster="assets/video/Bloom_FinalQ2_31726_poster.jpg">
+        <source src="assets/video/Bloom_FinalQ2_31726.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+
+    <button class="panel-toggle" id="panel-toggle-q2"
+            aria-label="Show extension manuscripts"
+            aria-expanded="false"
+            aria-controls="end-panel-q2">
+      Click for extension manuscripts
+      <svg class="toggle-chevron" viewBox="0 0 16 16" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <polyline points="4,6 8,10 12,6"/>
+      </svg>
+    </button>
+
+    <div id="end-panel-q2" class="end-panel" hidden>
+      <div class="pub-grid">
+
+        <a class="pub-card"
+           href="https://pubs.extension.wsu.edu/product/a-citizen-science-guide-to-wild-bees-and-floral-visitors-in-western-washington-home-garden-series/"
+           target="_blank" rel="noopener">
+          <img class="pub-card-cover" src="assets/pdfs/Extension_1_cover.jpg" alt="Wild bee monitoring guide cover">
+          <div class="pub-card-body">
+            <div class="pub-card-label">Wild bee monitoring</div>
+            <div class="pub-card-title">A Citizen Science Guide to Wild Bees and Floral Visitors in Western Washington</div>
+          </div>
+        </a>
+
+        <a class="pub-card"
+           href="https://pubs.extension.wsu.edu/product/an-introduction-to-cavitynesting-bees-in-the-puget-sound-region-home-garden-series/"
+           target="_blank" rel="noopener">
+          <img class="pub-card-cover" src="assets/pdfs/Extension_2_cover.jpg" alt="Bee hotels guide cover">
+          <div class="pub-card-body">
+            <div class="pub-card-label">Bee hotels</div>
+            <div class="pub-card-title">An Introduction to Cavity-Nesting Bees in the Puget Sound Region</div>
+          </div>
+        </a>
+
+        <a class="pub-card"
+           href="https://pubs.extension.wsu.edu/product/guia-de-ciencia-ciudadana-en-abejas-silvestres-y-visitantes-florales-del-oeste-de-washington-home-garden-series/"
+           target="_blank" rel="noopener">
+          <img class="pub-card-cover" src="assets/pdfs/Extension_3_cover.jpg" alt="Wild bee monitoring guide cover — Spanish">
+          <div class="pub-card-body">
+            <div class="pub-card-label">Wild bee monitoring — Spanish</div>
+            <div class="pub-card-title">Guía de Ciencia Ciudadana en Abejas Silvestres y Visitantes Florales del Oeste de Washington</div>
+          </div>
+        </a>
+
+      </div>
+      <button class="end-panel-replay" id="replay-q2" aria-label="Replay video">&#8635; Replay</button>
+    </div>
+
+    <p class="q-context">
+      Response to interview question 2. For questions or follow-up, contact
+      <a href="mailto:ehb@peas.phd">ehb@peas.phd</a>.
+    </p>
+  </section>
 
 </main>
 
@@ -363,32 +477,36 @@
         .catch(function ()  { titleEl.textContent = 'Watch on YouTube ↗'; });
     });
 
-    // ── Toggle ────────────────────────────────────────────────────────────
-    var toggleBtn = document.getElementById('panel-toggle-q1');
-    var endPanel  = document.getElementById('end-panel-q1');
-    if (toggleBtn && endPanel) {
-      toggleBtn.addEventListener('click', function () {
-        if (endPanel.classList.contains('visible')) {
-          hideEl(endPanel);
-          toggleBtn.setAttribute('aria-expanded', 'false');
+    // ── Wire up toggle + replay for a given question ─────────────────────
+    function wireQuestion(toggleId, panelId, replayId, videoId) {
+      var btn    = document.getElementById(toggleId);
+      var panel  = document.getElementById(panelId);
+      var replay = document.getElementById(replayId);
+      var vid    = document.getElementById(videoId);
+      if (!btn || !panel) return;
+
+      btn.addEventListener('click', function () {
+        if (panel.classList.contains('visible')) {
+          hideEl(panel);
+          btn.setAttribute('aria-expanded', 'false');
         } else {
-          showEl(endPanel);
-          toggleBtn.setAttribute('aria-expanded', 'true');
+          showEl(panel);
+          btn.setAttribute('aria-expanded', 'true');
         }
       });
+
+      if (replay && vid) {
+        replay.addEventListener('click', function () {
+          hideEl(panel);
+          btn.setAttribute('aria-expanded', 'false');
+          vid.currentTime = 0;
+          vid.play();
+        });
+      }
     }
 
-    // ── Replay ────────────────────────────────────────────────────────────
-    var replayBtn = document.getElementById('replay-q1');
-    var video     = document.getElementById('video-q1');
-    if (replayBtn && video && endPanel) {
-      replayBtn.addEventListener('click', function () {
-        hideEl(endPanel);
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        video.currentTime = 0;
-        video.play();
-      });
-    }
+    wireQuestion('panel-toggle-q1', 'end-panel-q1', 'replay-q1', 'video-q1');
+    wireQuestion('panel-toggle-q2', 'end-panel-q2', 'replay-q2', 'video-q2');
   })();
 </script>
 
