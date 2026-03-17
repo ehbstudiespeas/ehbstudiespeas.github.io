@@ -27,75 +27,6 @@
       margin: 0;
     }
 
-    /* ── Cue strip — mid-video banner below player ── */
-    .cue-strip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transition: max-height .35s ease, opacity .3s ease, margin .35s ease, padding .35s ease;
-      background: var(--surface, #fff);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 0 10px;
-      position: relative;
-      margin-top: 0;
-    }
-    .cue-strip.visible {
-      max-height: 72px;
-      opacity: 1;
-      margin-top: 10px;
-      padding: 8px 10px;
-    }
-    .cue-strip[hidden] { display: none; }
-
-    .cue-thumb {
-      width: 80px;
-      height: 56px;
-      object-fit: cover;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-    .cue-body {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 0;
-    }
-    .cue-label {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .cue-body a {
-      font-size: .88rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .cue-body a:hover { text-decoration: underline; }
-    .cue-close {
-      position: absolute;
-      top: 4px;
-      right: 6px;
-      background: none;
-      border: none;
-      font-size: 1rem;
-      line-height: 1;
-      cursor: pointer;
-      color: var(--muted);
-      padding: 2px 4px;
-    }
-    .cue-close:hover { color: var(--text); }
-
     /* ── Panel toggle button ── */
     .panel-toggle {
       display: flex;
@@ -288,25 +219,12 @@
       </video>
     </div>
 
-    <!-- Mid-video cue strip — slides in below player at 2:08 -->
-    <div id="cue-strip-q1" class="cue-strip" hidden>
-      <img class="cue-thumb"
-           src="https://img.youtube.com/vi/8NBORwECKIA/mqdefault.jpg"
-           alt="">
-      <div class="cue-body">
-        <div class="cue-label">Featured on YouTube</div>
-        <a href="https://youtu.be/8NBORwECKIA?si=z55jhuyllJP7hejq"
-           target="_blank" rel="noopener">Watch Video ↗</a>
-      </div>
-      <button class="cue-close" aria-label="Dismiss">×</button>
-    </div>
-
     <!-- Toggle button — always visible, expands the related-videos panel -->
     <button class="panel-toggle" id="panel-toggle-q1"
             aria-label="Show related videos"
             aria-expanded="false"
             aria-controls="end-panel-q1">
-      Related videos
+      eOrganic webinars
       <svg class="toggle-chevron" viewBox="0 0 16 16" fill="none"
            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
            aria-hidden="true">
@@ -411,9 +329,9 @@
 
   <!--
     Future questions go here — copy the section above and update:
-      - id="q2", id="video-q2", id="cue-strip-q2", id="panel-toggle-q2", id="end-panel-q2", id="replay-q2"
+      - id="q2", id="video-q2", id="panel-toggle-q2", id="end-panel-q2", id="replay-q2"
       - <source src="assets/video/Bloom_Q2_MDDYY.mp4">
-      - The cueTime, autoDismiss, and end-panel hrefs/srcs in the JS config below
+      - The endShowTime and end-panel hrefs/srcs in the JS config below
   -->
 
 </main>
@@ -425,14 +343,11 @@
     // ── Config: one entry per video ──────────────────────────────────────────
     var videos = [
       {
-        videoId:      'video-q1',
-        cueStripId:   'cue-strip-q1',
-        cueShowTime:  128,   // seconds — cue strip slides in  (2:08)
-        cueHideTime:  136,   // seconds — cue strip slides out (2:16)
-        endPanelId:   'end-panel-q1',
-        endShowTime:  176,   // seconds — end panel expands (2:56)
-        toggleId:     'panel-toggle-q1',
-        replayId:     'replay-q1'
+        videoId:     'video-q1',
+        endPanelId:  'end-panel-q1',
+        endShowTime: 176,   // seconds — end panel expands (2:56)
+        toggleId:    'panel-toggle-q1',
+        replayId:    'replay-q1'
       }
       // Add more objects here for Q2–Q5
     ];
@@ -473,15 +388,12 @@
     // ── Per-video logic ───────────────────────────────────────────────────
     videos.forEach(function (cfg) {
       var video     = document.getElementById(cfg.videoId);
-      var cueStrip  = document.getElementById(cfg.cueStripId);
       var endPanel  = document.getElementById(cfg.endPanelId);
       var toggleBtn = document.getElementById(cfg.toggleId);
       var replayBtn = document.getElementById(cfg.replayId);
       if (!video) return;
 
-      var cueShown     = false;
-      var cueDismissed = false;
-      var endShown     = false;
+      var endShown = false;
 
       // open/close the panel; sync toggle button state
       function openPanel() {
@@ -504,58 +416,26 @@
         });
       }
 
-      // ── timeupdate: drives time-based triggers ──
+      // ── timeupdate: auto-open panel at end-show time ──
       video.addEventListener('timeupdate', function () {
-        var t = video.currentTime;
-
-        if (cueStrip && !cueShown && t >= cfg.cueShowTime) {
-          showEl(cueStrip);
-          cueShown = true;
-        }
-        if (cueStrip && cueShown && !cueDismissed && t >= cfg.cueHideTime) {
-          hideEl(cueStrip, function () { cueStrip.hidden = true; });
-        }
-        if (endPanel && !endShown && t >= cfg.endShowTime) {
+        if (endPanel && !endShown && video.currentTime >= cfg.endShowTime) {
           openPanel();
           endShown = true;
         }
       });
 
-      // ── seeked: reset state when user scrubs back ──
+      // ── seeked: reset endShown when scrubbing back ──
       video.addEventListener('seeked', function () {
-        var t = video.currentTime;
-
-        if (cueStrip) {
-          if (t < cfg.cueShowTime) {
-            cueShown = false; cueDismissed = false;
-            hideEl(cueStrip, function () { cueStrip.hidden = true; });
-          } else if (t >= cfg.cueShowTime && t < cfg.cueHideTime && !cueDismissed) {
-            showEl(cueStrip); cueShown = true;
-          } else if (t >= cfg.cueHideTime) {
-            hideEl(cueStrip, function () { cueStrip.hidden = true; });
-          }
-        }
-
-        if (endPanel && t < cfg.endShowTime) {
+        if (endPanel && video.currentTime < cfg.endShowTime) {
           endShown = false;
-          // only auto-close; don't override a user-opened panel
-          if (endShown) closePanel(true);
         }
       });
-
-      // ── Manual cue dismiss ──
-      if (cueStrip) {
-        cueStrip.querySelector('.cue-close').addEventListener('click', function () {
-          cueDismissed = true;
-          hideEl(cueStrip, function () { cueStrip.hidden = true; });
-        });
-      }
 
       // ── Replay ──
       if (replayBtn) {
         replayBtn.addEventListener('click', function () {
           closePanel(true);
-          endShown = false; cueShown = false; cueDismissed = false;
+          endShown = false;
           video.currentTime = 0;
           video.play();
         });
