@@ -208,13 +208,13 @@
   <!-- ── Question 1 ── -->
   <section class="card interview-card" id="q1">
     <h1>Question 1 — Rutgers Interview</h1>
-    <p class="q-meta">Recorded March 16, 2026 · Test question</p>
+    <p class="q-meta">Recorded March 17, 2026</p>
 
     <div class="interview-player" id="player-wrap-q1">
       <video id="video-q1" controls preload="metadata"
              playsinline webkit-playsinline
              poster="assets/video/Bloom_TestQ1_31626_v2_poster.jpg">
-        <source src="assets/video/Bloom_TestQ1_31626_v2.mp4" type="video/mp4">
+        <source src="assets/video/Bloom_FinalQ1_31726.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
       </video>
     </div>
@@ -340,38 +340,21 @@
 
 <script>
   (function () {
-    // ── Config: one entry per video ──────────────────────────────────────────
-    var videos = [
-      {
-        videoId:     'video-q1',
-        endPanelId:  'end-panel-q1',
-        endShowTime: 176,   // seconds — end panel expands (2:56)
-        toggleId:    'panel-toggle-q1',
-        replayId:    'replay-q1'
-      }
-      // Add more objects here for Q2–Q5
-    ];
-    // ─────────────────────────────────────────────────────────────────────────
-
     // helper: show element with animated transition
     function showEl(el) {
       el.hidden = false;
       requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          el.classList.add('visible');
-        });
+        requestAnimationFrame(function () { el.classList.add('visible'); });
       });
     }
 
-    // helper: collapse element; optional callback when done
-    function hideEl(el, done) {
+    // helper: collapse element and set hidden after transition
+    function hideEl(el) {
       el.classList.remove('visible');
-      if (done) {
-        el.addEventListener('transitionend', function onEnd() {
-          el.removeEventListener('transitionend', onEnd);
-          if (!el.classList.contains('visible')) done();
-        });
-      }
+      el.addEventListener('transitionend', function onEnd() {
+        el.removeEventListener('transitionend', onEnd);
+        if (!el.classList.contains('visible')) el.hidden = true;
+      });
     }
 
     // ── Fetch YouTube titles via oEmbed ───────────────────────────────────
@@ -385,62 +368,32 @@
         .catch(function ()  { titleEl.textContent = 'Watch on YouTube ↗'; });
     });
 
-    // ── Per-video logic ───────────────────────────────────────────────────
-    videos.forEach(function (cfg) {
-      var video     = document.getElementById(cfg.videoId);
-      var endPanel  = document.getElementById(cfg.endPanelId);
-      var toggleBtn = document.getElementById(cfg.toggleId);
-      var replayBtn = document.getElementById(cfg.replayId);
-      if (!video) return;
-
-      var endShown = false;
-
-      // open/close the panel; sync toggle button state
-      function openPanel() {
-        showEl(endPanel);
-        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
-      }
-      function closePanel(andHide) {
-        hideEl(endPanel, andHide ? function () { endPanel.hidden = true; } : null);
-        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
-      }
-
-      // ── Manual toggle ──
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', function () {
-          if (endPanel.classList.contains('visible')) {
-            closePanel(true);
-          } else {
-            openPanel();
-          }
-        });
-      }
-
-      // ── timeupdate: auto-open panel at end-show time ──
-      video.addEventListener('timeupdate', function () {
-        if (endPanel && !endShown && video.currentTime >= cfg.endShowTime) {
-          openPanel();
-          endShown = true;
+    // ── Toggle ────────────────────────────────────────────────────────────
+    var toggleBtn = document.getElementById('panel-toggle-q1');
+    var endPanel  = document.getElementById('end-panel-q1');
+    if (toggleBtn && endPanel) {
+      toggleBtn.addEventListener('click', function () {
+        if (endPanel.classList.contains('visible')) {
+          hideEl(endPanel);
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          showEl(endPanel);
+          toggleBtn.setAttribute('aria-expanded', 'true');
         }
       });
+    }
 
-      // ── seeked: reset endShown when scrubbing back ──
-      video.addEventListener('seeked', function () {
-        if (endPanel && video.currentTime < cfg.endShowTime) {
-          endShown = false;
-        }
+    // ── Replay ────────────────────────────────────────────────────────────
+    var replayBtn = document.getElementById('replay-q1');
+    var video     = document.getElementById('video-q1');
+    if (replayBtn && video && endPanel) {
+      replayBtn.addEventListener('click', function () {
+        hideEl(endPanel);
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        video.currentTime = 0;
+        video.play();
       });
-
-      // ── Replay ──
-      if (replayBtn) {
-        replayBtn.addEventListener('click', function () {
-          closePanel(true);
-          endShown = false;
-          video.currentTime = 0;
-          video.play();
-        });
-      }
-    });
+    }
   })();
 </script>
 
