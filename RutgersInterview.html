@@ -59,7 +59,6 @@
       border-radius: 8px;
       flex-shrink: 0;
     }
-
     .cue-body {
       display: flex;
       flex-direction: column;
@@ -83,7 +82,6 @@
       text-overflow: ellipsis;
     }
     .cue-body a:hover { text-decoration: underline; }
-
     .cue-close {
       position: absolute;
       top: 4px;
@@ -98,7 +96,37 @@
     }
     .cue-close:hover { color: var(--text); }
 
-    /* ── End panel — below-player grid of related videos ── */
+    /* ── Panel toggle button ── */
+    .panel-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 2px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: .82rem;
+      font-family: var(--sans);
+      color: var(--muted);
+      text-align: left;
+      transition: color .15s;
+    }
+    .panel-toggle:hover { color: var(--text); }
+    .toggle-chevron {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-left: auto;
+      transition: transform .3s ease;
+    }
+    .panel-toggle[aria-expanded="true"] .toggle-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* ── End panel — row of 5 small thumbnails ── */
     .end-panel {
       overflow: hidden;
       max-height: 0;
@@ -107,26 +135,26 @@
       margin-top: 0;
     }
     .end-panel.visible {
-      max-height: 600px;
+      max-height: 400px;
       opacity: 1;
-      margin-top: 12px;
+      margin-top: 8px;
     }
     .end-panel[hidden] { display: none; }
 
     .end-panel-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
     }
 
     .end-tile {
       position: relative;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
       display: block;
       text-decoration: none;
-      aspect-ratio: 16 / 9;
+      height: 90px;
     }
     .end-tile img {
       width: 100%;
@@ -139,17 +167,15 @@
       transform: scale(1.04);
       filter: brightness(1.1);
     }
-
-    /* dim overlay on tile */
     .end-tile::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.28);
       transition: background .2s ease;
     }
     .end-tile:hover::after {
-      background: rgba(0,0,0,.08);
+      background: rgba(0,0,0,.1);
     }
 
     /* centered play button */
@@ -163,32 +189,32 @@
       pointer-events: none;
     }
     .end-tile-play svg {
-      width: clamp(24px, 12%, 44px);
-      height: clamp(24px, 12%, 44px);
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.7));
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 1px 4px rgba(0,0,0,.7));
     }
 
-    /* bottom info bar — label + title */
+    /* bottom info bar */
     .end-tile-info {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 22px 9px 8px;
-      background: linear-gradient(transparent, rgba(0,0,0,.78));
+      padding: 18px 6px 5px;
+      background: linear-gradient(transparent, rgba(0,0,0,.82));
       z-index: 3;
       pointer-events: none;
     }
     .end-tile-label {
-      font-size: .6rem;
+      font-size: .55rem;
       font-weight: 700;
       letter-spacing: .07em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.65);
-      margin-bottom: 2px;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 1px;
     }
     .end-tile-title {
-      font-size: .78rem;
+      font-size: .68rem;
       font-weight: 600;
       color: #fff;
       white-space: nowrap;
@@ -199,7 +225,7 @@
     /* replay button */
     .end-panel-replay {
       display: block;
-      margin: 10px auto 0;
+      margin: 10px auto 4px;
       background: var(--surface, #fff);
       border: 1px solid var(--border);
       color: var(--text);
@@ -275,7 +301,20 @@
       <button class="cue-close" aria-label="Dismiss">×</button>
     </div>
 
-    <!-- End-of-video panel — expands below player when video ends -->
+    <!-- Toggle button — always visible, expands the related-videos panel -->
+    <button class="panel-toggle" id="panel-toggle-q1"
+            aria-label="Show related videos"
+            aria-expanded="false"
+            aria-controls="end-panel-q1">
+      Related videos
+      <svg class="toggle-chevron" viewBox="0 0 16 16" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <polyline points="4,6 8,10 12,6"/>
+      </svg>
+    </button>
+
+    <!-- Related-videos panel — row of 5 small thumbnails -->
     <div id="end-panel-q1" class="end-panel" hidden>
       <div class="end-panel-grid">
 
@@ -290,7 +329,7 @@
             </svg>
           </div>
           <div class="end-tile-info">
-            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-label">YouTube</div>
             <div class="end-tile-title">Loading…</div>
           </div>
         </a>
@@ -306,7 +345,7 @@
             </svg>
           </div>
           <div class="end-tile-info">
-            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-label">YouTube</div>
             <div class="end-tile-title">Loading…</div>
           </div>
         </a>
@@ -322,7 +361,7 @@
             </svg>
           </div>
           <div class="end-tile-info">
-            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-label">YouTube</div>
             <div class="end-tile-title">Loading…</div>
           </div>
         </a>
@@ -338,7 +377,24 @@
             </svg>
           </div>
           <div class="end-tile-info">
-            <div class="end-tile-label">Watch on YouTube</div>
+            <div class="end-tile-label">YouTube</div>
+            <div class="end-tile-title">Loading…</div>
+          </div>
+        </a>
+
+        <!-- 5th tile: the mid-video featured video -->
+        <a class="end-tile" data-yt-id="8NBORwECKIA"
+           href="https://youtu.be/8NBORwECKIA?si=z55jhuyllJP7hejq"
+           target="_blank" rel="noopener" aria-label="Watch featured video on YouTube">
+          <img src="https://img.youtube.com/vi/8NBORwECKIA/mqdefault.jpg" alt="">
+          <div class="end-tile-play">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/>
+              <polygon points="10,8 17,12 10,16" fill="white"/>
+            </svg>
+          </div>
+          <div class="end-tile-info">
+            <div class="end-tile-label">YouTube</div>
             <div class="end-tile-title">Loading…</div>
           </div>
         </a>
@@ -355,7 +411,7 @@
 
   <!--
     Future questions go here — copy the section above and update:
-      - id="q2", id="video-q2", id="cue-strip-q2", id="end-panel-q2", id="replay-q2"
+      - id="q2", id="video-q2", id="cue-strip-q2", id="panel-toggle-q2", id="end-panel-q2", id="replay-q2"
       - <source src="assets/video/Bloom_Q2_MDDYY.mp4">
       - The cueTime, autoDismiss, and end-panel hrefs/srcs in the JS config below
   -->
@@ -372,9 +428,10 @@
         videoId:      'video-q1',
         cueStripId:   'cue-strip-q1',
         cueShowTime:  128,   // seconds — cue strip slides in  (2:08)
-        cueHideTime:  136,   // seconds — cue strip slides out (2:16); pause-safe
+        cueHideTime:  136,   // seconds — cue strip slides out (2:16)
         endPanelId:   'end-panel-q1',
         endShowTime:  176,   // seconds — end panel expands (2:56)
+        toggleId:     'panel-toggle-q1',
         replayId:     'replay-q1'
       }
       // Add more objects here for Q2–Q5
@@ -384,7 +441,6 @@
     // helper: show element with animated transition
     function showEl(el) {
       el.hidden = false;
-      // next frame so display:none is cleared before transition fires
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
           el.classList.add('visible');
@@ -392,12 +448,18 @@
       });
     }
 
-    // helper: hide element (collapse transition, then set hidden)
-    function hideEl(el) {
+    // helper: collapse element; optional callback when done
+    function hideEl(el, done) {
       el.classList.remove('visible');
+      if (done) {
+        el.addEventListener('transitionend', function onEnd() {
+          el.removeEventListener('transitionend', onEnd);
+          if (!el.classList.contains('visible')) done();
+        });
+      }
     }
 
-    // ── Fetch YouTube titles via oEmbed and populate end-tile labels ──────
+    // ── Fetch YouTube titles via oEmbed ───────────────────────────────────
     document.querySelectorAll('.end-tile[data-yt-id]').forEach(function (tile) {
       var ytId    = tile.getAttribute('data-yt-id');
       var titleEl = tile.querySelector('.end-tile-title');
@@ -410,94 +472,90 @@
 
     // ── Per-video logic ───────────────────────────────────────────────────
     videos.forEach(function (cfg) {
-      var video    = document.getElementById(cfg.videoId);
-      var cueStrip = document.getElementById(cfg.cueStripId);
-      var endPanel = document.getElementById(cfg.endPanelId);
+      var video     = document.getElementById(cfg.videoId);
+      var cueStrip  = document.getElementById(cfg.cueStripId);
+      var endPanel  = document.getElementById(cfg.endPanelId);
+      var toggleBtn = document.getElementById(cfg.toggleId);
       var replayBtn = document.getElementById(cfg.replayId);
       if (!video) return;
 
-      var cueShown      = false;
-      var cueDismissed  = false; // true if user manually closed it
-      var endShown      = false;
+      var cueShown     = false;
+      var cueDismissed = false;
+      var endShown     = false;
 
-      // ── timeupdate: drives all time-based triggers ──
+      // open/close the panel; sync toggle button state
+      function openPanel() {
+        showEl(endPanel);
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+      function closePanel(andHide) {
+        hideEl(endPanel, andHide ? function () { endPanel.hidden = true; } : null);
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      // ── Manual toggle ──
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function () {
+          if (endPanel.classList.contains('visible')) {
+            closePanel(true);
+          } else {
+            openPanel();
+          }
+        });
+      }
+
+      // ── timeupdate: drives time-based triggers ──
       video.addEventListener('timeupdate', function () {
         var t = video.currentTime;
 
-        // Show cue strip
         if (cueStrip && !cueShown && t >= cfg.cueShowTime) {
           showEl(cueStrip);
           cueShown = true;
         }
-
-        // Hide cue strip when playback reaches hide-time (pause-safe)
         if (cueStrip && cueShown && !cueDismissed && t >= cfg.cueHideTime) {
-          hideEl(cueStrip);
+          hideEl(cueStrip, function () { cueStrip.hidden = true; });
         }
-
-        // Show end panel
         if (endPanel && !endShown && t >= cfg.endShowTime) {
-          showEl(endPanel);
+          openPanel();
           endShown = true;
         }
       });
 
-      // ── seeked: reset state when user scrubs back before a cue ──
+      // ── seeked: reset state when user scrubs back ──
       video.addEventListener('seeked', function () {
         var t = video.currentTime;
 
         if (cueStrip) {
           if (t < cfg.cueShowTime) {
-            cueShown    = false;
-            cueDismissed = false;
-            hideEl(cueStrip);
-            // wait for transition then apply hidden
-            cueStrip.addEventListener('transitionend', function onEnd() {
-              cueStrip.removeEventListener('transitionend', onEnd);
-              if (!cueStrip.classList.contains('visible')) cueStrip.hidden = true;
-            });
+            cueShown = false; cueDismissed = false;
+            hideEl(cueStrip, function () { cueStrip.hidden = true; });
           } else if (t >= cfg.cueShowTime && t < cfg.cueHideTime && !cueDismissed) {
-            // seeked into the show-window: make sure it's visible
-            showEl(cueStrip);
-            cueShown = true;
+            showEl(cueStrip); cueShown = true;
           } else if (t >= cfg.cueHideTime) {
-            hideEl(cueStrip);
+            hideEl(cueStrip, function () { cueStrip.hidden = true; });
           }
         }
 
         if (endPanel && t < cfg.endShowTime) {
           endShown = false;
-          hideEl(endPanel);
-          endPanel.addEventListener('transitionend', function onEnd() {
-            endPanel.removeEventListener('transitionend', onEnd);
-            if (!endPanel.classList.contains('visible')) endPanel.hidden = true;
-          });
+          // only auto-close; don't override a user-opened panel
+          if (endShown) closePanel(true);
         }
       });
 
-      // ── Manual cue strip dismiss ──
+      // ── Manual cue dismiss ──
       if (cueStrip) {
         cueStrip.querySelector('.cue-close').addEventListener('click', function () {
           cueDismissed = true;
-          hideEl(cueStrip);
-          cueStrip.addEventListener('transitionend', function onEnd() {
-            cueStrip.removeEventListener('transitionend', onEnd);
-            if (!cueStrip.classList.contains('visible')) cueStrip.hidden = true;
-          });
+          hideEl(cueStrip, function () { cueStrip.hidden = true; });
         });
       }
 
-      // ── Replay button: collapse end panel and restart ──
+      // ── Replay ──
       if (replayBtn) {
         replayBtn.addEventListener('click', function () {
-          hideEl(endPanel);
-          endPanel.addEventListener('transitionend', function onEnd() {
-            endPanel.removeEventListener('transitionend', onEnd);
-            if (!endPanel.classList.contains('visible')) endPanel.hidden = true;
-          });
-          endShown      = false;
-          cueShown      = false;
-          cueDismissed  = false;
+          closePanel(true);
+          endShown = false; cueShown = false; cueDismissed = false;
           video.currentTime = 0;
           video.play();
         });
