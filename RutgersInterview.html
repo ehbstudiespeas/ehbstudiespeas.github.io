@@ -40,7 +40,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 8px 10px 8px 8px;
-      max-width: 280px;
+      max-width: min(260px, 62%);
       z-index: 20;
       animation: slide-in .3s ease;
     }
@@ -96,6 +96,13 @@
       padding: 2px 4px;
     }
     .yt-close:hover { color: var(--text); }
+
+    @media (max-width: 480px) {
+      .yt-card { padding: 6px 8px 6px 6px; gap: 7px; }
+      .yt-thumb { width: 60px; height: 42px; }
+      .yt-label { font-size: .65rem; }
+      .yt-card-body a { font-size: .82rem; }
+    }
 
     /* ── End-screen overlay (4-quadrant grid) ── */
     .end-screen {
@@ -256,7 +263,9 @@
     <p class="q-meta">Recorded March 16, 2026 · Test question</p>
 
     <div class="interview-player" id="player-wrap-q1">
-      <video id="video-q1" controls preload="metadata">
+      <video id="video-q1" controls preload="metadata"
+             playsinline webkit-playsinline
+             poster="assets/video/Bloom_TestQ1_31626_v2_poster.jpg">
         <source src="assets/video/Bloom_TestQ1_31626_v2.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
       </video>
