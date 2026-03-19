@@ -236,6 +236,22 @@
       color: var(--muted);
       text-align: left;
     }
+
+    /* ── Download link ── */
+    .video-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 8px;
+      font-size: .8rem;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 12px;
+      transition: color .15s, border-color .15s;
+    }
+    .video-download:hover { color: var(--text); border-color: var(--text); }
   </style>
 </head>
 <body class="interview-page">
@@ -270,6 +286,9 @@
         Your browser does not support HTML5 video.
       </video>
     </div>
+    <a class="video-download" href="assets/video/Bloom_FinalQ1_31726.mp4" download>
+      &#8675; Download video
+    </a>
 
     <!-- Toggle button — always visible, expands the related-videos panel -->
     <button class="panel-toggle" id="panel-toggle-q1"
@@ -388,6 +407,10 @@
       </video>
     </div>
 
+    <a class="video-download" href="assets/video/Bloom_FinalQ2_31726.mp4" download>
+      &#8675; Download video
+    </a>
+
     <button class="panel-toggle" id="panel-toggle-q2"
             aria-label="Show extension manuscripts"
             aria-expanded="false"
@@ -448,6 +471,82 @@
         Your browser does not support HTML5 video.
       </video>
     </div>
+    <a class="video-download" href="assets/video/Bloom_FinalQ3_31726.mp4" download>
+      &#8675; Download video
+    </a>
+  </section>
+
+  <!-- ── Question 4 ── -->
+  <section class="card interview-card" id="q4">
+    <h1>Question 4 - IPM Background</h1>
+
+    <div class="interview-player" id="player-wrap-q4">
+      <video id="video-q4" controls preload="metadata"
+             playsinline webkit-playsinline
+             poster="assets/video/Bloom_FinalQ4_31926_poster.jpg">
+        <source src="assets/video/Bloom_FinalQ4_31926.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+    <a class="video-download" href="assets/video/Bloom_FinalQ4_31926.mp4" download>
+      &#8675; Download video
+    </a>
+
+    <button class="panel-toggle" id="panel-toggle-q4"
+            aria-label="Show research manuscripts"
+            aria-expanded="false"
+            aria-controls="end-panel-q4">
+      Click for papers
+      <svg class="toggle-chevron" viewBox="0 0 16 16" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <polyline points="4,6 8,10 12,6"/>
+      </svg>
+    </button>
+
+    <div id="end-panel-q4" class="end-panel" hidden>
+      <div class="pub-grid" style="grid-template-columns: repeat(4, 1fr);">
+
+        <a class="pub-card"
+           href="https://link.springer.com/chapter/10.1007/978-3-319-31800-4_3"
+           target="_blank" rel="noopener">
+          <img class="pub-card-cover" src="assets/pdfs/Research_1_cover.png" alt="Research paper 1 cover">
+          <div class="pub-card-body">
+            <div class="pub-card-label">Organic pest and pollinator management</div>
+          </div>
+        </a>
+
+        <a class="pub-card"
+           href="https://doi.org/10.1002/ps.5922"
+           target="_blank" rel="noopener">
+          <img class="pub-card-cover" src="assets/pdfs/Research_2_cover.png" alt="Research paper 2 cover">
+          <div class="pub-card-body">
+            <div class="pub-card-label">Decision support tools</div>
+          </div>
+        </a>
+
+        <a class="pub-card"
+           href="https://www.cambridge.org/core/journals/renewable-agriculture-and-food-systems/article/motivating-organic-farmers-to-adopt-practices-that-support-the-pestsuppressive-microbiome-relies-on-understanding-their-beliefs/EDBF37E970D9DFC61C3F93DE5DDEF44C"
+           target="_blank" rel="noopener">
+          <img class="pub-card-cover" src="assets/pdfs/Research_3_cover.png" alt="Research paper 3 cover">
+          <div class="pub-card-body">
+            <div class="pub-card-label">Farmer motivations</div>
+          </div>
+        </a>
+
+        <a class="pub-card"
+           href="https://doi.org/10.1038/s44264-025-00109-6"
+           target="_blank" rel="noopener">
+          <img class="pub-card-cover" src="assets/pdfs/Research_4_cover.png" alt="Research paper 4 cover">
+          <div class="pub-card-body">
+            <div class="pub-card-label">Socio-ecological models</div>
+          </div>
+        </a>
+
+      </div>
+      <button class="end-panel-replay" id="replay-q4" aria-label="Replay video">&#8635; Replay</button>
+    </div>
+
   </section>
 
 </main>
@@ -514,6 +613,7 @@
 
     wireQuestion('panel-toggle-q1', 'end-panel-q1', 'replay-q1', 'video-q1');
     wireQuestion('panel-toggle-q2', 'end-panel-q2', 'replay-q2', 'video-q2');
+    wireQuestion('panel-toggle-q4', 'end-panel-q4', 'replay-q4', 'video-q4');
   })();
 </script>
 
