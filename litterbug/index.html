@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Litterbug - PEAS</title>
+  <meta name="description" content="Litterbug is a beta app for logging litter pickups, cleanup spots, community cleanup posts, tips, and bounties." />
+  <link rel="canonical" href="https://peas.phd/litterbug/" />
+  <link rel="icon" href="../assets/peas_logo_31526_sq.svg" type="image/svg+xml" />
+  <link rel="icon" href="../assets/peas_logo_31526_sq.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/peas_logo_31526_sq.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://peas.phd/litterbug/" />
+  <meta property="og:site_name" content="PEAS" />
+  <meta property="og:title" content="Litterbug" />
+  <meta property="og:description" content="A beta app for logging litter pickups and coordinating cleanups." />
+  <meta property="og:image" content="https://peas.phd/assets/peas_social_preview_sq.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Litterbug" />
+  <meta name="twitter:description" content="A beta app for logging litter pickups and coordinating cleanups." />
+  <meta name="twitter:image" content="https://peas.phd/assets/peas_social_preview_sq.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/site_v2.css" />
+  <style>
+    .litterbug-page main {
+      max-width: 980px;
+    }
+
+    .litterbug-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .litterbug-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .litterbug-tile {
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      border-radius: 14px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .litterbug-tile h2 {
+      margin-top: 0;
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body class="litterbug-page">
+<header>
+  <div class="nav">
+    <div class="brand">
+      <a href="../index_v2.html" aria-label="Go to PEAS home page">
+        <div class="mark">
+          <img src="../assets/peas_logo_3626.png" alt="PEAS logo" />
+        </div>
+      </a>
+      <div class="txt">
+        <div class="name">Litterbug<br><span class="muted" style="font-weight:600">PEAS project</span></div>
+      </div>
+    </div>
+
+    <nav class="navlinks">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <div class="dropdown">
+        <a href="../index_v2.html">PEAS</a>
+        <a href="./">Litterbug</a>
+        <a href="privacy/">Privacy</a>
+        <a href="support/">Support</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <div class="kicker">Litterbug</div>
+    <h1>Pickup data for cleaner places.</h1>
+    <p>
+      Litterbug is a beta mobile app for logging litter pickups, reviewing detector results,
+      posting cleanup spots, sharing cleanup activity, and testing optional tips and bounties.
+    </p>
+    <div class="litterbug-actions">
+      <a class="btn" href="privacy/">Privacy Policy</a>
+      <a class="btn" href="support/">Support</a>
+    </div>
+  </section>
+
+  <section class="litterbug-grid" aria-label="Litterbug beta features">
+    <article class="litterbug-tile">
+      <h2>Scan</h2>
+      <p>Use the camera to log litter items and review model suggestions.</p>
+    </article>
+    <article class="litterbug-tile">
+      <h2>Map</h2>
+      <p>Create public cleanup spots and validate completed cleanups.</p>
+    </article>
+    <article class="litterbug-tile">
+      <h2>Share</h2>
+      <p>Post cleanup summaries, photos, comments, and reactions in the community feed.</p>
+    </article>
+    <article class="litterbug-tile">
+      <h2>Payments</h2>
+      <p>Test optional Stripe-backed tips, bounties, and payout flows during beta.</p>
+    </article>
+  </section>
+</main>
+
+<footer>&copy; 2026 Elias H. Bloom &middot; peas.phd</footer>
+</body>
+</html>
