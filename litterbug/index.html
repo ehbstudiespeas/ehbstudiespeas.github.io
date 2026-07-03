@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Litterbug - PEAS</title>
-  <meta name="description" content="Litterbug is a beta app for logging litter pickups, cleanup spots, community cleanup posts, tips, and bounties." />
+  <meta name="description" content="Litterbug is a gamified micro-gig and gig-ecology app for measuring litter, training machine vision, and coordinating environmental incentives." />
   <link rel="canonical" href="https://peas.phd/litterbug/" />
   <link rel="icon" href="../assets/peas_logo_31526_sq.svg" type="image/svg+xml" />
   <link rel="icon" href="../assets/peas_logo_31526_sq.png" type="image/png" />
@@ -13,11 +13,11 @@
   <meta property="og:url" content="https://peas.phd/litterbug/" />
   <meta property="og:site_name" content="PEAS" />
   <meta property="og:title" content="Litterbug" />
-  <meta property="og:description" content="A beta app for logging litter pickups and coordinating cleanups." />
+  <meta property="og:description" content="A gamified micro-gig and gig-ecology app for measuring litter and coordinating environmental incentives." />
   <meta property="og:image" content="https://peas.phd/assets/peas_social_preview_sq.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Litterbug" />
-  <meta name="twitter:description" content="A beta app for logging litter pickups and coordinating cleanups." />
+  <meta name="twitter:description" content="A gamified micro-gig and gig-ecology app for measuring litter and coordinating environmental incentives." />
   <meta name="twitter:image" content="https://peas.phd/assets/peas_social_preview_sq.png" />
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" href="../assets/css/site_v2.css" />
@@ -28,9 +28,34 @@
 
     .litterbug-actions {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 0.75rem;
       margin-top: 1.5rem;
+    }
+
+    .litterbug-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .litterbug-logo {
+      width: 112px;
+      height: 112px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 10px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .litterbug-page .card p.litterbug-statement {
+      max-width: 70ch;
+      font-size: clamp(1.02rem, 2vw, 1.25rem);
+      text-align: center;
     }
 
     .litterbug-grid {
@@ -50,6 +75,33 @@
     .litterbug-tile h2 {
       margin-top: 0;
       font-size: 1.05rem;
+    }
+
+    .litterbug-link-panel {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    .screenshot-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .screenshot-placeholder {
+      aspect-ratio: 9 / 16;
+      border: 1px dashed rgba(17, 17, 17, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 700;
     }
   </style>
 </head>
@@ -76,24 +128,30 @@
       </label>
 
       <div class="dropdown">
-        <a href="../index_v2.html">PEAS</a>
+        <a href="../index_v2.html">Home</a>
+        <a href="../research.html">Research</a>
+        <a href="../cv.html">CV</a>
+        <a href="../repos.html">Repos</a>
         <a href="./">Litterbug</a>
-        <a href="privacy/">Privacy</a>
-        <a href="support/">Support</a>
+        <a href="../contact.html">Contact</a>
       </div>
     </nav>
   </div>
 </header>
 
 <main>
-  <section class="card">
+  <section class="card litterbug-hero">
+    <img class="litterbug-logo" src="../assets/litterbug-icon-128.png" alt="Litterbug logo" />
     <div class="kicker">Litterbug</div>
-    <h1>Pickup data for cleaner places.</h1>
-    <p>
-      Litterbug is a beta mobile app for logging litter pickups, reviewing detector results,
-      posting cleanup spots, sharing cleanup activity, and testing optional tips and bounties.
+    <h1>Gig ecology for pollution accountability.</h1>
+    <p class="litterbug-statement">
+      Litterbug is a gamified micro-gig and gig-ecology application. It uses machine vision,
+      gamified model training, and social media to quantify patterns of litter in the environment
+      and their causes. Litterbugs and Litterbug supporters can coordinate through micro financial
+      incentives that support the environment by reducing litter and the proximal causes of pollution.
     </p>
     <div class="litterbug-actions">
+      <span class="btn" aria-disabled="true">App Store coming soon</span>
       <a class="btn" href="privacy/">Privacy Policy</a>
       <a class="btn" href="support/">Support</a>
     </div>
@@ -116,6 +174,24 @@
       <h2>Payments</h2>
       <p>Test optional Stripe-backed tips, bounties, and payout flows during beta.</p>
     </article>
+  </section>
+
+  <section class="card">
+    <div class="kicker">Preview</div>
+    <h1>What testers will see</h1>
+    <div class="screenshot-strip" aria-label="Litterbug screenshot placeholders">
+      <div class="screenshot-placeholder">Scan screen screenshot coming soon</div>
+      <div class="screenshot-placeholder">Training review screenshot coming soon</div>
+      <div class="screenshot-placeholder">Map cleanup screenshot coming soon</div>
+    </div>
+    <div class="litterbug-link-panel">
+      <h2>Litterbug pages</h2>
+      <div class="litterbug-actions">
+        <a class="btn" href="./">Project page</a>
+        <a class="btn" href="privacy/">Privacy Policy</a>
+        <a class="btn" href="support/">Support</a>
+      </div>
+    </div>
   </section>
 </main>
 
