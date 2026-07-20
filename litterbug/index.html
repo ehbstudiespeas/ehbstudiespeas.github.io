@@ -85,23 +85,25 @@
 
     .screenshot-strip {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 1rem;
       margin-top: 1.5rem;
     }
 
-    .screenshot-placeholder {
+    .screenshot {
       aspect-ratio: 9 / 16;
-      border: 1px dashed rgba(17, 17, 17, 0.22);
+      overflow: hidden;
       border-radius: 18px;
-      background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      color: var(--muted);
-      text-align: center;
-      font-weight: 700;
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      background: #111;
+      box-shadow: var(--shadow);
+    }
+
+    .screenshot img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -178,11 +180,15 @@
 
   <section class="card">
     <div class="kicker">Preview</div>
-    <h1>What testers will see</h1>
-    <div class="screenshot-strip" aria-label="Litterbug screenshot placeholders">
-      <div class="screenshot-placeholder">Scan screen screenshot coming soon</div>
-      <div class="screenshot-placeholder">Training review screenshot coming soon</div>
-      <div class="screenshot-placeholder">Map cleanup screenshot coming soon</div>
+    <h1>See Litterbug in action</h1>
+    <div class="screenshot-strip" aria-label="Litterbug app screenshots">
+      <figure class="screenshot"><img src="screenshots/01-scan-detection.png" alt="Litterbug scan screen identifying a litter item" /></figure>
+      <figure class="screenshot"><img src="screenshots/02-train-review.png" alt="Litterbug model training review screen" /></figure>
+      <figure class="screenshot"><img src="screenshots/03-litterbug-xp.png" alt="Litterbug experience and progress screen" /></figure>
+      <figure class="screenshot"><img src="screenshots/04-community-post.png" alt="Litterbug community cleanup post" /></figure>
+      <figure class="screenshot"><img src="screenshots/05-community-map.png" alt="Litterbug community cleanup map" /></figure>
+      <figure class="screenshot"><img src="screenshots/06-profile.png" alt="Litterbug profile screen" /></figure>
+      <figure class="screenshot"><img src="screenshots/07-leaderboard.png" alt="Litterbug community leaderboard" /></figure>
     </div>
     <div class="litterbug-link-panel">
       <h2>Litterbug pages</h2>
