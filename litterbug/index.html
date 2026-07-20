@@ -58,52 +58,108 @@
       text-align: center;
     }
 
-    .litterbug-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .litterbug-tile {
-      border: 1px solid rgba(17, 17, 17, 0.12);
-      border-radius: 14px;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.72);
-    }
-
-    .litterbug-tile h2 {
-      margin-top: 0;
-      font-size: 1.05rem;
-    }
-
     .litterbug-link-panel {
       margin-top: 1.5rem;
       border-top: 1px solid var(--border);
       padding-top: 1rem;
     }
 
-    .screenshot-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
+    .feature-intro {
+      max-width: 62ch;
+      margin-bottom: 1.25rem;
     }
 
-    .screenshot {
-      aspect-ratio: 9 / 16;
+    .feature-intro p {
+      text-align: left;
+    }
+
+    .feature-rail {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+      padding: 0.25rem 0.25rem 1rem;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 0.25rem;
+      overscroll-behavior-x: contain;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .feature-slide {
+      flex: 0 0 min(760px, 88vw);
+      display: grid;
+      grid-template-columns: minmax(120px, 0.72fr) minmax(0, 1.28fr);
+      align-items: center;
+      gap: clamp(1rem, 3vw, 2.25rem);
+      min-height: 340px;
+      margin: 0;
+      padding: clamp(1rem, 3vw, 1.75rem);
+      scroll-snap-align: start;
       overflow: hidden;
-      border-radius: 18px;
+      border-radius: 20px;
       border: 1px solid rgba(17, 17, 17, 0.12);
-      background: #111;
+      background: linear-gradient(135deg, #fff 0%, #f2f6ed 100%);
       box-shadow: var(--shadow);
     }
 
-    .screenshot img {
+    .feature-screen {
+      width: min(100%, 210px);
+      justify-self: center;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #111;
+      box-shadow: 0 12px 28px rgba(17, 17, 17, 0.2);
+    }
+
+    .feature-screen img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .feature-copy .kicker {
+      margin: 0 0 0.35rem;
+      text-align: left;
+      font-size: 0.75rem;
+    }
+
+    .feature-copy h2 {
+      margin: 0;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      letter-spacing: -0.02em;
+    }
+
+    .feature-copy p {
+      max-width: 38ch;
+      margin: 0.7rem 0 0;
+      text-align: left;
+    }
+
+    .feature-rail-hint {
+      margin: 0.85rem 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 520px) {
+      .feature-slide {
+        flex-basis: 92vw;
+        grid-template-columns: minmax(104px, 0.68fr) minmax(0, 1.32fr);
+        min-height: 300px;
+        gap: 0.9rem;
+        padding: 1rem;
+      }
+
+      .feature-copy h2 {
+        font-size: 1.35rem;
+      }
+
+      .feature-copy p {
+        font-size: 0.94rem;
+        line-height: 1.45;
+      }
     }
   </style>
 </head>
@@ -159,37 +215,43 @@
     </div>
   </section>
 
-  <section class="litterbug-grid" aria-label="Litterbug beta features">
-    <article class="litterbug-tile">
-      <h2>Scan</h2>
-      <p>Use the camera to log litter items and review model suggestions.</p>
-    </article>
-    <article class="litterbug-tile">
-      <h2>Map</h2>
-      <p>Create public cleanup spots and validate completed cleanups.</p>
-    </article>
-    <article class="litterbug-tile">
-      <h2>Share</h2>
-      <p>Post cleanup summaries, photos, comments, and reactions in the community feed.</p>
-    </article>
-    <article class="litterbug-tile">
-      <h2>Payments</h2>
-      <p>Test optional Stripe-backed tips, bounties, and payout flows during beta.</p>
-    </article>
-  </section>
-
   <section class="card">
     <div class="kicker">Preview</div>
-    <h1>See Litterbug in action</h1>
-    <div class="screenshot-strip" aria-label="Litterbug app screenshots">
-      <figure class="screenshot"><img src="screenshots/01-scan-detection.png" alt="Litterbug scan screen identifying a litter item" /></figure>
-      <figure class="screenshot"><img src="screenshots/02-train-review.png" alt="Litterbug model training review screen" /></figure>
-      <figure class="screenshot"><img src="screenshots/03-litterbug-xp.png" alt="Litterbug experience and progress screen" /></figure>
-      <figure class="screenshot"><img src="screenshots/04-community-post.png" alt="Litterbug community cleanup post" /></figure>
-      <figure class="screenshot"><img src="screenshots/05-community-map.png" alt="Litterbug community cleanup map" /></figure>
-      <figure class="screenshot"><img src="screenshots/06-profile.png" alt="Litterbug profile screen" /></figure>
-      <figure class="screenshot"><img src="screenshots/07-leaderboard.png" alt="Litterbug community leaderboard" /></figure>
+    <div class="feature-intro">
+      <h1>Explore the field kit</h1>
+      <p>Each screen supports a different part of a community cleanup—from finding litter to showing the collective impact.</p>
     </div>
+    <div class="feature-rail" aria-label="Litterbug app features. Swipe or scroll horizontally to explore.">
+      <article class="feature-slide">
+        <div class="feature-screen"><img src="screenshots/01-scan-detection.png" alt="Litterbug scan screen identifying a litter item" /></div>
+        <div class="feature-copy"><div class="kicker">01 / Scan</div><h2>Spot it. Log it.</h2><p>Point the camera at litter to identify and count what you collect, with a live record of the cleanup taking shape.</p></div>
+      </article>
+      <article class="feature-slide">
+        <div class="feature-screen"><img src="screenshots/02-train-review.png" alt="Litterbug model training review screen" /></div>
+        <div class="feature-copy"><div class="kicker">02 / Train</div><h2>Teach the model.</h2><p>Review the app’s suggestions and help improve recognition for the messy, real-world objects found outdoors.</p></div>
+      </article>
+      <article class="feature-slide">
+        <div class="feature-screen"><img src="screenshots/03-litterbug-xp.png" alt="Litterbug experience and progress screen" /></div>
+        <div class="feature-copy"><div class="kicker">03 / Progress</div><h2>Build your impact.</h2><p>Earn experience as your contributions make the data—and the local cleanup effort—stronger.</p></div>
+      </article>
+      <article class="feature-slide">
+        <div class="feature-screen"><img src="screenshots/04-community-post.png" alt="Litterbug community cleanup post" /></div>
+        <div class="feature-copy"><div class="kicker">04 / Community</div><h2>Share the work.</h2><p>Turn a cleanup into a community post with photos, context, comments, and encouragement from fellow Litterbugs.</p></div>
+      </article>
+      <article class="feature-slide">
+        <div class="feature-screen"><img src="screenshots/05-community-map.png" alt="Litterbug community cleanup map" /></div>
+        <div class="feature-copy"><div class="kicker">05 / Map</div><h2>Find a place to help.</h2><p>See public cleanup spots, coordinate local action, and follow the progress of shared environmental work.</p></div>
+      </article>
+      <article class="feature-slide">
+        <div class="feature-screen"><img src="screenshots/06-profile.png" alt="Litterbug profile screen" /></div>
+        <div class="feature-copy"><div class="kicker">06 / Profile</div><h2>Keep your record.</h2><p>Track the items you have collected, your activity, and the contribution you bring to the collective.</p></div>
+      </article>
+      <article class="feature-slide">
+        <div class="feature-screen"><img src="screenshots/07-leaderboard.png" alt="Litterbug community leaderboard" /></div>
+        <div class="feature-copy"><div class="kicker">07 / Leaderboard</div><h2>Celebrate the collective.</h2><p>See how individual effort adds up across the community and recognize the people moving the work forward.</p></div>
+      </article>
+    </div>
+    <p class="feature-rail-hint">Swipe sideways to explore all seven screens.</p>
     <div class="litterbug-link-panel">
       <h2>Litterbug pages</h2>
       <div class="litterbug-actions">
