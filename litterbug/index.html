@@ -66,11 +66,12 @@
 
     .feature-intro {
       max-width: 62ch;
-      margin-bottom: 1.25rem;
+      margin: 0 auto 1.25rem;
+      text-align: center;
     }
 
     .feature-intro p {
-      text-align: left;
+      text-align: center;
     }
 
     .feature-rail {
@@ -86,7 +87,8 @@
     }
 
     .feature-slide {
-      flex: 0 0 min(760px, 88vw);
+      flex: 0 0 100%;
+      box-sizing: border-box;
       display: grid;
       grid-template-columns: minmax(120px, 0.72fr) minmax(0, 1.28fr);
       align-items: center;
@@ -137,15 +139,36 @@
       text-align: left;
     }
 
-    .feature-rail-hint {
-      margin: 0.85rem 0 0;
-      color: var(--muted);
-      font-size: 0.9rem;
+    .feature-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .feature-dot {
+      width: 0.56rem;
+      height: 0.56rem;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(17, 17, 17, 0.22);
+      cursor: pointer;
+      transition: transform 160ms ease, background-color 160ms ease;
+    }
+
+    .feature-dot[aria-current="true"] {
+      background: #111;
+      transform: scale(1.25);
+    }
+
+    .feature-dot:focus-visible {
+      outline: 2px solid #111;
+      outline-offset: 3px;
     }
 
     @media (max-width: 520px) {
       .feature-slide {
-        flex-basis: 92vw;
         grid-template-columns: minmax(104px, 0.68fr) minmax(0, 1.32fr);
         min-height: 300px;
         gap: 0.9rem;
@@ -216,42 +239,49 @@
   </section>
 
   <section class="card">
-    <div class="kicker">Preview</div>
     <div class="feature-intro">
-      <h1>Explore the field kit</h1>
-      <p>Each screen supports a different part of a community cleanup—from finding litter to showing the collective impact.</p>
+      <h1>Getting Started</h1>
+      <p>Review these screenshots to familiarize yourself with Litterbug.</p>
     </div>
     <div class="feature-rail" aria-label="Litterbug app features. Swipe or scroll horizontally to explore.">
-      <article class="feature-slide">
+      <article class="feature-slide" id="feature-1">
         <div class="feature-screen"><img src="screenshots/01-scan-detection.png" alt="Litterbug scan screen identifying a litter item" /></div>
         <div class="feature-copy"><div class="kicker">01 / Scan</div><h2>Spot it. Log it.</h2><p>Point the camera at litter to identify and count what you collect, with a live record of the cleanup taking shape.</p></div>
       </article>
-      <article class="feature-slide">
+      <article class="feature-slide" id="feature-2">
         <div class="feature-screen"><img src="screenshots/02-train-review.png" alt="Litterbug model training review screen" /></div>
         <div class="feature-copy"><div class="kicker">02 / Train</div><h2>Teach the model.</h2><p>Review the app’s suggestions and help improve recognition for the messy, real-world objects found outdoors.</p></div>
       </article>
-      <article class="feature-slide">
+      <article class="feature-slide" id="feature-3">
         <div class="feature-screen"><img src="screenshots/03-litterbug-xp.png" alt="Litterbug experience and progress screen" /></div>
         <div class="feature-copy"><div class="kicker">03 / Progress</div><h2>Build your impact.</h2><p>Earn experience as your contributions make the data—and the local cleanup effort—stronger.</p></div>
       </article>
-      <article class="feature-slide">
+      <article class="feature-slide" id="feature-4">
         <div class="feature-screen"><img src="screenshots/04-community-post.png" alt="Litterbug community cleanup post" /></div>
         <div class="feature-copy"><div class="kicker">04 / Community</div><h2>Share the work.</h2><p>Turn a cleanup into a community post with photos, context, comments, and encouragement from fellow Litterbugs.</p></div>
       </article>
-      <article class="feature-slide">
+      <article class="feature-slide" id="feature-5">
         <div class="feature-screen"><img src="screenshots/05-community-map.png" alt="Litterbug community cleanup map" /></div>
         <div class="feature-copy"><div class="kicker">05 / Map</div><h2>Find a place to help.</h2><p>See public cleanup spots, coordinate local action, and follow the progress of shared environmental work.</p></div>
       </article>
-      <article class="feature-slide">
+      <article class="feature-slide" id="feature-6">
         <div class="feature-screen"><img src="screenshots/06-profile.png" alt="Litterbug profile screen" /></div>
         <div class="feature-copy"><div class="kicker">06 / Profile</div><h2>Keep your record.</h2><p>Track the items you have collected, your activity, and the contribution you bring to the collective.</p></div>
       </article>
-      <article class="feature-slide">
+      <article class="feature-slide" id="feature-7">
         <div class="feature-screen"><img src="screenshots/07-leaderboard.png" alt="Litterbug community leaderboard" /></div>
         <div class="feature-copy"><div class="kicker">07 / Leaderboard</div><h2>Celebrate the collective.</h2><p>See how individual effort adds up across the community and recognize the people moving the work forward.</p></div>
       </article>
     </div>
-    <p class="feature-rail-hint">Swipe sideways to explore all seven screens.</p>
+    <div class="feature-pagination" aria-label="Screenshot carousel pages">
+      <button class="feature-dot" type="button" aria-label="Show Scan" aria-controls="feature-1" aria-current="true"></button>
+      <button class="feature-dot" type="button" aria-label="Show Train" aria-controls="feature-2"></button>
+      <button class="feature-dot" type="button" aria-label="Show Progress" aria-controls="feature-3"></button>
+      <button class="feature-dot" type="button" aria-label="Show Community" aria-controls="feature-4"></button>
+      <button class="feature-dot" type="button" aria-label="Show Map" aria-controls="feature-5"></button>
+      <button class="feature-dot" type="button" aria-label="Show Profile" aria-controls="feature-6"></button>
+      <button class="feature-dot" type="button" aria-label="Show Leaderboard" aria-controls="feature-7"></button>
+    </div>
     <div class="litterbug-link-panel">
       <h2>Litterbug pages</h2>
       <div class="litterbug-actions">
@@ -264,5 +294,26 @@
 </main>
 
 <footer>&copy; 2026 Elias H. Bloom &middot; peas.phd</footer>
+<script>
+  const featureRail = document.querySelector('.feature-rail');
+  const featureDots = Array.from(document.querySelectorAll('.feature-dot'));
+
+  function setActiveFeature(index) {
+    featureDots.forEach((dot, dotIndex) => {
+      dot.setAttribute('aria-current', String(dotIndex === index));
+    });
+  }
+
+  featureDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      featureRail.querySelector(`#feature-${index + 1}`).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      setActiveFeature(index);
+    });
+  });
+
+  featureRail.addEventListener('scroll', () => {
+    setActiveFeature(Math.round(featureRail.scrollLeft / featureRail.clientWidth));
+  }, { passive: true });
+</script>
 </body>
 </html>
