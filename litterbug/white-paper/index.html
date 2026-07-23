@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Litterbug White Paper - PEAS</title>
+  <meta name="description" content="A technical white paper describing the Litterbug cleanup, machine-vision, community, and payment system." />
+  <link rel="canonical" href="https://peas.phd/litterbug/white-paper/" />
+  <link rel="icon" href="../../assets/peas_logo_31526_sq.svg" type="image/svg+xml" />
+  <link rel="icon" href="../../assets/peas_logo_31526_sq.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/peas_logo_31526_sq.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://peas.phd/litterbug/white-paper/" />
+  <meta property="og:site_name" content="PEAS" />
+  <meta property="og:title" content="Litterbug White Paper" />
+  <meta property="og:description" content="The technical architecture and operating model behind Litterbug." />
+  <meta property="og:image" content="https://peas.phd/assets/peas_social_preview_sq.png" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/site_v2.css" />
+  <style>
+    .white-paper main { max-width: 960px; }
+    .white-paper h1 { margin-bottom: .25rem; }
+    .white-paper h2 { margin-top: 2.35rem; }
+    .white-paper h3 { margin-top: 1.5rem; }
+    .white-paper li { margin: .42rem 0; }
+    .white-paper p, .white-paper li { max-width: 80ch; }
+    .white-paper .lede { font-size: 1.12rem; line-height: 1.65; }
+    .white-paper .toc { columns: 2; column-gap: 2rem; }
+    .white-paper .toc li { break-inside: avoid; }
+    .white-paper code { padding: .1rem .3rem; border-radius: 4px; background: #edf0e8; font-size: .9em; }
+    .white-paper table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .95rem; }
+    .white-paper th, .white-paper td { vertical-align: top; padding: .7rem; border: 1px solid var(--border); text-align: left; }
+    .white-paper th { background: #edf0e8; }
+    .note { padding: 1rem 1.15rem; border-left: 4px solid #5c7d3f; background: #f2f6ed; }
+    @media (max-width: 620px) { .white-paper .toc { columns: 1; } .white-paper table { font-size: .84rem; } .white-paper th, .white-paper td { padding: .48rem; } }
+  </style>
+</head>
+<body class="white-paper">
+<header><div class="nav"><div class="brand"><a href="../../index_v2.html" aria-label="Go to PEAS home page"><div class="mark"><img src="../../assets/peas_logo_3626.png" alt="PEAS logo" /></div></a><div class="txt"><div class="name">Elias H. Bloom<br><span class="muted" style="font-weight:600">PEAS</span></div></div></div><nav class="navlinks"><input type="checkbox" id="menu-toggle" /><label for="menu-toggle" class="menu-icon" aria-label="Open menu"><span></span><span></span><span></span></label><div class="dropdown"><a href="../../index_v2.html">Home</a><a href="../../research.html">Research</a><a href="../../cv.html">CV</a><a href="../../repos.html">Repos</a><a href="../">Litterbug</a><a href="../../contact.html">Contact</a></div></nav></div></header>
+<main>
+  <article class="card">
+    <div class="kicker">PEAS · Litterbug · Technical White Paper</div>
+    <h1>Litterbug: decentralized cleanup measurement, training, and incentives</h1>
+    <p class="muted">Version 1.0 · July 23, 2026 · Beta system description</p>
+    <p class="lede">Litterbug is a mobile system for turning a local cleanup into structured environmental evidence. It combines camera-assisted litter logging, human review of machine-vision output, community coordination, and optional person-to-person incentives. Its purpose is not simply to count objects: it is to make cleanup work visible, improve the models that describe it, and support locally directed action.</p>
+    <p class="note"><strong>Scope note.</strong> This paper describes the current beta architecture. Features marked <em>experimental</em> are under active validation; they are not claims of universal accuracy, guaranteed payment availability, or automated enforcement. The product is not yet publicly released on the App Store.</p>
+
+    <h2>Contents</h2>
+    <ol class="toc"><li><a href="#problem">Problem and design principles</a></li><li><a href="#system">System architecture</a></li><li><a href="#tabs">Application tabs</a></li><li><a href="#vision">Vision and recognition pipeline</a></li><li><a href="#training">Human review and model training</a></li><li><a href="#data">Data model and security</a></li><li><a href="#community">Community, sharing, and map workflows</a></li><li><a href="#payments">Tips, bounties, and payouts</a></li><li><a href="#privacy">Privacy and responsible operation</a></li><li><a href="#limits">Limitations and roadmap</a></li></ol>
+
+    <h2 id="problem">1. Problem and design principles</h2>
+    <p>Litter is distributed, varied, and expensive to document. Conventional cleanup reporting can reduce a cleanup to a single bag count, losing item type, brand evidence, location context, and the work performed by individual people. Litterbug treats the phone as a field instrument and the community as a distributed review network.</p>
+    <ul><li><strong>Human work remains primary.</strong> The app records collections; it does not claim that a detection proves disposal, pollution responsibility, or cleanup quality.</li><li><strong>Machine assistance must be correctable.</strong> Every logged observation can be reviewed and corrected rather than silently accepted as ground truth.</li><li><strong>Local action should be legible.</strong> Sessions, public posts, map spots, and leaderboards make voluntary work discoverable without requiring a centralized cleanup operator.</li><li><strong>Money is optional and auditable.</strong> Tips and bounties use explicit transaction states and Stripe-hosted financial onboarding rather than storing payment credentials in the app.</li></ul>
+
+    <h2 id="system">2. System architecture</h2>
+    <table><thead><tr><th>Layer</th><th>Technology</th><th>Responsibility</th></tr></thead><tbody><tr><td>Mobile client</td><td>React Native, Expo Router, TypeScript</td><td>Authentication, five-tab interface, camera interaction, review, sharing, maps, and payment-sheet presentation.</td></tr><tr><td>On-device vision</td><td>VisionCamera frame processors, <code>react-native-fast-tflite</code>, native OCR</td><td>Low-latency object inference, object tracking, image capture, and text recognition while scanning.</td></tr><tr><td>Backend</td><td>Supabase Auth, Postgres, Realtime, Edge Functions</td><td>Accounts, authoritative litter records, social data, row-level access control, server-side payment actions, and realtime updates.</td></tr><tr><td>Media</td><td>Cloudflare R2</td><td>Review images and optional community or cleanup media, separated from runtime records.</td></tr><tr><td>Payments</td><td>Stripe PaymentSheet and Stripe Connect</td><td>Card/wallet payment collection, recipient onboarding, transfers, payout status, and payout execution.</td></tr><tr><td>Device services</td><td>Camera, foreground location, motion/pedometer, haptics, sharing</td><td>Field capture, optional map context, scan diagnostics, feedback, and export to the device share sheet.</td></tr></tbody></table>
+    <p>The mobile client treats <code>litter_items</code> as the runtime source of truth. Richer images, OCR, corrections, and diagnostic artifacts are stored in a separate review path so the core session, profile, and leaderboard views do not depend on a slow model-processing job.</p>
+
+    <h2 id="tabs">3. Application tabs</h2>
+    <h3>Scan</h3><p>The Scan tab is the field workflow. A physical device camera feeds a frame processor; detections are tracked across frames before an item is promoted to a count. The scanner can attach a short-lived foreground location lookup, haptic feedback, a review image, and later OCR-derived brand information. The current native camera/model path is intentionally unavailable in iOS Simulator because it depends on native TensorFlow Lite components.</p>
+    <h3>Train</h3><p>The Train tab is the session and review workspace. It lists current-session items, summarizes container and brand counts, prepares share cards, and presents an observation-review queue. A participant can correct container type, brand text, OCR text, bounding box, or resolution state; tag observations; and remove mistaken review records. Reviewed items award in-app training XP and contribute to badges and the Litterbug progression state.</p>
+    <h3>Share</h3><p>Share has Community and Leaderboard subtabs. Community supports posts, optional images, hashtags, reactions, session shares, cleanup-completion content, and weekly summaries. Session sharing can build a visual card with selected cleanup totals, route-style map context, and a location granularity selected by the user. Leaderboard rankings are derived from public aggregate cleanup totals; the interface can offer optional tips to eligible users.</p>
+    <h3>Map</h3><p>The Map tab uses foreground location and native maps to show community cleanup spots. A user may create a spot with a title, description, optional image, and location; another user can claim it, submit a completion, and move it through open, claimed, awaiting-validation, and done states. A poster may fund a bounty for a spot. Bounty release is tied to its workflow and payment state rather than a client-side promise.</p>
+    <h3>Profile</h3><p>Profile provides personal totals, cleanup history, badge and progression information, feedback, account controls, and payout controls. People receiving funds complete Stripe Connect onboarding in a browser-hosted Stripe flow. The screen can show available and pending balances, payout readiness, external-account status, payout schedule, and standard or instant cash-out options where Stripe and the account allow them.</p>
+
+    <h2 id="vision">4. Vision and recognition pipeline</h2>
+    <p>The live detector is <code>litterbug_v1</code>, a TensorFlow Lite object-detection model with a 320 × 320 input and 18 upstream class indices. Nine usable litter labels are mapped to product-facing container types: cardboard; clear plastic bottle; crisp packet/wrapper; disposable plastic cup; drink can; glass bottle; paper cup; plastic straw; and polystyrene. Six malformed upstream labels and bottle-cap subparts are deliberately suppressed. The client also recognizes a broader correction taxonomy such as bags, cigarette litter, film, cutlery, foil, gloves, masks, fragments, and other.</p>
+    <p>Raw detections are not immediately logged. The scanner applies a confidence threshold, dimensional sanity checks, and candidate limits; then links boxes over time using overlap, center distance, size, shape, and appearance continuity. An object must persist across multiple observations and a short dwell window before it counts. This lowers duplicate counts when a camera remains over one item, while special handling accommodates small or elongated objects such as straws. The scanner retains only a bounded number of active tracks and applies a cooldown/handoff policy before recognizing a new object.</p>
+    <p>Brand recognition is a separate, asynchronous path. A cropped region around an active object is sent to native OCR; text may update a recently logged item only inside a short attachment window. The app normalizes known aliases against a large brand lexicon. It also includes an <em>experimental</em> on-device TinyBERT-style named-entity-recognition model: 64-token BERT inputs (<code>input_ids</code>, <code>attention_mask</code>, <code>token_type_ids</code>) produce <code>[1,64,3]</code> logits for <code>O</code>, <code>B-BRAND</code>, and <code>I-BRAND</code>. This model is a developing enhancement, not a substitute for review.</p>
+
+    <h2 id="training">5. Human review and model training</h2>
+    <p>Machine output becomes useful training evidence only after human intervention. For each counted item, the review system can preserve a snapshot, detector summary, OCR text, scan context, corrected brand and container type, semantic bounding-box data, tags, and a resolution status. Deferred processing keeps intensive image and model work off the live scanning path and supports retrying interrupted uploads or review synchronization.</p>
+    <p>This structure separates two kinds of truth: the event record used to run the product and the richer evidence record used to assess and improve recognition. Corrections can be exported and curated into training datasets; model experiments are versioned independently of the app’s live counting model. The system’s gamification—XP, stages, collectible Litterbugs, and badges—rewards review participation, not a claim that every correction is automatically accepted into a future model.</p>
+
+    <h2 id="data">6. Data model and security</h2>
+    <p>Supabase Auth maintains account sessions. Profile data includes a username, aggregate item total, account timestamps, and limited Stripe identifiers/status fields. Core tables include authoritative litter items; sessions; reviewed observations; community posts, comments, and reactions; cleanup spots, claims, and completions; badge-related records; and payment/payout ledgers. Location, time, container type, confidence, and a nullable brand can be associated with a litter item.</p>
+    <p>Postgres row-level security constrains user-owned reads and writes. Sensitive counters and payment fields are not client-writable. Payment operations use authenticated Edge Functions and Stripe secret keys held server-side; client code receives only the data needed to present a payment sheet or reflect status. Realtime subscriptions keep selected app views current without requiring a polling loop. Diagnostic scan-power tables can record device/build context, timing, battery/thermal signals, and error states during beta profiling.</p>
+
+    <h2 id="community">7. Community, sharing, and map workflows</h2>
+    <p>Community content has explicit source types—ordinary user post, session share, cleanup spot, spot completion, or weekly summary—and can carry public media, hashtags, reactions, and moderation visibility. The map is designed for coordination rather than surveillance: foreground location is used when permission is granted, and a participant chooses what location precision to expose in a share. A map spot is public by design and should never be created for a sensitive location.</p>
+    <p>Badges recognize cumulative cleanup, training, and community milestones. They are a motivational layer, not a certification program. Leaderboard and weekly-summary data are aggregation views over cleanup activity; they do not independently verify disposal, location ownership, or the environmental condition of a place.</p>
+
+    <h2 id="payments">8. Tips, bounties, and payouts</h2>
+    <p>Litterbug supports optional USD tips and cleanup-spot bounties. The current beta permits values from $1.00 to $500.00 per payment. A payment starts in an in-app Stripe PaymentSheet with card support and, where configured, Apple Pay or Google Pay. Users cannot tip themselves. Stripe customer, card, bank, identity-verification, and destination-account details are handled by Stripe rather than stored as raw payment data by Litterbug.</p>
+    <p>The current fee calculation is transparent but estimated at checkout: the intended recipient amount, a 1% platform fee, and an estimated domestic-card processing charge (2.9% plus $0.30, grossed up) form the displayed total. Stripe’s actual fee is reconciled afterward in the server ledger. Payment records retain kind, amount, total, platform fee, estimated and actual processor fee, PaymentIntent/charge/transfer identifiers, timestamps, and state such as requires-payment, processing, succeeded, released, refunded, or failed.</p>
+    <p>Funds for eligible recipients move through Stripe Connect. A recipient must complete Stripe onboarding and have required charges/payout capabilities enabled before funds can be released or withdrawn. The app exposes balance and payout health, while Stripe determines availability, account requirements, schedules, and whether instant payout is offered. A bounty is associated with a map spot and its completion/validation workflow; it is not an unconditional reward merely because a pin was created or claimed. In beta, payment systems may operate in Stripe test/sandbox mode.</p>
+
+    <h2 id="privacy">9. Privacy and responsible operation</h2>
+    <p>Litterbug can process account information, camera frames, optional review images, foreground location, public community content, diagnostic data, and payment metadata. Public surfaces may show usernames, aggregate totals, posts, map pins, and media chosen for public sharing. Exact locations and images can be sensitive even when a cleanup is well-intentioned. Users should avoid posting homes, schools, workplaces, personal data, or unsafe locations.</p>
+    <p>The system uses Supabase for auth and backend data, Cloudflare R2 for object media, Stripe for financial activity, device platform services for camera/location/diagnostics, and Have I Been Pwned’s k-anonymity password check during signup. Litterbug does not sell personal information and does not use third-party advertising or cross-app tracking. For the full disclosures, rights, and retention terms, read the <a href="../privacy/">Privacy Policy</a>.</p>
+
+    <h2 id="limits">10. Limitations and roadmap</h2>
+    <p>Vision models can fail because of occlusion, poor lighting, motion, crushed containers, unfamiliar packaging, object overlap, and domain shift. OCR may miss, misread, or over-read text. A detection or brand match should be understood as a suggestion with a confidence score, not proof. Human review, spatial/temporal tracking, and conservative count promotion mitigate errors but do not eliminate them.</p>
+    <p>Current work includes improving custom litter detection and brand extraction, measuring camera power use, strengthening correction-data provenance, refining community moderation and validation, and testing financial workflows before a public release. Litterbug’s success should be evaluated by reliable local usefulness, transparent limitations, and improved cleanup coordination—not only by raw object totals.</p>
+    <p><a class="btn" href="../">Back to Litterbug</a> <a class="btn" href="../support/">Support</a></p>
+  </article>
+</main>
+<footer>&copy; 2026 Elias H. Bloom &middot; peas.phd</footer>
+</body>
+</html>
