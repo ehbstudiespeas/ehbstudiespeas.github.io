@@ -19,6 +19,8 @@ const audioDirectory = "assets/audio/farm-talk";
 const audioMode = process.env.FARM_TALK_AUDIO_MODE || "metadata";
 const streamEmbedUrl = process.env.WTBQ_STREAM_EMBED_URL || "";
 const streamFallbackUrl = process.env.WTBQ_STREAM_FALLBACK_URL || "https://wtbq.com/";
+const existingPayload = existsSync(outputPath) ? JSON.parse(readFileSync(outputPath, "utf8")) : { episodes: [] };
+const existingByDate = new Map(existingPayload.episodes.map((episode) => [episode.date, episode]));
 
 for (const key of ["BOX_CLIENT_ID", "BOX_CLIENT_SECRET", "BOX_REFRESH_TOKEN"]) {
   if (!process.env[key]) throw new Error(`Missing required ${key} secret.`);
@@ -52,6 +54,10 @@ function guestFromFolder(name) {
     .replace(/\s+$/, ""));
 }
 
+function slugify(value) {
+  return cleanText(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 function docxText(buffer) {
   const temporary = mkdtempSync(join(tmpdir(), "farm-talk-"));
   const input = join(temporary, "notes.docx");
@@ -63,13 +69,16 @@ function docxText(buffer) {
   }
 }
 
-function extractDetails(text, guest) {
+function extractDetails(text, guest, previous = {}) {
   const paragraphs = text.split(/\n+/).map(cleanText).filter(Boolean);
-  const opening = paragraphs.find((paragraph) => /this week|today|devoting|speaking with/i.test(paragraph)) || paragraphs[0] || "Farm Talk episode details are coming soon.";
+  const opening = paragraphs.find((paragraph) => /this week|today|devoting|speaking with/i.test(paragraph)) || paragraphs[0] || "";
+  const sentences = opening.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+  const summary = cleanText(sentences.slice(0, 2).join(" ")).slice(0, 360) || previous.summary || `A Farm Talk conversation with ${guest}.`;
   const titleMatch = text.match(/\b(?:is|serves as|works as)\s+(?:now\s+)?(?:an?\s+)?(Assistant Professor|Associate Professor|Professor|CEO|Director|Owner|Educator|Researcher)[^.]{0,170}/i);
-  const title = titleMatch ? cleanText(titleMatch[0].replace(/^\b(?:is|serves as|works as)\s+(?:now\s+)?/i, "")) : "Farm Talk guest";
+  const derivedTitle = titleMatch ? cleanText(titleMatch[0].replace(/^\b(?:is|serves as|works as)\s+(?:now\s+)?/i, "")) : "";
+  const title = previous.title && !/^Farm Talk guests?$/i.test(previous.title) ? previous.title : (derivedTitle || previous.title || "Farm Talk guest");
   const topics = paragraphs.filter((paragraph) => /^Topic\s*\d+/i.test(paragraph)).map((paragraph) => cleanText(paragraph.replace(/^Topic\s*\d+\s*[:.]?\s*/i, "").split(/[?.]/)[0])).filter(Boolean).slice(0, 4);
-  return { summary: opening.slice(0, 360), title: title.slice(0, 180), topics };
+  return { summary, title: title.slice(0, 180), topics: topics.length ? topics : (previous.topics || []) };
 }
 
 async function boxToken() {
@@ -105,19 +114,25 @@ async function download(token, fileId) {
 
 async function syncEpisode(token, folder) {
   const date = parseDate(folder.name);
-  if (!date) return null;
-  const guest = guestFromFolder(folder.name);
+  if (!date) {
+    console.warn(`Skipping folder without a recognizable broadcast date: ${folder.name}`);
+    return null;
+  }
+  const previous = existingByDate.get(date) || {};
+  // Keep a curated multi-guest name when a folder name only lists part of the program.
+  const guest = previous.guest || guestFromFolder(folder.name);
   const contents = await listItems(token, folder.id);
   const showNotes = contents.find((item) => item.type === "file" && item.extension === "docx" && /show notes/i.test(item.name));
   const audio = contents.find((item) => item.type === "file" && item.extension === "mp3");
-  let details = { title: "Farm Talk guest", summary: `A Farm Talk conversation with ${guest}.`, topics: [] };
-  if (showNotes) details = extractDetails(docxText(await download(token, showNotes.id)), guest);
+  let details = { title: previous.title || "Farm Talk guest", summary: previous.summary || `A Farm Talk conversation with ${guest}.`, topics: previous.topics || [] };
+  if (showNotes) details = extractDetails(docxText(await download(token, showNotes.id)), guest, previous);
+  else console.warn(`No show notes found for ${folder.name}; retaining existing episode details where available.`);
   let audioUrl = "";
   if (audio && audioMode === "repository") {
     mkdirSync(audioDirectory, { recursive: true });
-    const filename = `${date}-${audio.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
+    const filename = `${date}-${slugify(guest)}.mp3`;
     const destination = join(audioDirectory, filename);
-    if (!existsSync(destination)) writeFileSync(destination, await download(token, audio.id));
+    if (!existsSync(destination) || previous.boxAudioId !== audio.id) writeFileSync(destination, await download(token, audio.id));
     audioUrl = destination;
   }
   return { date, guest, ...details, audioUrl, boxFolderId: folder.id, boxShowNotesId: showNotes?.id || "", boxAudioId: audio?.id || "" };
@@ -126,7 +141,16 @@ async function syncEpisode(token, folder) {
 async function main() {
   const token = await boxToken();
   const folders = (await listItems(token, rootFolderId)).filter((item) => item.type === "folder" && item.name !== "Farm Talk Eps");
-  const episodes = (await Promise.all(folders.map((folder) => syncEpisode(token, folder)))).filter(Boolean).sort((a, b) => b.date.localeCompare(a.date));
+  const seenDates = new Set();
+  const episodes = [];
+  for (const folder of folders) {
+    const episode = await syncEpisode(token, folder);
+    if (!episode) continue;
+    if (seenDates.has(episode.date)) throw new Error(`More than one Farm Talk folder resolves to ${episode.date}.`);
+    seenDates.add(episode.date);
+    episodes.push(episode);
+  }
+  episodes.sort((a, b) => b.date.localeCompare(a.date));
   const payload = { streamEmbedUrl, streamFallbackUrl, timezone: "America/New_York", episodes };
   writeFileSync(outputPath, `${JSON.stringify(payload, null, 2)}\n`);
   console.log(`Synced ${episodes.length} Farm Talk episodes from Box.`);

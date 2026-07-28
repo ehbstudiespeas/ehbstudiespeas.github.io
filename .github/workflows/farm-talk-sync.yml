@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Validate Farm Talk sync script
+        run: node --check scripts/sync_farm_talk.mjs
       - name: Sync episode details and recordings from Box
         env:
           BOX_CLIENT_ID: ${{ secrets.BOX_CLIENT_ID }}
@@ -34,6 +36,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/data/farm-talk-episodes.json assets/audio/farm-talk
+          git add -A assets/data/farm-talk-episodes.json assets/audio/farm-talk
+          git diff --cached --check
           git commit -m "Sync Farm Talk episodes"
           git push
