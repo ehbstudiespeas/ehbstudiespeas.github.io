@@ -9,7 +9,7 @@
       "title": "CEO, For the Love of Fungi",
       "summary": "A conversation about mushroom farming, grower education, and functional microbiome products for outdoor producers.",
       "topics": ["Mushroom farming", "Grower education", "Microbiome products"],
-      "audioUrl": "assets/audio/farm-talk/2026-07-01-taylor-sujay-kayleigh.mp3",
+      "audioUrl": "",
       "boxFolderId": "398588984847",
       "boxShowNotesId": "",
       "boxAudioId": ""
@@ -20,7 +20,7 @@
       "title": "Assistant Professor of Biology, University of Arkansas at Little Rock",
       "summary": "Black soldier fly farming, insect frass and plant defenses, and translating pest-management research into practical decisions for farmers.",
       "topics": ["Black soldier fly farming", "Insect frass", "Plant defenses", "Pest management"],
-      "audioUrl": "assets/audio/farm-talk/2026-06-24-dr-sara-emery.mp3",
+      "audioUrl": "",
       "boxFolderId": "403657463416",
       "boxShowNotesId": "2371833923218",
       "boxAudioId": ""
@@ -31,7 +31,7 @@
       "title": "Farm Talk guests",
       "summary": "A Farm Talk conversation with Taylor, Sujay, and Kayleigh.",
       "topics": [],
-      "audioUrl": "assets/audio/farm-talk/2026-06-17-jill-van-aken.mp3",
+      "audioUrl": "assets/audio/farm-talk/2026-07-01-taylor-sujay-kayleigh.mp3",
       "boxFolderId": "393245915063",
       "boxShowNotesId": "2309118817546",
       "boxAudioId": "2323613703837"
@@ -42,7 +42,7 @@
       "title": "Farm Talk guest",
       "summary": "A Farm Talk conversation with Dr. Sara Emery.",
       "topics": [],
-      "audioUrl": "assets/audio/farm-talk/2026-06-10-eric-youngerman.mp3",
+      "audioUrl": "assets/audio/farm-talk/2026-06-24-dr-sara-emery.mp3",
       "boxFolderId": "391630190243",
       "boxShowNotesId": "2304371432756",
       "boxAudioId": "2323616896355"
@@ -53,7 +53,7 @@
       "title": "Farm Talk guest",
       "summary": "A Farm Talk conversation with Jill Van Aken.",
       "topics": [],
-      "audioUrl": "",
+      "audioUrl": "assets/audio/farm-talk/2026-06-17-jill-van-aken.mp3",
       "boxFolderId": "389727289441",
       "boxShowNotesId": "2291528514034",
       "boxAudioId": "2294201046431"
@@ -64,7 +64,7 @@
       "title": "Farm Talk guest",
       "summary": "A Farm Talk conversation with Eric Youngerman.",
       "topics": [],
-      "audioUrl": "",
+      "audioUrl": "assets/audio/farm-talk/2026-06-10-eric-youngerman.mp3",
       "boxFolderId": "388924106380",
       "boxShowNotesId": "2276719849684",
       "boxAudioId": "2294199009379"
