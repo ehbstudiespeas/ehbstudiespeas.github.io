@@ -1,0 +1,73 @@
+{
+  "streamEmbedUrl": "",
+  "streamFallbackUrl": "https://wtbq.com/",
+  "timezone": "America/New_York",
+  "episodes": [
+    {
+      "date": "2026-08-05",
+      "guest": "Luke Sarrantonio",
+      "title": "CEO, For the Love of Fungi",
+      "summary": "A conversation about mushroom farming, grower education, and functional microbiome products for outdoor producers.",
+      "topics": ["Mushroom farming", "Grower education", "Microbiome products"],
+      "audioUrl": "",
+      "boxFolderId": "398588984847",
+      "boxShowNotesId": "",
+      "boxAudioId": ""
+    },
+    {
+      "date": "2026-07-29",
+      "guest": "Dr. Swayamjit Ray",
+      "title": "Assistant Professor of Biology, University of Arkansas at Little Rock",
+      "summary": "Black soldier fly farming, insect frass and plant defenses, and translating pest-management research into practical decisions for farmers.",
+      "topics": ["Black soldier fly farming", "Insect frass", "Plant defenses", "Pest management"],
+      "audioUrl": "",
+      "boxFolderId": "403657463416",
+      "boxShowNotesId": "2371833923218",
+      "boxAudioId": ""
+    },
+    {
+      "date": "2026-07-01",
+      "guest": "Taylor, Sujay & Kayleigh",
+      "title": "Farm Talk guests",
+      "summary": "A Farm Talk conversation with Taylor, Sujay, and Kayleigh.",
+      "topics": [],
+      "audioUrl": "",
+      "boxFolderId": "393245915063",
+      "boxShowNotesId": "2309118817546",
+      "boxAudioId": "2323613703837"
+    },
+    {
+      "date": "2026-06-24",
+      "guest": "Dr. Sara Emery",
+      "title": "Farm Talk guest",
+      "summary": "A Farm Talk conversation with Dr. Sara Emery.",
+      "topics": [],
+      "audioUrl": "",
+      "boxFolderId": "391630190243",
+      "boxShowNotesId": "2304371432756",
+      "boxAudioId": "2323616896355"
+    },
+    {
+      "date": "2026-06-17",
+      "guest": "Jill Van Aken",
+      "title": "Farm Talk guest",
+      "summary": "A Farm Talk conversation with Jill Van Aken.",
+      "topics": [],
+      "audioUrl": "",
+      "boxFolderId": "389727289441",
+      "boxShowNotesId": "2291528514034",
+      "boxAudioId": "2294201046431"
+    },
+    {
+      "date": "2026-06-10",
+      "guest": "Eric Youngerman",
+      "title": "Farm Talk guest",
+      "summary": "A Farm Talk conversation with Eric Youngerman.",
+      "topics": [],
+      "audioUrl": "",
+      "boxFolderId": "388924106380",
+      "boxShowNotesId": "2276719849684",
+      "boxAudioId": "2294199009379"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+name: Sync Farm Talk
+
+on:
+  schedule:
+    - cron: "15 13 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Sync episode details and recordings from Box
+        env:
+          BOX_CLIENT_ID: ${{ secrets.BOX_CLIENT_ID }}
+          BOX_CLIENT_SECRET: ${{ secrets.BOX_CLIENT_SECRET }}
+          BOX_REFRESH_TOKEN: ${{ secrets.BOX_REFRESH_TOKEN }}
+          BOX_FARM_TALK_FOLDER_ID: "388261523128"
+          FARM_TALK_AUDIO_MODE: repository
+          WTBQ_STREAM_EMBED_URL: ${{ secrets.WTBQ_STREAM_EMBED_URL }}
+          WTBQ_STREAM_FALLBACK_URL: https://wtbq.com/
+        run: node scripts/sync_farm_talk.mjs
+      - name: Commit updated Farm Talk content
+        run: |
+          if git diff --quiet; then
+            echo "No Farm Talk changes to publish."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/farm-talk-episodes.json assets/audio/farm-talk
+          git commit -m "Sync Farm Talk episodes"
+          git push
