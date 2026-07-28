@@ -13,8 +13,8 @@
 .live-time { margin: 4px 0 20px; color: #506152; font-weight: 650; }
 .live-episode h3 { margin: 0 0 4px; font-size: 1.23rem; }
 .live-episode p { margin: 6px 0; max-width: 62ch; }
-.topic-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 15px 0 0; padding: 0; list-style: none; }
-.topic-list li { padding: 5px 9px; border-radius: 999px; background: #fff; border: 1px solid #cfe1c1; color: #355438; font-size: .8rem; }
+.topic-list { display: flex; flex-wrap: wrap; gap: 9px 11px; margin: 15px 0 0; padding: 0; list-style: none; }
+.topic-list li { display: inline-flex; flex: 0 0 auto; max-width: 100%; padding: 6px 11px; border: 1px solid #cfe1c1; border-radius: 999px; background: #fff; color: #355438; font-size: .8rem; line-height: 1.25; text-indent: 0; }
 .countdown { margin: 22px 0 0; color: var(--farm-ink); font-weight: 750; }
 .stream-panel { display: flex; min-height: 232px; flex-direction: column; justify-content: center; padding: 24px; border-radius: 16px; background: var(--farm-ink); color: #fff; }
 .stream-panel h3 { margin: 0 0 9px; font-size: 1.45rem; }
