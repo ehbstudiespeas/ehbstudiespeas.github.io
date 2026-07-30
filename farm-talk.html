@@ -32,8 +32,8 @@
     <div>
       <h1 id="farm-talk-title">Farm Talk</h1>
       <details class="farm-about">
-        <summary>About Farm Talk</summary>
-        <p>Farm Talk is a long-running live weekly program in collaboration with the WTBQ radio station which serves the lower Hudson Valley, including northern parts of NYC and streams online. The program features live conversations with educators, researchers, farmers, chefs, and eaters covering topics that span the food system, including precision pest management, carbon farming, no-tillage, and cover cropping. Farm Talk runs every Wednesday from 12:05 to 1 p.m. ET out of Warwick in the Black Dirt region. If you want to be a part of the conversation, live on the radio, you can call 845-651-1110 or text 845-328-0886.</p>
+        <summary>Farm Talk is a long-running live weekly program in collaboration with the WTBQ radio station which serves the lower Hudson Valley, including northern parts of NYC and streams online. The program features live conversations with educators, researchers, farmers, chefs, and eaters covering topics that span the food system, including precision pest management, carbon farming, no-tillage, and cover cropping.<span class="about-cue" aria-hidden="true"> …</span></summary>
+        <p>Farm Talk runs every Wednesday from 12:05 to 1 p.m. ET out of Warwick in the Black Dirt region. If you want to be a part of the conversation, live on the radio, you can call 845-651-1110 or text 845-328-0886.</p>
       </details>
     </div>
     <a class="wtbq-lockup" href="https://wtbq.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit WTBQ.com">
@@ -42,18 +42,20 @@
     </a>
   </section>
 
-  <section class="live-shell" aria-label="Next live broadcast">
-    <div class="live-copy">
-      <p class="eyebrow" id="live-state">Next live broadcast</p>
-      <div id="live-episode" class="live-episode" aria-live="polite"></div>
-      <p id="countdown" class="countdown" aria-live="polite"></p>
+  <section class="live-section" aria-labelledby="live-state">
+    <div class="section-head section-head-single"><h2 id="live-state">Next live broadcast</h2></div>
+    <div class="live-shell">
+      <div class="live-copy">
+        <div id="live-episode" class="live-episode" aria-live="polite"></div>
+        <p id="countdown" class="countdown" aria-live="polite"></p>
+      </div>
+      <div id="stream-panel" class="stream-panel" aria-live="polite"></div>
     </div>
-    <div id="stream-panel" class="stream-panel" aria-live="polite"></div>
   </section>
 
   <section class="archive" aria-labelledby="archive-heading">
     <div class="section-head">
-      <div><p class="eyebrow">Episode archive</p><h2 id="archive-heading">Listen back</h2></div>
+      <h2 id="archive-heading">Episode archive</h2>
     </div>
     <div id="archive-player" class="archive-player" aria-live="polite">
       <p class="loading">Loading episodes…</p>
