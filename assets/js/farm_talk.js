@@ -22,8 +22,8 @@
     liveState.textContent = hasLive ? "On air now" : "Next live broadcast";
     liveEpisode.innerHTML = episode ? '<h3>' + escapeHtml(episode.guest) + '</h3><p>' + escapeHtml(episode.title) + '</p><p>' + escapeHtml(episode.summary) + '</p>' + topicMarkup(episode.topics) : "<p>The next Farm Talk episode is being prepared.</p>";
     const streamUrl = data.streamFallbackUrl;
-    if (hasLive) streamPanel.innerHTML = '<p class="stream-label">Live on WTBQ</p><audio controls preload="none" src="' + encodeURI(streamUrl) + '">Your browser does not support audio playback.</audio><a class="btn" href="' + streamUrl + '" target="_blank" rel="noopener noreferrer">Open WTBQ live stream</a>';
-    else streamPanel.innerHTML = '<p class="stream-label">WTBQ live stream</p><a class="btn" href="' + streamUrl + '" target="_blank" rel="noopener noreferrer">Open WTBQ live stream</a>';
+    if (hasLive) streamPanel.innerHTML = '<audio controls preload="none" src="' + encodeURI(streamUrl) + '">Your browser does not support audio playback.</audio><a class="btn" href="' + streamUrl + '" target="_blank" rel="noopener noreferrer">Open WTBQ live stream</a>';
+    else streamPanel.innerHTML = '<a class="btn" href="' + streamUrl + '" target="_blank" rel="noopener noreferrer">Open WTBQ live stream</a>';
     function updateCountdown() { if (hasLive) { countdown.textContent = "Farm Talk is on air now."; return; } const difference = Math.max(0, easternNoonUtc(nextDate).getTime() - Date.now()); const values = [Math.floor(difference / 86400000), Math.floor((difference % 86400000) / 3600000), Math.floor((difference % 3600000) / 60000), Math.floor((difference % 60000) / 1000)]; const labels = ["days", "hours", "mins", "secs"]; countdown.innerHTML = '<span class="countdown-grid">' + values.map(function (value, index) { return '<span class="countdown-part"><strong>' + String(value).padStart(2, "0") + '</strong><span>' + labels[index] + '</span></span>'; }).join("") + '</span>'; }
     updateCountdown(); window.setInterval(updateCountdown, 1000);
   }
