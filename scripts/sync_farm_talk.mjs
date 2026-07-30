@@ -18,7 +18,7 @@ const outputPath = "assets/data/farm-talk-episodes.json";
 const audioDirectory = "assets/audio/farm-talk";
 const audioMode = process.env.FARM_TALK_AUDIO_MODE || "metadata";
 const streamEmbedUrl = process.env.WTBQ_STREAM_EMBED_URL || "";
-const streamFallbackUrl = process.env.WTBQ_STREAM_FALLBACK_URL || "https://wtbq.com/";
+const streamFallbackUrl = process.env.WTBQ_STREAM_FALLBACK_URL || "https://das-edge14-live365-dal02.cdnstream.com/a00215";
 const existingPayload = existsSync(outputPath) ? JSON.parse(readFileSync(outputPath, "utf8")) : { episodes: [] };
 const existingByDate = new Map(existingPayload.episodes.map((episode) => [episode.date, episode]));
 

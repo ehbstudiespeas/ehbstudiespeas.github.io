@@ -26,7 +26,7 @@ jobs:
           BOX_FARM_TALK_FOLDER_ID: "388261523128"
           FARM_TALK_AUDIO_MODE: repository
           WTBQ_STREAM_EMBED_URL: ${{ secrets.WTBQ_STREAM_EMBED_URL }}
-          WTBQ_STREAM_FALLBACK_URL: https://wtbq.com/
+          WTBQ_STREAM_FALLBACK_URL: https://das-edge14-live365-dal02.cdnstream.com/a00215
         run: node scripts/sync_farm_talk.mjs
       - name: Commit updated Farm Talk content
         run: |

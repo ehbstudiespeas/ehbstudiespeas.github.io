@@ -30,9 +30,11 @@
 <main>
   <section class="farm-hero" aria-labelledby="farm-talk-title">
     <div>
-      <p class="eyebrow">WTBQ AM 1110 · FM 93.5</p>
       <h1 id="farm-talk-title">Farm Talk</h1>
-      <p class="farm-dek">A weekly conversation for growers, neighbors, and the curious — hosted by Eli Bloom.</p>
+      <details class="farm-about">
+        <summary>About Farm Talk</summary>
+        <p>Farm Talk is a long-running live weekly program in collaboration with the WTBQ radio station which serves the lower Hudson Valley, including northern parts of NYC and streams online. The program features live conversations with educators, researchers, farmers, chefs, and eaters covering topics that span the food system, including precision pest management, carbon farming, no-tillage, and cover cropping. Farm Talk runs every Wednesday from 12:05 to 1 p.m. ET out of Warwick in the Black Dirt region. If you want to be a part of the conversation, live on the radio, you can call 845-651-1110 or text 845-328-0886.</p>
+      </details>
     </div>
     <a class="wtbq-lockup" href="https://wtbq.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit WTBQ.com">
       <img src="assets/wtbq-am-fm-logo.png" alt="WTBQ AM 1110 and FM 93.5" />
@@ -40,11 +42,9 @@
     </a>
   </section>
 
-  <section class="live-shell" aria-labelledby="live-heading">
+  <section class="live-shell" aria-label="Next live broadcast">
     <div class="live-copy">
-      <p class="eyebrow" id="live-state">Loading this week's program</p>
-      <h2 id="live-heading">Farm Talk live</h2>
-      <p class="live-time">Wednesdays · 12:00–1:00 p.m. Eastern</p>
+      <p class="eyebrow" id="live-state">Next live broadcast</p>
       <div id="live-episode" class="live-episode" aria-live="polite"></div>
       <p id="countdown" class="countdown" aria-live="polite"></p>
     </div>
@@ -54,7 +54,6 @@
   <section class="archive" aria-labelledby="archive-heading">
     <div class="section-head">
       <div><p class="eyebrow">Episode archive</p><h2 id="archive-heading">Listen back</h2></div>
-      <p>Select an episode below. Recordings are added as they become available.</p>
     </div>
     <div id="archive-player" class="archive-player" aria-live="polite">
       <p class="loading">Loading episodes…</p>
