@@ -3,3 +3,9 @@
 # Raw video source files — keep out of git history (large, unedited OBS recordings)
 assets/*.mov
 assets/*.MOV
+
+# Only production video assets belong in Git. Keep source and test renders local.
+assets/video/*.mov
+assets/video/*.MOV
+assets/video/Bloom_TestQ*.mp4
+!assets/video/Litterbug_IntroductionDemo_Edited_500kbs_mobile_crop.mov
