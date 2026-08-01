@@ -211,6 +211,43 @@
       box-shadow: var(--shadow);
     }
 
+    .collection-rig {
+      max-width: 405px;
+      margin: 1rem auto 0;
+      text-align: left;
+      border-top: 1px solid var(--line);
+    }
+
+    .collection-rig summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .collection-rig summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .collection-rig summary::after {
+      content: ">";
+      font-size: 1.1rem;
+      font-weight: 400;
+      transition: transform 160ms ease;
+    }
+
+    .collection-rig[open] summary::after {
+      transform: rotate(90deg);
+    }
+
+    .collection-rig p {
+      margin: 0 0 1rem;
+    }
+
     @media (max-width: 520px) {
       .feature-slide {
         grid-template-columns: minmax(104px, 0.68fr) minmax(0, 1.32fr);
@@ -341,6 +378,10 @@
       <source src="../assets/video/Litterbug_IntroductionDemo_Edited_500kbs_mobile_crop.mov" type="video/quicktime" />
       Your browser does not support embedded video.
     </video>
+    <details class="collection-rig">
+      <summary>Litter Collection Rig</summary>
+      <p>Similar litter grabbers to the one I use can be found cheaply on amazon. The bendable selfie stick I use can be found at this <a href="https://www.amazon.com/dp/B0C9DC1JYJ?ref=ppx_yo2ov_dt_b_fed_asin_title&amp;th=1">link</a>. Reach out if you cannot afford a litter collection setup. I'm keen to support beta testers and can help with some purchasing! My email is in the support section below.</p>
+    </details>
   </section>
 
   <section class="card litterbug-resources" aria-label="Litterbug resources">
