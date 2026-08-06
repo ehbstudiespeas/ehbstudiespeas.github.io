@@ -2,7 +2,10 @@ name: Sync Farm Talk
 
 on:
   schedule:
-    - cron: "15 13 * * 2"
+    # GitHub Actions schedules are UTC. Trigger at both possible UTC offsets
+    # and skip the one that is not 1:05 p.m. in America/New_York.
+    - cron: "5 17 * * 3"
+    - cron: "5 18 * * 3"
   workflow_dispatch:
 
 permissions:
@@ -12,13 +15,26 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 24
+      - name: Confirm scheduled run is at 1:05 p.m. Eastern
+        id: schedule-window
+        env:
+          TZ: America/New_York
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(date +%H:%M)" != "13:05" ]; then
+            echo "Skipping duplicate UTC schedule outside 1:05 p.m. Eastern."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Validate Farm Talk sync script
+        if: steps.schedule-window.outputs.run == 'true'
         run: node --check scripts/sync_farm_talk.mjs
       - name: Sync episode details and recordings from Box
+        if: steps.schedule-window.outputs.run == 'true'
         env:
           BOX_CLIENT_ID: ${{ secrets.BOX_CLIENT_ID }}
           BOX_CLIENT_SECRET: ${{ secrets.BOX_CLIENT_SECRET }}
@@ -29,6 +45,7 @@ jobs:
           WTBQ_STREAM_FALLBACK_URL: https://das-edge14-live365-dal02.cdnstream.com/a00215
         run: node scripts/sync_farm_talk.mjs
       - name: Commit updated Farm Talk content
+        if: steps.schedule-window.outputs.run == 'true'
         run: |
           if git diff --quiet; then
             echo "No Farm Talk changes to publish."
