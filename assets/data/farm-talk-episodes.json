@@ -4,14 +4,25 @@
   "timezone": "America/New_York",
   "episodes": [
     {
+      "date": "2026-08-12",
+      "guest": "Anne Loftin Weber & John-Erik Kocho-Schellenberg",
+      "title": "Farm Talk guests",
+      "summary": "A forthcoming Farm Talk conversation with Anne Loftin Weber and John-Erik Kocho-Schellenberg.",
+      "topics": [],
+      "audioUrl": "",
+      "boxFolderId": "404983967650",
+      "boxShowNotesId": "",
+      "boxAudioId": ""
+    },
+    {
       "date": "2026-08-05",
-      "guest": "Luke Sarrantonio",
-      "title": "CEO, For the Love of Fungi",
-      "summary": "A conversation about mushroom farming, grower education, and functional microbiome products for outdoor producers.",
-      "topics": ["Mushroom farming", "Grower education", "Microbiome products"],
+      "guest": "Luke Sarrantonio & Harley Wolfanger",
+      "title": "Mushroom grower and CCE OC Horse Farm Improvement Program intern",
+      "summary": "Luke Sarrantonio discusses outdoor mushroom farming, foraging education, and functional mushroom products. Harley Wolfanger shares her summer internship with CCE Orange County's Horse Farm Improvement Program.",
+      "topics": ["Mushroom farming", "Mushroom foraging", "Functional mushroom products", "Horse farm internship"],
       "audioUrl": "",
       "boxFolderId": "398588984847",
-      "boxShowNotesId": "",
+      "boxShowNotesId": "2386005916632",
       "boxAudioId": ""
     },
     {
@@ -23,6 +34,39 @@
       "audioUrl": "",
       "boxFolderId": "403657463416",
       "boxShowNotesId": "2371833923218",
+      "boxAudioId": ""
+    },
+    {
+      "date": "2026-07-22",
+      "guest": "Dr. Rae Olsson",
+      "title": "Scholarly Professor of Entomology, Washington State University",
+      "summary": "Dr. Rae Olsson discusses science education, forensic entomology, commercial beekeeping education in Spanish, and pollinator-friendly pesticide and habitat management.",
+      "topics": ["Science education", "Forensic entomology", "Commercial beekeeping", "Pollinator management"],
+      "audioUrl": "",
+      "boxFolderId": "393247909244",
+      "boxShowNotesId": "2353125837559",
+      "boxAudioId": ""
+    },
+    {
+      "date": "2026-07-15",
+      "guest": "Michaela Hayes-Hodge",
+      "title": "Farm Talk guest",
+      "summary": "A Farm Talk conversation with Michaela Hayes-Hodge of Rise and Root Farm in Chester, New York.",
+      "topics": [],
+      "audioUrl": "",
+      "boxFolderId": "393245901288",
+      "boxShowNotesId": "",
+      "boxAudioId": ""
+    },
+    {
+      "date": "2026-07-08",
+      "guest": "Dr. Pranjal Dwivedi & Dr. Julika von Stackelberg",
+      "title": "Cornell researchers and educators",
+      "summary": "Dr. Pranjal Dwivedi explains carbon sequestration, carbon farming, carbon credits, and biochar. Dr. Julika von Stackelberg discusses Orange County's climate-related challenges survey and community resilience.",
+      "topics": ["Carbon sequestration", "Carbon farming", "Biochar", "Climate resilience"],
+      "audioUrl": "",
+      "boxFolderId": "397306388559",
+      "boxShowNotesId": "2334792080986",
       "boxAudioId": ""
     },
     {
