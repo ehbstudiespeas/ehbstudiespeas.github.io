@@ -3,8 +3,9 @@
 /**
  * Syncs Farm Talk episode data from Box into this static GitHub Pages site.
  *
- * Required secrets: BOX_CLIENT_ID, BOX_CLIENT_SECRET, BOX_REFRESH_TOKEN.
- * The Box OAuth app should have least-privilege access to the Farm Talk folder.
+ * Required secrets: BOX_CLIENT_ID, BOX_CLIENT_SECRET, BOX_ENTERPRISE_ID.
+ * The Box Client Credentials app's Service Account must have read-only access
+ * to the Farm Talk folder.
  * Set FARM_TALK_AUDIO_MODE=repository to copy MP3s to assets/audio/farm-talk.
  */
 
@@ -22,7 +23,7 @@ const streamFallbackUrl = process.env.WTBQ_STREAM_FALLBACK_URL || "https://das-e
 const existingPayload = existsSync(outputPath) ? JSON.parse(readFileSync(outputPath, "utf8")) : { episodes: [] };
 const existingByDate = new Map(existingPayload.episodes.map((episode) => [episode.date, episode]));
 
-for (const key of ["BOX_CLIENT_ID", "BOX_CLIENT_SECRET", "BOX_REFRESH_TOKEN"]) {
+for (const key of ["BOX_CLIENT_ID", "BOX_CLIENT_SECRET", "BOX_ENTERPRISE_ID"]) {
   if (!process.env[key]) throw new Error(`Missing required ${key} secret.`);
 }
 
@@ -82,9 +83,15 @@ function extractDetails(text, guest, previous = {}) {
 }
 
 async function boxToken() {
-  const form = new URLSearchParams({ grant_type: "refresh_token", refresh_token: process.env.BOX_REFRESH_TOKEN, client_id: process.env.BOX_CLIENT_ID, client_secret: process.env.BOX_CLIENT_SECRET });
+  const form = new URLSearchParams({
+    grant_type: "client_credentials",
+    client_id: process.env.BOX_CLIENT_ID,
+    client_secret: process.env.BOX_CLIENT_SECRET,
+    box_subject_type: "enterprise",
+    box_subject_id: process.env.BOX_ENTERPRISE_ID,
+  });
   const response = await fetch("https://api.box.com/oauth2/token", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: form });
-  if (!response.ok) throw new Error(`Box OAuth refresh failed: ${response.status}`);
+  if (!response.ok) throw new Error(`Box Client Credentials authentication failed: ${response.status}`);
   return (await response.json()).access_token;
 }
 

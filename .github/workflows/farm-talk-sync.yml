@@ -38,7 +38,7 @@ jobs:
         env:
           BOX_CLIENT_ID: ${{ secrets.BOX_CLIENT_ID }}
           BOX_CLIENT_SECRET: ${{ secrets.BOX_CLIENT_SECRET }}
-          BOX_REFRESH_TOKEN: ${{ secrets.BOX_REFRESH_TOKEN }}
+          BOX_ENTERPRISE_ID: ${{ secrets.BOX_ENTERPRISE_ID }}
           BOX_FARM_TALK_FOLDER_ID: "388261523128"
           FARM_TALK_AUDIO_MODE: repository
           WTBQ_STREAM_EMBED_URL: ${{ secrets.WTBQ_STREAM_EMBED_URL }}
