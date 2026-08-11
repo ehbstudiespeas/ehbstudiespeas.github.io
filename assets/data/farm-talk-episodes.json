@@ -4,6 +4,17 @@
   "timezone": "America/New_York",
   "episodes": [
     {
+      "date": "2026-08-19",
+      "guest": "Dr. Brian Nault & Zoe Nafis",
+      "title": "Cornell entomologist and CCE OC agriculture educator",
+      "summary": "Dr. Brian Nault discusses pest-management research in the Black Dirt Region and a family legacy in entomology. Zoe Nafis shares details about Orange County Open House on the Farm, which showcases the local agriculture industry on September 26.",
+      "topics": ["Pest management", "Black Dirt Region", "Entomology", "Open House on the Farm"],
+      "audioUrl": "",
+      "boxFolderId": "408036577520",
+      "boxShowNotesId": "2400830123736",
+      "boxAudioId": ""
+    },
+    {
       "date": "2026-08-12",
       "guest": "Anne Loftin Weber & John-Erik Kocho-Schellenberg",
       "title": "Cornell landscape architect and CCE OC Natural Resources Educator",
@@ -16,7 +27,7 @@
       ],
       "audioUrl": "",
       "boxFolderId": "404983967650",
-      "boxShowNotesId": "",
+      "boxShowNotesId": "2394834436565",
       "boxAudioId": ""
     },
     {
@@ -25,10 +36,10 @@
       "title": "Mushroom grower and CCE OC Horse Farm Improvement Program intern",
       "summary": "Luke Sarrantonio discusses outdoor mushroom farming, foraging education, and functional mushroom products. Harley Wolfanger shares her summer internship with CCE Orange County's Horse Farm Improvement Program.",
       "topics": ["Mushroom farming", "Mushroom foraging", "Functional mushroom products", "Horse farm internship"],
-      "audioUrl": "",
+      "audioUrl": "assets/audio/farm-talk/2026-08-05-luke-sarrantonio-harley-wolfanger.mp3",
       "boxFolderId": "398588984847",
       "boxShowNotesId": "2386005916632",
-      "boxAudioId": ""
+      "boxAudioId": "2402906471386"
     },
     {
       "date": "2026-07-29",
@@ -36,10 +47,10 @@
       "title": "Assistant Professor of Biology, University of Arkansas at Little Rock",
       "summary": "Black soldier fly farming, insect frass and plant defenses, and translating pest-management research into practical decisions for farmers.",
       "topics": ["Black soldier fly farming", "Insect frass", "Plant defenses", "Pest management"],
-      "audioUrl": "",
+      "audioUrl": "assets/audio/farm-talk/2026-07-29-dr-swayamjit-ray.mp3",
       "boxFolderId": "403657463416",
       "boxShowNotesId": "2371833923218",
-      "boxAudioId": ""
+      "boxAudioId": "2402906876914"
     },
     {
       "date": "2026-07-22",
@@ -47,10 +58,10 @@
       "title": "Scholarly Professor of Entomology, Washington State University",
       "summary": "Dr. Rae Olsson discusses science education, forensic entomology, commercial beekeeping education in Spanish, and pollinator-friendly pesticide and habitat management.",
       "topics": ["Science education", "Forensic entomology", "Commercial beekeeping", "Pollinator management"],
-      "audioUrl": "",
+      "audioUrl": "assets/audio/farm-talk/2026-07-22-dr-rae-olsson.mp3",
       "boxFolderId": "393247909244",
       "boxShowNotesId": "2353125837559",
-      "boxAudioId": ""
+      "boxAudioId": "2402908557198"
     },
     {
       "date": "2026-07-08",
@@ -58,10 +69,10 @@
       "title": "Cornell researchers and educators",
       "summary": "Dr. Pranjal Dwivedi explains carbon sequestration, carbon farming, carbon credits, and biochar. Dr. Julika von Stackelberg discusses Orange County's climate-related challenges survey and community resilience.",
       "topics": ["Carbon sequestration", "Carbon farming", "Biochar", "Climate resilience"],
-      "audioUrl": "",
+      "audioUrl": "assets/audio/farm-talk/2026-07-08-dr-pranjal-dwivedi-dr-julika-von-stackelberg.mp3",
       "boxFolderId": "397306388559",
       "boxShowNotesId": "2334792080986",
-      "boxAudioId": ""
+      "boxAudioId": "2402907282243"
     },
     {
       "date": "2026-07-01",
