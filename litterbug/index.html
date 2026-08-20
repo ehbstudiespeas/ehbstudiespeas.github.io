@@ -31,6 +31,110 @@
       max-width: 980px;
     }
 
+    /* Update the href and event details below when the Eventbrite listing is live. */
+    .events-banner {
+      position: relative;
+      z-index: 2;
+      border-bottom: 1px solid #cfd8bd;
+      background: #f2f6ed;
+    }
+
+    .events-banner-link {
+      max-width: 980px;
+      min-height: 64px;
+      margin: 0 auto;
+      padding: 0.7rem 18px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+    }
+
+    .events-banner-link:hover {
+      background: rgba(255, 255, 255, 0.42);
+      text-decoration: none;
+    }
+
+    .events-banner-link:focus-visible {
+      outline: 3px solid #111;
+      outline-offset: -3px;
+    }
+
+    .event-date {
+      width: 42px;
+      overflow: hidden;
+      border: 1px solid #bdcaa6;
+      border-radius: 10px;
+      background: #fff;
+      text-align: center;
+      line-height: 1;
+      box-shadow: 0 3px 10px rgba(48, 69, 31, 0.08);
+    }
+
+    .event-date-month {
+      display: block;
+      padding: 0.27rem 0.2rem 0.22rem;
+      background: #40522b;
+      color: #fff;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+    }
+
+    .event-date-day {
+      display: block;
+      padding: 0.34rem 0.2rem 0.38rem;
+      color: #27351a;
+      font-size: 1rem;
+      font-weight: 750;
+    }
+
+    .event-banner-copy {
+      min-width: 0;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.65rem;
+    }
+
+    .event-banner-label {
+      color: #40522b;
+      font-size: 0.7rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .event-banner-title {
+      font-weight: 700;
+    }
+
+    .event-banner-detail {
+      color: #55624a;
+      font-size: 0.9rem;
+    }
+
+    .event-banner-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      color: #27351a;
+      font-size: 0.88rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .event-banner-cta::after {
+      content: "→";
+      font-size: 1.05rem;
+      transition: transform 160ms ease;
+    }
+
+    .events-banner-link:hover .event-banner-cta::after {
+      transform: translateX(3px);
+    }
+
     .litterbug-actions {
       display: flex;
       justify-content: center;
@@ -261,6 +365,29 @@
     }
 
     @media (max-width: 520px) {
+      .events-banner-link {
+        min-height: 58px;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 0.65rem;
+      }
+
+      .event-date {
+        width: 38px;
+      }
+
+      .event-banner-copy {
+        gap: 0.12rem 0.45rem;
+      }
+
+      .event-banner-detail {
+        width: 100%;
+        font-size: 0.82rem;
+      }
+
+      .event-banner-cta {
+        display: none;
+      }
+
       .feature-slide {
         grid-template-columns: minmax(104px, 0.68fr) minmax(0, 1.32fr);
         min-height: 300px;
@@ -313,6 +440,22 @@
     </nav>
   </div>
 </header>
+
+<!-- Replace the Eventbrite URL, date, title, and detail in this banner when the event is published. -->
+<aside class="events-banner" aria-label="Upcoming Litterbug event">
+  <a class="events-banner-link" href="https://www.eventbrite.com/" target="_blank" rel="noopener noreferrer" aria-label="View the upcoming Litterbug community cleanup on Eventbrite">
+    <time class="event-date" datetime="2026-09-01" aria-label="September 1">
+      <span class="event-date-month">SEP</span>
+      <span class="event-date-day">01</span>
+    </time>
+    <span class="event-banner-copy">
+      <span class="event-banner-label">Upcoming event</span>
+      <span class="event-banner-title">Litterbug Community Cleanup</span>
+      <span class="event-banner-detail">Details &amp; RSVP on Eventbrite</span>
+    </span>
+    <span class="event-banner-cta" aria-hidden="true">See event</span>
+  </a>
+</aside>
 
 <main>
   <section class="card litterbug-hero">
