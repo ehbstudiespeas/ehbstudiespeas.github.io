@@ -59,6 +59,17 @@ function slugify(value) {
   return cleanText(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
+function easternToday() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const value = Object.fromEntries(parts.filter((part) => part.type !== "literal").map((part) => [part.type, part.value]));
+  return `${value.year}-${value.month}-${value.day}`;
+}
+
 function docxText(buffer) {
   const temporary = mkdtempSync(join(tmpdir(), "farm-talk-"));
   const input = join(temporary, "notes.docx");
@@ -166,6 +177,11 @@ async function main() {
     if (seenDates.has(episode.date)) throw new Error(`More than one Farm Talk folder resolves to ${episode.date}.`);
     seenDates.add(episode.date);
     episodes.push(episode);
+  }
+  // Keep editorially confirmed future programs that have not yet received a Box folder.
+  // This lets the live page announce next week's guest without having its details erased.
+  for (const episode of existingPayload.episodes) {
+    if (episode.date > easternToday() && !seenDates.has(episode.date)) episodes.push(episode);
   }
   episodes.sort((a, b) => b.date.localeCompare(a.date));
   const payload = { streamEmbedUrl, streamFallbackUrl, timezone: "America/New_York", episodes };
