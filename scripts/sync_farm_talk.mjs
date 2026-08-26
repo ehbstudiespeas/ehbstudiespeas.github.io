@@ -82,6 +82,16 @@ function extractDetails(text, guest, previous = {}) {
   return { summary, title: title.slice(0, 180), topics: topics.length ? topics : (previous.topics || []) };
 }
 
+function applyEpisodeEditorialRules(episode) {
+  if (episode.guest !== "Dr. Karol Krey") return episode;
+  return {
+    ...episode,
+    title: "PhD in Entomology",
+    summary: cleanText(episode.summary
+      .replace(/\s*(?:at|of|with)\s+ISK\s+Biosciences(?:\s+Corporation)?\b[^,.;]*/gi, "")),
+  };
+}
+
 async function boxToken() {
   const form = new URLSearchParams({
     grant_type: "client_credentials",
@@ -142,7 +152,7 @@ async function syncEpisode(token, folder) {
     if (!existsSync(destination) || previous.boxAudioId !== audio.id) writeFileSync(destination, await download(token, audio.id));
     audioUrl = destination;
   }
-  return { date, guest, ...details, audioUrl, boxFolderId: folder.id, boxShowNotesId: showNotes?.id || "", boxAudioId: audio?.id || "" };
+  return applyEpisodeEditorialRules({ date, guest, ...details, audioUrl, boxFolderId: folder.id, boxShowNotesId: showNotes?.id || "", boxAudioId: audio?.id || "" });
 }
 
 async function main() {
