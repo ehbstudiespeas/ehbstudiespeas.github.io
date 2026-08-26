@@ -4,6 +4,17 @@
   "timezone": "America/New_York",
   "episodes": [
     {
+      "date": "2026-09-02",
+      "guest": "Dr. Steve Reiners",
+      "title": "Retired Cornell AgriTech horticulture faculty",
+      "summary": "Dr. Steve Reiners, retired faculty in the School of Integrative Plant Science's Horticulture Section at Cornell AgriTech in Geneva, recaps timely challenges New York vegetable farmers have faced this production year, including Canadian wildfire smoke, extreme heat and heatwaves, and more intense and frequent rainfall.",
+      "topics": ["New York vegetable farming", "Wildfire smoke", "Extreme heat", "Rainfall intensity"],
+      "audioUrl": "",
+      "boxFolderId": "",
+      "boxShowNotesId": "",
+      "boxAudioId": ""
+    },
+    {
       "date": "2026-08-26",
       "guest": "Dr. Karol Krey",
       "title": "PhD in Entomology",
