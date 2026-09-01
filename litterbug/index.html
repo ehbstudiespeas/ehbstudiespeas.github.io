@@ -456,6 +456,21 @@
   </a>
 </aside>
 
+<script>
+  document.querySelectorAll('.events-banner').forEach((banner) => {
+    const date = banner.querySelector('time[datetime]')?.dateTime;
+    const [year, month, day] = (date || '').split('-').map(Number);
+
+    if (!year || !month || !day) return;
+
+    const eventDate = new Date(year, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (eventDate < today) banner.hidden = true;
+  });
+</script>
+
 <main>
   <section class="card litterbug-hero">
     <img class="litterbug-logo" src="../assets/litterbug-icon-128.png" alt="Litterbug logo" />
