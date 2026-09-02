@@ -4,6 +4,17 @@
   "timezone": "America/New_York",
   "episodes": [
     {
+      "date": "2026-09-09",
+      "guest": "Michaela Hodge-Hayes",
+      "title": "Rise & Root Farm, Chester Agricultural Center",
+      "summary": "Michaela Hodge-Hayes of Rise & Root Farm at the Chester Agricultural Center discusses the farm's QT+BIPOC-centered, social-justice work, including fighting hunger and poverty with community partners, educational visits, community workdays, and farmer training. The conversation will also celebrate Rise & Root Farm's 10th anniversary and its September 27 Rise, Root & Revel dinner.",
+      "topics": ["Food justice", "Community partnerships", "Farmer training", "Rise & Root Farm anniversary"],
+      "audioUrl": "",
+      "boxFolderId": "413753850683",
+      "boxShowNotesId": "",
+      "boxAudioId": ""
+    },
+    {
       "date": "2026-09-02",
       "guest": "Dr. Steve Reiners",
       "title": "Retired Cornell AgriTech horticulture faculty",
