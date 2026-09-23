@@ -4,14 +4,25 @@
   "timezone": "America/New_York",
   "episodes": [
     {
+      "date": "2026-09-23",
+      "guest": "Emma Scales & Hannah Frank",
+      "title": "Cornell PhD candidates in plant pathology and horticulture",
+      "summary": "Emma Scales and Hannah Frank discuss local science journalism and grape-vine soil health. Emma shares the Innovations in Science project, which connects local communities with research stories, while Hannah explains her Finger Lakes vineyard research on arbuscular mycorrhizal fungi and practices that can promote beneficial soil microbiomes.",
+      "topics": ["Science journalism", "Bacterial endosymbionts", "Vineyard soil health", "Arbuscular mycorrhizal fungi"],
+      "audioUrl": "",
+      "boxFolderId": "420328950766",
+      "boxShowNotesId": "2481870234815",
+      "boxAudioId": ""
+    },
+    {
       "date": "2026-09-16",
       "guest": "Zoe Economos",
-      "title": "Cornell cover-crop and pest-suppression researcher",
-      "summary": "Zoe Economos discusses Cornell research on the relationship between cover cropping, plant defenses, and pest suppression. The conversation covers field studies at Farm Hub in the Hudson Valley and in the Finger Lakes, along with lab experiments that help explain how cover crops can suppress pest populations in dry beans.",
-      "topics": ["Cover crops", "Plant defenses", "Pest suppression", "Dry beans"],
+      "title": "Cornell cover-crop, soil microbiome, and pest-suppression researcher",
+      "summary": "Zoe Economos discusses Cornell research on cover cropping, soil microbial communities, plant defenses, and pest suppression in dry beans. The conversation covers field studies at Farm Hub in the Hudson Valley and Musgrave Research Farm in the Finger Lakes, plus lab experiments that reveal how different cover crops can affect pest populations in the following year.",
+      "topics": ["Cover crops", "Soil microbiomes", "Plant defenses", "Pest suppression"],
       "audioUrl": "",
-      "boxFolderId": "",
-      "boxShowNotesId": "",
+      "boxFolderId": "416650669786",
+      "boxShowNotesId": "2468580536515",
       "boxAudioId": ""
     },
     {
