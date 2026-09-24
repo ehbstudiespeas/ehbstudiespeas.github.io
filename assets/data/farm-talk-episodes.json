@@ -4,6 +4,17 @@
   "timezone": "America/New_York",
   "episodes": [
     {
+      "date": "2026-09-30",
+      "guest": "Kristen Lake",
+      "title": "Orange County FSA Executive Director",
+      "summary": "Kristen Lake, the new Orange County Executive Director for the USDA Farm Service Agency, discusses her past and present work with USDA/FSA, current and upcoming programs available to farmers, and her goals for the role in Orange County.",
+      "topics": ["USDA Farm Service Agency", "FSA programs", "Farmer services", "Orange County agriculture"],
+      "audioUrl": "",
+      "boxFolderId": "",
+      "boxShowNotesId": "",
+      "boxAudioId": ""
+    },
+    {
       "date": "2026-09-23",
       "guest": "Emma Scales & Hannah Frank",
       "title": "Cornell PhD candidates in plant pathology and horticulture",
