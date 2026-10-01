@@ -4,6 +4,17 @@
   "timezone": "America/New_York",
   "episodes": [
     {
+      "date": "2026-10-07",
+      "guest": "Dr. Katja Poveda & Dr. Scott McArt",
+      "title": "Cornell pollinator and pest-management researchers",
+      "summary": "Drs. Katja Poveda and Scott McArt discuss New York's Birds and Bees Protection Act. Scott covers research on neonicotinoid impacts on wildlife and pollinators, while Katja shares current New York research on seedcorn maggot and alternative management approaches that meet the new neonicotinoid regulations.",
+      "topics": ["Birds and Bees Protection Act", "Neonicotinoid seed treatments", "Pollinators and wildlife", "Seedcorn maggot management"],
+      "audioUrl": "",
+      "boxFolderId": "",
+      "boxShowNotesId": "",
+      "boxAudioId": ""
+    },
+    {
       "date": "2026-09-30",
       "guest": "Kristen Lake",
       "title": "Orange County FSA Executive Director",
